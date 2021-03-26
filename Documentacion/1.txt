@@ -1,0 +1,10 @@
+clientes
+articulos
+articulo_color
+articulo_color_serigrafia
+articulo_color_hilo
+localizaciones
+orden de trabajo(serigrafia, bordado, transfer)
+Logos de clientes
+Pedidos
+Estado del pedido

@@ -1,0 +1,16 @@
+ORDEN
+-----------------------------
+
+1 --> Marcar tienda
+2 --> Nombre cliente
+3 --> id cliente de credito
+4 --> marcar tipologia de trabajo
+5 --> elegir tipo de prenda
+6 --> 
+7 --> Datos de la mercancia
+8 --> marcar zona de trabajo (imagen svg)
+9 --> numero generada en la intranet
+10 --> albaran de deposito
+11 --> fecha terminacion de trabajo
+12 --> generar informe
+13 --> firma cliente
