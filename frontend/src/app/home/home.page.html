@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Pruebas de crud con PHP
     </ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -14,27 +15,27 @@
   </ion-header>
 
   <div id="container">
+
+    
     <div class="example-button-container">
-      <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
-        <mat-icon>delete</mat-icon>
+      <button mat-button (click)="getLogo()" color="primary" aria-label="Example icon button with a delete icon">
+        Ver info 
+      </button>
+      <button mat-button (click)="addLogo()" color="primary" aria-label="Example icon button with a delete icon">
+        Añadir logo
       </button>
     </div>
-    <div class="example-button-container">
-      <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
-        <mat-icon>bookmark</mat-icon>
-      </button>
-    </div>
-    <div class="example-button-container">
-      <button mat-fab color="warn" aria-label="Example icon button with a home icon">
-        <mat-icon>home</mat-icon>
-      </button>
-    </div>
-    <div class="example-button-container">
-      <button mat-fab disabled aria-label="Example icon button with a heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-    </div>
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+    <ion-card *ngFor="let l of logotipo">
+      <ion-card-header>
+        <ion-card-subtitle>Nombre del logo {{l.nombre}}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <button mat-button (click)="getLogoById(l.id)">Buscar por id</button>
+        <button mat-button (click)="deleteLogo(l.id)">  Eliminar por id</button>
+        <button mat-button (click)="updateLogo(l.id)">  Actualizar por id</button>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

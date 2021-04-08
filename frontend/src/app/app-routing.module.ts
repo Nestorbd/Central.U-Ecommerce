@@ -10,7 +10,16 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'add-logo',
+    loadChildren: () => import('./add-logo/add-logo.module').then( m => m.AddLogoPageModule)
   },
+  {
+    path: 'update-logo',
+    loadChildren: () => import('./update-logo/update-logo.module').then( m => m.UpdateLogoPageModule)
+  }
+
+
 ];
 
 @NgModule({
