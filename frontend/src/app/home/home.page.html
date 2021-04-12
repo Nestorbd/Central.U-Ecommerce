@@ -1,41 +1,58 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Pruebas de crud con PHP
-    </ion-title>
-    
-  </ion-toolbar>
+<ion-header >
+
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content >
 
-  <div id="container">
-
+  <!-- <div id="container">
     
-    <div class="example-button-container">
-      <button mat-button (click)="getLogo()" color="primary" aria-label="Example icon button with a delete icon">
-        Ver info 
-      </button>
-      <button mat-button (click)="addLogo()" color="primary" aria-label="Example icon button with a delete icon">
-        Añadir logo
-      </button>
+     <ion-grid id="linea">
+    <ion-row id="linea">
+      <ion-col size="5" >
+      Esto es una columna
+      </ion-col>
+      <ion-col size="2">
+        <mat-divider vertical  style="height: 600px;"></mat-divider>
+      </ion-col>
+      <ion-col size="5">
+      Otra columna
+      </ion-col>
+      </ion-row>      
+
+    </ion-grid> -->
+
+    <!-- <mat-grid-list cols="3" rowHeight="6:12">
+      <mat-grid-tile id="tile1" col-8>
+        <img src="../../assets/icon/pixlr-bg-result.png"/>
+      </mat-grid-tile>
+      <mat-grid-tile class="vl" ></mat-grid-tile>
+      <mat-grid-tile>Inicio de sesión</mat-grid-tile>
+    </mat-grid-list> -->
+    
+
+    <div class="contact-wrapper">
+      <div class="left_side">
+        <img src="../../assets/icon/pixlr-bg-result.png">
+      </div>
+      <div class="vl"></div>
+      <div class="right_side">
+        <h2>Iniciar Sesión</h2>
+        <form>
+          <div class="form-row">
+            <input type="text" required>
+            <span>Username or Email</span>
+          </div>
+          <div class="form-row">
+            <input type="password" required>
+            <span>Password</span>
+          </div>
+          <div class="form-row"></div>
+          <div class="form-row"> 
+            <button type="submit" id="boton">Login</button>
+          </div>
+        </form>
+   
+      </div>
     </div>
 
-    <ion-card *ngFor="let l of logotipo">
-      <ion-card-header>
-        <ion-card-subtitle>Nombre del logo {{l.nombre}}</ion-card-subtitle>
-      </ion-card-header>
-    
-      <ion-card-content>
-        <button mat-button (click)="getLogoById(l.id)">Buscar por id</button>
-        <button mat-button (click)="deleteLogo(l.id)">  Eliminar por id</button>
-        <button mat-button (click)="updateLogo(l.id)">  Actualizar por id</button>
-      </ion-card-content>
-    </ion-card>
-  </div>
 </ion-content>

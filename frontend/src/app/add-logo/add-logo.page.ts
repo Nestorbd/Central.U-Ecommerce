@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,37 +11,42 @@ import { LogotipoService } from '../services/logotipo.service';
   styleUrls: ['./add-logo.page.scss'],
 })
 export class AddLogoPage implements OnInit {
-
+  image: any
   logoForm: FormGroup;
   logotipo: Logotipo[];
   constructor(
     private logoService: LogotipoService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {
     this.logoForm = this.fb.group({
-      nombre: ['']
+      nombre: [''],
+      imagen: ['']
     })
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
   }
 
-  onFormSubmit() {
+  selectedFile(event) {
+    this.image = event.target.files[0];
+  }
+
+  onClick() {
     if (!this.logoForm.valid) {
       return false;
     } else {
-      let logo = {
-        id: null,
-        nombre: this.logoForm.value.nombre,
-        imagen: null
+      const formData = new FormData();
+      formData.append('imagen', this.image);
+      formData.append('nombre', this.logoForm.value.nombre)
 
-      }
-      console.log(logo)
-      this.logoService.addLogo(logo)
+      this.logoService.addLogo(formData)
       this.router.navigateByUrl("home")
     }
   }
+
+
 
 }
