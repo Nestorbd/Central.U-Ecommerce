@@ -41,6 +41,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 @NgModule({
   exports: [
@@ -61,7 +62,6 @@ import {MatTreeModule} from '@angular/material/tree';
     MatStepperModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatIconModule,
     MatDividerModule,
     MatExpansionModule,
     MatGridListModule,
@@ -86,6 +86,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    OverlayModule,
     PortalModule,
     ScrollingModule,
   ]

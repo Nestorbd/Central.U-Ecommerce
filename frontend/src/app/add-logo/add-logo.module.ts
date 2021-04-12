@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddLogoPageRoutingModule } from './add-logo-routing.module';
 
 import { AddLogoPage } from './add-logo.page';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { AddLogoPage } from './add-logo.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    MaterialModule,
     AddLogoPageRoutingModule
   ],
   declarations: [AddLogoPage]

@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>uploadImage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="ion-padding">
+  <input type="file" [(ngModel)]="image" (change)="selectedFile($event)">
+  <button (click)="onClick()">Send Data</button>
+</div>
+</ion-content>

@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\api\config\headers.php';
+
 require_once 'C:\xampp\htdocs\api\api\models\logotipoModel.php';
 
 
