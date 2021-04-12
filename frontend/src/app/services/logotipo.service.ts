@@ -19,7 +19,7 @@ export class LogotipoService {
 
   getLogos(): Observable<Logotipo[]> {
 
-    return this.httpClient.get<Logotipo[]>("http://localhost:80/crud_api/api/logotipos")
+    return this.httpClient.get<Logotipo[]>("http://localhost:80/api/logotipo/")
     .pipe(
       
       tap(logotipos => console.log('Get logotipos')),
@@ -55,7 +55,7 @@ export class LogotipoService {
   addLogo( formData: FormData) {
 
 
-    this.httpClient.post("http://localhost:80/crud_api/api/añadirLogotipo", formData).subscribe(data => {
+    this.httpClient.post("http://localhost:80/api/logotipo/insertar", formData).subscribe(data => {
         console.log(data);
       }, err => {
         console.log(err);
