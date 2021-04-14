@@ -213,6 +213,17 @@ create table update_precio (
     foreign key (id_tarifa) REFERENCES tarifas(id)
 );
 
+drop table if EXISTS formulario;
+create table formulario (
+    id int primary key auto_increment,
+    apartado varchar(60),
+    label varchar(40),
+    placeholder varchar(40),
+    value varchar(40),
+    type varchar(40),
+    formControlName varchar(40)
+)
+
 
 DELIMITER |
 create trigger tarifas_AU_Trigger
@@ -224,3 +235,17 @@ BEGIN
         values (id, old.precio);
 end |
 DELIMITER ;
+
+DELIMITER
+create function insert_cliente
+
+insert into cliente_individual  VALUES (1,"nestor","batista","nestor@CU.es","54682321");
+insert into cliente_empresa  VALUES (1,"Central Uniformes", "777777");
+insert into cliente_individual  VALUES (2,"Gonzalo","Santana","gonzalo@CU.es","878454856");
+insert into cliente_empresa  VALUES (2,"KFC", "666666");
+insert into cliente VALUES (1,"626202874",false,1,null);
+insert into cliente  VALUES (2,"928603247",true,null,1);
+insert into cliente VALUES (3,"6268956",false,2,null);
+insert into cliente  VALUES (4,"9287854",true,null,2);
+
+insert into formulario values (null,"Datos de contacto","nombre","pepito","nombre","text","nombre");
