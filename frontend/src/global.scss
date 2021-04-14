@@ -24,3 +24,35 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+ion-toolbar{
+    height: 100px;
+    color: white;
+}
+ion-title{
+    margin-top: 15px;
+    
+    font-size: 15px;
+}
+
+#botones{
+    background: linear-gradient(to bottom, #6EDFD4, #1B3864);
+   
+    border-radius: 20px;
+    border-style: solid;
+    border-width: thin;
+    border-color: grey;
+
+}
+
+#texto{
+    color: white;
+    text-shadow: 10px, 10px, black;
+}
+
+#menuBtn{
+    margin-top: 15px;
+    height: 60px;
+    width: 70px;
+}

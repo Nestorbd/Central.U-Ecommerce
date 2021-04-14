@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { UploadImagePage } from './upload-image.page';
+import { PrendaSelectorPage } from './prenda-selector.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: UploadImagePage
+    component: PrendaSelectorPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UploadImagePageRoutingModule {}
+export class PrendaSelectorPageRoutingModule {}

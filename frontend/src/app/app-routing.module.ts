@@ -13,20 +13,28 @@ const routes: Routes = [
   },
   {
     path: 'add-logo',
-    loadChildren: () => import('./add-logo/add-logo.module').then( m => m.AddLogoPageModule)
+    loadChildren: () => import('./mantenimiento/logo/add-logo/add-logo.module').then( m => m.AddLogoPageModule)
   },
   {
     path: 'update-logo',
-    loadChildren: () => import('./update-logo/update-logo.module').then( m => m.UpdateLogoPageModule)
-  },
-  {
-    path: 'upload-image',
-    loadChildren: () => import('./upload-image/upload-image.module').then( m => m.UploadImagePageModule)
+    loadChildren: () => import('./mantenimiento/logo/update-logo/update-logo.module').then( m => m.UpdateLogoPageModule)
   },
   {
     path: 'pruebas',
     loadChildren: () => import('./pruebas/pruebas.module').then( m => m.PruebasPageModule)
+  },  {
+    path: 'prenda-selector',
+    loadChildren: () => import('./prenda-selector/prenda-selector.module').then( m => m.PrendaSelectorPageModule)
+  },
+  {
+    path: 'form-page',
+    loadChildren: () => import('./form-page/form-page.module').then( m => m.FormPagePageModule)
+  },
+  {
+    path: 'pruebas-form',
+    loadChildren: () => import('./pruebas-form/pruebas-form.module').then( m => m.PruebasFormPageModule)
   }
+
 
 
 ];

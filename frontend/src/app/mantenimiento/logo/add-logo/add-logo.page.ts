@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Logotipo } from '../model/logotipo';
-import { LogotipoService } from '../services/logotipo.service';
+import { Logotipo } from '../../../model/logotipo';
+import { LogotipoService } from '../../../services/logotipo.service';
 
 @Component({
   selector: 'app-add-logo',

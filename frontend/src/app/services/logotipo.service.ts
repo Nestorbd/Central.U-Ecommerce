@@ -19,7 +19,7 @@ export class LogotipoService {
 
   getLogos(): Observable<Logotipo[]> {
 
-    return this.httpClient.get<Logotipo[]>("http://localhost:80/api/logotipo/")
+    return this.httpClient.get<Logotipo[]>("http://localhost/crud_api/api/logotipos/")
     .pipe(
       
       tap(logotipos => console.log('Get logotipos')),

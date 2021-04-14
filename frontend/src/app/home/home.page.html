@@ -1,58 +1,29 @@
-<ion-header >
-
+<ion-header>
+  <ion-toolbar>
+   
+      <ion-icon id="menuBtn" name="menu-outline" slot="start" (click)="toggleMenu()"></ion-icon>
+ 
+  
+    <ion-title>Página principal</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content >
-
-  <!-- <div id="container">
-    
-     <ion-grid id="linea">
-    <ion-row id="linea">
-      <ion-col size="5" >
-      Esto es una columna
-      </ion-col>
-      <ion-col size="2">
-        <mat-divider vertical  style="height: 600px;"></mat-divider>
-      </ion-col>
-      <ion-col size="5">
-      Otra columna
-      </ion-col>
-      </ion-row>      
-
-    </ion-grid> -->
-
-    <!-- <mat-grid-list cols="3" rowHeight="6:12">
-      <mat-grid-tile id="tile1" col-8>
-        <img src="../../assets/icon/pixlr-bg-result.png"/>
-      </mat-grid-tile>
-      <mat-grid-tile class="vl" ></mat-grid-tile>
-      <mat-grid-tile>Inicio de sesión</mat-grid-tile>
-    </mat-grid-list> -->
-    
-
-    <div class="contact-wrapper">
-      <div class="left_side">
-        <img src="../../assets/icon/pixlr-bg-result.png">
-      </div>
-      <div class="vl"></div>
-      <div class="right_side">
-        <h2>Iniciar Sesión</h2>
-        <form>
-          <div class="form-row">
-            <input type="text" required>
-            <span>Username or Email</span>
-          </div>
-          <div class="form-row">
-            <input type="password" required>
-            <span>Password</span>
-          </div>
-          <div class="form-row"></div>
-          <div class="form-row"> 
-            <button type="submit" id="boton">Login</button>
-          </div>
-        </form>
-   
-      </div>
+<ion-content>
+  
+  <div class="container">
+    <br/>
+    <p>¿Qué desea hacer?</p>
+    <div class="row">
+      <button mat-button id="botones" (click)="goToNewInvoice()"><span id="texto">Nuevo encargo</span></button>
     </div>
-
+    <div class="row">
+      <button mat-button id="botones"><span id="texto">Validaciones</span></button>
+    </div>
+    <div class="row">
+      <button mat-button id="botones"><span id="texto">Seguimiento de pedidos</span></button>
+    </div>
+    <div class="row">
+      <button mat-button id="botones"><span id="texto">Historial de pedidos</span></button>
+    </div>
+  </div>
 </ion-content>

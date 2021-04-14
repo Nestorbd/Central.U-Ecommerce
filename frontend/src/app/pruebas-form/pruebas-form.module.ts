@@ -4,20 +4,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddLogoPageRoutingModule } from './add-logo-routing.module';
+import { PruebasFormPageRoutingModule } from './pruebas-form-routing.module';
 
-import { AddLogoPage } from './add-logo.page';
+import { PruebasFormPage } from './pruebas-form.page';
 import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
+    ReactiveFormsModule,
     MaterialModule,
-    AddLogoPageRoutingModule
+    PruebasFormPageRoutingModule
   ],
-  declarations: [AddLogoPage]
+  declarations: [PruebasFormPage]
 })
-export class AddLogoPageModule {}
+export class PruebasFormPageModule {}

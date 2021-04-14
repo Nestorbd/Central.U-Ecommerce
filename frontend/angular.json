@@ -31,7 +31,8 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss",
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "src/theme/variables.scss",
+              "src/global.scss",
               "./node_modules/ngx-draggable-resize/css/resizable.min.css"],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js"
@@ -93,7 +94,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "styles": [],
+            "styles": [ "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"],
             "scripts": [
               
             ],

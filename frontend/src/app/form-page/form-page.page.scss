@@ -1,0 +1,37 @@
+.mat-stepper-vertical {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+
+#centrarForm{
+    position: absolute;
+   width: 100%;
+    border-style: groove;
+    box-shadow: 10px, 10px, rgba(129, 129, 129, 0.671);
+  
+    
+}
+
+
+
+#centrarBar{
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 1%;
+}
+
+#imagen{
+    position: fixed;
+    top: 93%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+      height: 8%;
+      width: 5%;
+}
