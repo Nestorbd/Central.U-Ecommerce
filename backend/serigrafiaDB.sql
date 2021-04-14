@@ -227,8 +227,9 @@ create table formulario (
     placeholder varchar(40),
     value varchar(40),
     type varchar(40),
-    formControlName varchar(40)
-)
+    formControlName varchar(40),
+    activo boolean default true
+);
 
 
 DELIMITER |
@@ -242,16 +243,9 @@ BEGIN
 end |
 DELIMITER ;
 
-DELIMITER
-create function insert_cliente
+insert into cliente_individual  VALUES (null,"nestor","batista","626202874","nestor@CU.es","54682321");
+insert into cliente_empresa  VALUES (null,"Central Uniformes", "626202874","777777");
+insert into cliente_individual  VALUES (null,"Gonzalo","Santana","626202874","gonzalo@CU.es","878454856");
+insert into cliente_empresa  VALUES (null,"KFC","626202874", "666666");
 
-insert into cliente_individual  VALUES (1,"nestor","batista","nestor@CU.es","54682321");
-insert into cliente_empresa  VALUES (1,"Central Uniformes", "777777");
-insert into cliente_individual  VALUES (2,"Gonzalo","Santana","gonzalo@CU.es","878454856");
-insert into cliente_empresa  VALUES (2,"KFC", "666666");
-insert into cliente VALUES (1,"626202874",false,1,null);
-insert into cliente  VALUES (2,"928603247",true,null,1);
-insert into cliente VALUES (3,"6268956",false,2,null);
-insert into cliente  VALUES (4,"9287854",true,null,2);
-
-insert into formulario values (null,"Datos de contacto","nombre","pepito","nombre","text","nombre");
+insert into formulario values (null,"Datos de contacto","nombre","pepito","nombre","text","nombre", default);
