@@ -22,7 +22,8 @@ const routes: Routes = [
   {
     path: 'pruebas',
     loadChildren: () => import('./pruebas/pruebas.module').then( m => m.PruebasPageModule)
-  },  {
+  },
+  {
     path: 'prenda-selector',
     loadChildren: () => import('./prenda-selector/prenda-selector.module').then( m => m.PrendaSelectorPageModule)
   },
@@ -33,7 +34,23 @@ const routes: Routes = [
   {
     path: 'pruebas-form',
     loadChildren: () => import('./pruebas-form/pruebas-form.module').then( m => m.PruebasFormPageModule)
+  },  {
+    path: 'add-input',
+    loadChildren: () => import('./mantenimiento/formulario/add-input/add-input.module').then( m => m.AddInputPageModule)
+  },
+  {
+    path: 'add-column',
+    loadChildren: () => import('./mantenimiento/formulario/add-column/add-column.module').then( m => m.AddColumnPageModule)
+  },
+  {
+    path: 'mantenimiento-tablas',
+    loadChildren: () => import('./mantenimiento/mantenimiento-tablas/mantenimiento-tablas.module').then( m => m.MantenimientoTablasPageModule)
+  },
+  {
+    path: 'ver-input',
+    loadChildren: () => import('./mantenimiento/formulario/ver-input/ver-input.module').then( m => m.VerInputPageModule)
   }
+
 
 
 

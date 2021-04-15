@@ -8,6 +8,7 @@ create table cliente_individual (
 id int primary key auto_increment,
 nombre varchar(40) not null,
 apellidos varchar(40) not null,
+telefono varchar(20),
 email varchar(100),
 NIF varchar(20)
 );
@@ -16,19 +17,8 @@ drop table if EXISTS cliente_empresa;
 create table cliente_empresa (
     id int primary key auto_increment,
     nombre varchar(40),
-    CIF varchar(20)
-);
-
-drop table if EXISTS cliente;
-create table cliente (
-    id int primary key auto_increment,
     telefono varchar(20),
-    es_empresa BOOLEAN,
-    id_individual int,
-    id_empresa int,
-
-    foreign key (id_individual) REFERENCES cliente_individual (id),
-    foreign key (id_empresa) REFERENCES cliente_empresa (id)
+    CIF varchar(20)
 );
 
 drop table if EXISTS cliente_direccion;
@@ -39,9 +29,12 @@ create table cliente_direccion (
     municipio varchar(40) not null,
     provincia varchar(40) not null,
     codigo_postal varchar(10) not null,
-    id_cliente int not null,
+    id_individual int,
+    id_empresa int,
 
-    foreign key (id_cliente) REFERENCES cliente (id)
+
+    foreign key (id_individual) REFERENCES cliente_individual (id),
+    foreign key (id_empresa) REFERENCES cliente_empresa (id)
 );
 
 drop table if EXISTS logotipos;
@@ -49,22 +42,25 @@ create table logotipos (
     id int primary key auto_increment,
     nombre varchar(40) not null,
     imagen blob not null,
-    id_cliente int,
+    id_individual int,
+    id_empresa int,
 
-    foreign key (id_cliente) REFERENCES cliente(id)
-
+    foreign key (id_individual) REFERENCES cliente_individual (id),
+    foreign key (id_empresa) REFERENCES cliente_empresa (id)
 );
 
 drop table if EXISTS usuario_rol;
 create table usuario_rol (
     id int primary key auto_increment,
-    nombre varchar(40)
+    nombre varchar(40),
+    activo boolean default true
 );
 
 drop table if EXISTS usuario;
 create table usuario (
     id int primary key auto_increment,
     nombre varchar(40) not null,
+    activo boolean default true,
     id_rol int not null,
 
     foreign key (id_rol) REFERENCES usuario_rol(id)
@@ -85,11 +81,14 @@ create table pedidos (
     observaciones varchar(500),
     validado boolean,
     timestamp timestamp,
-    id_cliente int,
     id_usuario int,
     id_estado int,
+    id_individual int,
+    id_empresa int,
 
-    foreign key (id_cliente) REFERENCES cliente (id),
+
+    foreign key (id_individual) REFERENCES cliente_individual (id),
+    foreign key (id_empresa) REFERENCES cliente_empresa (id),
     foreign key (id_usuario) REFERENCES usuario (id),
     foreign key (id_estado) REFERENCES estado_pedido (id)
 );
@@ -118,7 +117,8 @@ create table articulos (
     id int primary key auto_increment,
     nombre varchar(40) not null,
     codigo_barra varchar(20) not null,
-    stock int not null
+    stock int not null,
+    activo boolean default true
 );
 
 drop table if EXISTS articulos_pedidos;
@@ -135,6 +135,7 @@ drop table if EXISTS articulo_talla;
 create table articulo_talla (
     id int primary key auto_increment,
     nombre varchar(40),
+    activo boolean default true,
     id_articulo int,
 
     foreign key (id_articulo) REFERENCES articulos(id)
@@ -144,6 +145,7 @@ drop table if EXISTS articulo_categoria;
 create table articulo_categoria (
     id int primary key auto_increment,
     nombre varchar(40),
+    activo boolean default true,
     id_articulo int,
 
     foreign key (id_articulo) REFERENCES articulos(id)
@@ -153,6 +155,7 @@ drop table if EXISTS articulo_color;
 create table articulo_color (
     id int primary key auto_increment,
     nombre varchar(40),
+    activo boolean default true,
     id_articulo int,
 
     foreign key (id_articulo) REFERENCES articulos (id)
@@ -161,13 +164,15 @@ create table articulo_color (
 drop table if EXISTS tarifas_categorias;
 create table tarifas_categorias (
     id int primary key auto_increment,
-    nombre varchar(40)
+    nombre varchar(40),
+    activo boolean default true
 );
 
 drop table if EXISTS tarifas_tipo;
 create table tarifas_tipo (
     id int primary key auto_increment,
-    nombre varchar(40)
+    nombre varchar(40),
+    activo boolean default true
 );
 
 drop table if EXISTS categorias_tipo;
@@ -186,6 +191,7 @@ create table tarifas (
     nombre varchar(40) not null,
     precio float not null,
     timestamp timestamp,
+    activo boolean default true,
     id_categoria int not null,
     id_tipo int not null,
 
@@ -213,6 +219,18 @@ create table update_precio (
     foreign key (id_tarifa) REFERENCES tarifas(id)
 );
 
+drop table if EXISTS formulario;
+create table formulario (
+    id int primary key auto_increment,
+    apartado varchar(60),
+    label varchar(40),
+    placeholder varchar(40),
+    value varchar(40),
+    type varchar(40),
+    formControlName varchar(40),
+    activo boolean default true
+);
+
 
 DELIMITER |
 create trigger tarifas_AU_Trigger
@@ -224,3 +242,10 @@ BEGIN
         values (id, old.precio);
 end |
 DELIMITER ;
+
+insert into cliente_individual  VALUES (null,"nestor","batista","626202874","nestor@CU.es","54682321");
+insert into cliente_empresa  VALUES (null,"Central Uniformes", "626202874","777777");
+insert into cliente_individual  VALUES (null,"Gonzalo","Santana","626202874","gonzalo@CU.es","878454856");
+insert into cliente_empresa  VALUES (null,"KFC","626202874", "666666");
+
+insert into formulario values (null,"Datos de contacto","nombre","pepito","nombre","text","nombre", default);

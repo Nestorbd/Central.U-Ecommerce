@@ -18,10 +18,15 @@ class Request
             $this->argumento = $ruta;
 
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                if (!$this->metodo || !$this->argumento) {
+                if ((!$this->metodo && !$this->argumento) || ($this->metodo == "ver" && !$this->argumento)) {
                     $this->metodo = "getAll";
                 } else {
-                    $this->metodo = "getOne";
+                    if($this->metodo == "ver"){
+                        $this->metodo = "getOne";
+                    }else {
+                        exit("Este no es el metodo adecuado");
+                    }
+                    
                 }
             } else {
                 if (!$this->metodo) {
@@ -30,9 +35,15 @@ class Request
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if ($this->metodo == "insertar") {
-                    $this->metodo = "insert";
+                if ($this->metodo == "insertar" || ($this->controlador == "formulario" && $this->metodo == "insertarcolumna")) {
+                    if($this->metodo == "insertar"){
+                        $this->metodo = "insert";
+                    }else{
+                        $this->metodo = "createColumn";
+                    }
+                    
                 } else {
+                    print $this->metodo;
                     exit("Este no es el metodo adecuado");
                 }
             }

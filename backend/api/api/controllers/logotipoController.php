@@ -1,5 +1,4 @@
 <?php
-
 require_once 'C:\xampp\htdocs\api\api\models\logotipoModel.php';
 
 
@@ -13,6 +12,7 @@ public function __construct(){
 }
 
     public function getAll(){
+        
         $data = $this->logotipo->getLogotipos();
 
         exit(json_encode($data));
@@ -77,7 +77,7 @@ function uploadImage($imgName)
 
     if (isset($_FILES[$imgName])) {
         $img_tmp = $_FILES[$imgName]['tmp_name'];
-        $imgFolder = 'imagenes/';
+        $imgFolder = '../imagenes/';
 
         if (!file_exists($imgFolder)) {
             mkdir($imgFolder, 0777, true);

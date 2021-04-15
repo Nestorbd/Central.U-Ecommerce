@@ -1,13 +1,13 @@
 <?php
-require_once 'connection.php';
 
 
-class Logotipos 
+class Empresa
 {
     private $id;
     private $nombre;
-    private $imagen;
-    public $conn;
+    private $CIF;
+
+    private $conn;
 
     public function __construct()
 	{
@@ -19,16 +19,6 @@ class Logotipos
 		}
 	}
 
-    public function __construct0(){
-        $this->conn = Connection::conexion();
-    }
-
-    public function __construct1($id, $nombre, $imagen){
-        $this->conn = Connection::conexion();
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->imagen = $imagen;
-    }
     public function getId(){
         return $this->id;
     }
@@ -43,47 +33,50 @@ class Logotipos
         $this->nombre = $nombre;
     }
 
-    public function getImagen(){
-        return $this->imagen;
+    public function getCIF(){
+        return $this->CIF;
     }
-    public function setImagen($imagen){
-        $this->imagen = $imagen;
+    public function setCIF($CIF){
+        $this->CIF = $CIF;
     }
 
-    public function getLogotipos()
+    public function getEmpresa($conn)
     {
 
-        $sql = $this->conn->query("SELECT * FROM logotipos");
+        $sql = $conn->query("SELECT c.*, e.nombre, e.CIF FROM cliente c JOIN cliente_empresa e 
+        on c.id_empresa = e.id");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;
     }
 
-    public function getLogotiposById($id)
+    public function getEmpresaById($conn,$id)
     {
-        $id =  $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT * FROM logotipos WHERE id =" . $id);
+        $id =  $conn->quote($id);
+        $sql = $conn->query("SELECT c.*, e.nombre, e.CIF FROM cliente c join cliente_empresa e on c.id_empresa = e.id WHERE e.id =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
         return $data;
     }
 
-    public function createLogotipos($data, $img)
+    public function createEmpresa($conn,$data)
     {
-        $sql = $this->conn->query("INSERT INTO logotipos (nombre, imagen) VALUES ('" . $data->nombre . "','".$img."')");
+        $sql = $conn->query("INSERT INTO cliente_empresa (nombre, CIF) VALUES ('" . $data->nombre . "','". $data->CIF."')");
+        $data = $sql->fetch(PDO::FETCH_OBJ);
+        $data = $this->getEmpresaById($conn,$data->id);
 
-        return $sql;
+        return $data;
     }
 
-    public function updateLogotipos($id, $dataNew)
+    public function updateEmpresa($id, $dataNew)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM logotipos WHERE id=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id=" . $id);
         $dataOld = $sql_get->fetch();
         if ($dataOld == null) {
             return false;
         } else {
-            $sql = $this->conn->query("UPDATE logotipos SET nombre = '" . $dataNew->nombre . "'  WHERE id=" . $id);
+            $sql = $this->conn->query("UPDATE cliente_empresa SET nombre = '" . $dataNew->nombre . "',  CIF = '" . $dataNew->CIF . "' WHERE id=" . $id);
             if ($sql) {
                 return true;
             } else {
@@ -92,15 +85,15 @@ class Logotipos
         }
     }
 
-    public function deleteLogotipos($id)
+    public function deleteEmpresa($id)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM logotipos WHERE id=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id=" . $id);
         $data = $sql_get->fetch();
         if ($data == null) {
             return false;
         } else {
-            $sql = "DELETE FROM logotipos WHERE id=" . $id;
+            $sql = "DELETE FROM cliente_empresa WHERE id=" . $id;
             if ($this->conn->query($sql) == TRUE) {
                 return true;
             } else {
