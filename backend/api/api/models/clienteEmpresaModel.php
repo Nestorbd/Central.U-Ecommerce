@@ -19,6 +19,10 @@ class Empresa
 		}
 	}
 
+    public function __construct0(){
+        $this->conn = Connection::conexion();
+    }
+
     public function getId(){
         return $this->id;
     }
@@ -40,32 +44,43 @@ class Empresa
         $this->CIF = $CIF;
     }
 
-    public function getEmpresa($conn)
+    public function getEmpresa()
     {
 
-        $sql = $conn->query("SELECT c.*, e.nombre, e.CIF FROM cliente c JOIN cliente_empresa e 
-        on c.id_empresa = e.id");
+        $sql = $this->conn->query("SELECT * FROM  cliente_empresa");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;
     }
 
-    public function getEmpresaById($conn,$id)
+    public function getEmpresaById($id)
     {
-        $id =  $conn->quote($id);
-        $sql = $conn->query("SELECT c.*, e.nombre, e.CIF FROM cliente c join cliente_empresa e on c.id_empresa = e.id WHERE e.id =" . $id);
+        $id =  $this->conn->quote($id);
+        $sql = $this->conn->query("SELECT * FROM cliente_empresa WHERE id=". $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
         return $data;
     }
 
-    public function createEmpresa($conn,$data)
+    public function createEmpresa($data)
     {
-        $sql = $conn->query("INSERT INTO cliente_empresa (nombre, CIF) VALUES ('" . $data->nombre . "','". $data->CIF."')");
-        $data = $sql->fetch(PDO::FETCH_OBJ);
-        $data = $this->getEmpresaById($conn,$data->id);
+        $return = array();
+        $returnColum = array();
 
-        return $data;
+        foreach ($data as $key => $val) {
+            $returnColum[$key] = $key; 
+            $return[$key] = $val;
+        }
+        if($returnColum["es_empresa"]){
+            unset($returnColum["es_empresa"]);
+            unset($return["es_empresa"]);
+        }
+        $insData= implode("','",$return);
+        $insDataColumn = implode(",",$returnColum);
+
+        $sql = $this->conn->query("INSERT INTO cliente_empresa (".$insDataColumn.") VALUES ('".$insData."')");
+
+        return $sql;
     }
 
     public function updateEmpresa($id, $dataNew)
@@ -76,7 +91,17 @@ class Empresa
         if ($dataOld == null) {
             return false;
         } else {
-            $sql = $this->conn->query("UPDATE cliente_empresa SET nombre = '" . $dataNew->nombre . "',  CIF = '" . $dataNew->CIF . "' WHERE id=" . $id);
+            $return = array();
+
+            foreach ($dataNew as $key => $val) {
+                $return[$key] = $key. " = '".$val."'";
+            }
+            if($return["es_empresa"]){
+                unset($return["es_empresa"]);
+            }
+            $insData=implode(", ",$return);
+
+            $sql = $this->conn->query("UPDATE cliente_empresa SET ".$insData. " WHERE id=" . $id);
             if ($sql) {
                 return true;
             } else {

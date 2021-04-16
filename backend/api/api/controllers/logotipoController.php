@@ -1,9 +1,9 @@
 <?php
-require_once 'C:\xampp\htdocs\api\api\models\logotipoModel.php';
+require_once 'models/logotipoModel.php';
 
 
 
-Class logotipoController{
+Class LogotipoController{
 
     private $logotipo;
 
