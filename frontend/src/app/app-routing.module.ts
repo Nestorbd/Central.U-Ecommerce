@@ -10,14 +10,48 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'add-logo',
-    loadChildren: () => import('./add-logo/add-logo.module').then( m => m.AddLogoPageModule)
+    loadChildren: () => import('./mantenimiento/logo/add-logo/add-logo.module').then( m => m.AddLogoPageModule)
   },
   {
     path: 'update-logo',
-    loadChildren: () => import('./update-logo/update-logo.module').then( m => m.UpdateLogoPageModule)
+    loadChildren: () => import('./mantenimiento/logo/update-logo/update-logo.module').then( m => m.UpdateLogoPageModule)
+  },
+  {
+    path: 'pruebas',
+    loadChildren: () => import('./pruebas/pruebas.module').then( m => m.PruebasPageModule)
+  },
+  {
+    path: 'prenda-selector',
+    loadChildren: () => import('./prenda-selector/prenda-selector.module').then( m => m.PrendaSelectorPageModule)
+  },
+  {
+    path: 'form-page',
+    loadChildren: () => import('./form-page/form-page.module').then( m => m.FormPagePageModule)
+  },
+  {
+    path: 'pruebas-form',
+    loadChildren: () => import('./pruebas-form/pruebas-form.module').then( m => m.PruebasFormPageModule)
+  },  {
+    path: 'add-input',
+    loadChildren: () => import('./mantenimiento/formulario/add-input/add-input.module').then( m => m.AddInputPageModule)
+  },
+  {
+    path: 'add-column',
+    loadChildren: () => import('./mantenimiento/formulario/add-column/add-column.module').then( m => m.AddColumnPageModule)
+  },
+  {
+    path: 'mantenimiento-tablas',
+    loadChildren: () => import('./mantenimiento/mantenimiento-tablas/mantenimiento-tablas.module').then( m => m.MantenimientoTablasPageModule)
+  },
+  {
+    path: 'ver-input',
+    loadChildren: () => import('./mantenimiento/formulario/ver-input/ver-input.module').then( m => m.VerInputPageModule)
   }
+
+
 
 
 ];

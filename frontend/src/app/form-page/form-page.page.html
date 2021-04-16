@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon id="menuBtn" name="menu-outline" slot="start" (click)="toggleMenu()"></ion-icon>
+    <ion-title>Creación de la prenda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <mat-horizontal-stepper  #stepper  id="centrarForm">
+    <mat-step *ngFor="let number of prendaArray; let i = index">
+      
+      <form  [formGroup]="pedidoForm1"(ngSubmit)="onFormSubmit()">
+        <ng-template matStepLabel>Prenda nº {{i}}</ng-template>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let form of formArray">
+              <div *ngIf="form.titulo == form.titulo">
+                <br/>
+                <br/>
+                <p>{{form.titulo}}</p>
+              <mat-divider style="background-color: black; width: 60%;"></mat-divider>
+            </div>
+        <mat-form-field >
+         
+          <mat-label>{{form.label}}</mat-label>
+          <input type="{{form.type}}" (change)="porcentaje= porcentaje + 5" matInput placeholder="{{form.placeHolder}}" formControlName="{{form.formControlName}}" required>
+        </mat-form-field>
+      </ion-col>
+        <br/>
+        
+        
+        </ion-row>
+        </ion-grid>
+
+
+        
+        <div>
+          <button mat-button type="submit" shape="full" expand="block">Finalizar</button>
+          <button mat-button  *ngIf="nPrendas == 1 || nPrendas >=2" (click)="addPrenda()">Añadir otra prenda</button>
+          <button mat-button matStepperNext *ngIf="nPrendas > 1">Siguiente</button>
+        </div>
+      </form>
+     
+    </mat-step>
+   
+  </mat-horizontal-stepper>
+  <img src="../../assets/icon/pixlr-bg-result.png" id="imagen">
+  <mat-progress-bar mode="determinate" value="{{porcentaje}}" id="centrarBar"></mat-progress-bar>
+</ion-content>

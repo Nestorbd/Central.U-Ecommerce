@@ -1,41 +1,29 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Pruebas de crud con PHP
-    </ion-title>
-    
+   
+      <ion-icon id="menuBtn" name="menu-outline" slot="start" (click)="toggleMenu()"></ion-icon>
+ 
+  
+    <ion-title>Página principal</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-
-    
-    <div class="example-button-container">
-      <button mat-button (click)="getLogo()" color="primary" aria-label="Example icon button with a delete icon">
-        Ver info 
-      </button>
-      <button mat-button (click)="addLogo()" color="primary" aria-label="Example icon button with a delete icon">
-        Añadir logo
-      </button>
+<ion-content>
+  
+  <div class="container">
+    <br/>
+    <p>¿Qué desea hacer?</p>
+    <div class="row">
+      <button mat-button id="botones" (click)="goToNewInvoice()"><span id="texto">Nuevo encargo</span></button>
     </div>
-
-    <ion-card *ngFor="let l of logotipo">
-      <ion-card-header>
-        <ion-card-subtitle>Nombre del logo {{l.nombre}}</ion-card-subtitle>
-      </ion-card-header>
-    
-      <ion-card-content>
-        <button mat-button (click)="getLogoById(l.id)">Buscar por id</button>
-        <button mat-button (click)="deleteLogo(l.id)">  Eliminar por id</button>
-        <button mat-button (click)="updateLogo(l.id)">  Actualizar por id</button>
-      </ion-card-content>
-    </ion-card>
+    <div class="row">
+      <button mat-button id="botones"><span id="texto">Validaciones</span></button>
+    </div>
+    <div class="row">
+      <button mat-button id="botones"><span id="texto">Seguimiento de pedidos</span></button>
+    </div>
+    <div class="row">
+      <button mat-button id="botones"><span id="texto">Historial de pedidos</span></button>
+    </div>
   </div>
 </ion-content>

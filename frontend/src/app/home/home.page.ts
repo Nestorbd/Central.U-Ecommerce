@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonSlides, MenuController, PopoverController } from '@ionic/angular';
 import { Logotipo } from '../model/logotipo';
 import { LogotipoService } from '../services/logotipo.service';
 
@@ -8,15 +9,32 @@ import { LogotipoService } from '../services/logotipo.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
 
   logotipo: Logotipo[];
 
   constructor(
     private logoService: LogotipoService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private menu: MenuController
+  ) {
+  }
+
+  ngOnInit(){
+    this.getLogo()
+  
+  }
+
+  goToNewInvoice(){
+    this.router.navigateByUrl("prenda-selector")
+  }
+
+  toggleMenu() {
+        this.menu.enable(true, 'tienda');
+        this.menu.open('tienda');
+
+  }
 
 
   getLogo() {

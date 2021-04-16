@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pruebasForm</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <mat-horizontal-stepper  #stepper  id="centrarForm">
+    <mat-step >
+      
+      <form  [formGroup]="dynamicForm"(ngSubmit)="onFormSubmit()">
+    
+        <div class="card m-3">
+          <ng-template matStepLabel>Nueva Prenda</ng-template>
+          <div >
+          <div class="card-body">
+            <p  *ngIf="contador == 0" id="p">Pulse el botón si usted desea añadir una nueva prenda al pedido</p>
+            <p  *ngIf="contador > 0 && contador <  8" id="p">Pulse el botón si usted desea añadir más de una prenda al pedido</p>
+            <p  *ngIf="contador == 8" id="p">Ha llegado al limite de prendas por pedido, si desea añadir más prendas, cree un nuevo pedido</p>
+              <div class="form-row">
+                  <div class="form-group">
+                    <br/><br/>
+                      <button *ngIf="contador < 8" id="botones" mat-button type="button" (click)="onChangeTickets($event)">Agregar nueva prenda</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        
+       
+        <div *ngFor="let prendas of t.controls; let i = index" class="list-group list-group-flush">
+         
+          <mat-step>
+            <ng-template matStepLabel>Prenda nº {{i+1}}</ng-template>
+          <div class="list-group-item">
+              <div [formGroup]="prendas" class="form-row">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="6" *ngFor="let form of formArray">
+                    <div *ngIf="form.titulo == form.titulo">
+                      <br/>
+                      <br/>
+                      <p>{{form.titulo}}</p>
+                      <mat-divider style="background-color: black; width: 60%;"></mat-divider>
+                    </div>
+                    <mat-form-field >
+                      <mat-label>{{form.label}}</mat-label>
+                      <input type="{{form.type}}" (change)="porcentaje= porcentaje + 5" matInput placeholder="{{form.placeHolder}}"   class="form-control" formControlName="{{form.formControlName}}" required>
+                    </mat-form-field>
+                  </ion-col>
+                  <br/>
+                  </ion-row>
+                  </ion-grid>
+                  <div>
+                    <button mat-button matStepperNext *ngIf="contador > 0">Siguiente</button>
+                  </div>
+              </div>
+          </div>
+        </mat-step>
+      </div>
+    </div>
+ 
+    <mat-step *ngIf="contador > 0">
+      <ng-template matStepLabel>Finalizar pedido</ng-template>
+      <div>
+        <button mat-button (click)="onSubmit()"shape="full" expand="block">Finalizar</button>
+      </div>
+    </mat-step>
+  
+        
+      </form>
+     
+    </mat-step>
+   
+  </mat-horizontal-stepper>
+
+</ion-content>

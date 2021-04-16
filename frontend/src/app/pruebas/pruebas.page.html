@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pruebas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="moveable app">
+    <div class="container">
+        <ngx-selecto
+            #selecto
+            dragContainer=".elements"
+            [selectableTargets]='[".selecto-area .cube"]'
+            [hitRate]='0'
+            
+            [selectByClick]='true'
+            [selectFromInside]='false'
+            [toggleContinueSelect]='["shift"]'
+            [ratio]='0'
+            (dragStart)="onDragStart($event)"
+            (dragEnd)="onDragEnd($event)"
+            (selectEnd)="onSelectEnd($event)"
+        ></ngx-selecto>
+        <ngx-moveable
+            #moveable
+            [draggable]='true'
+            [target]='targets'
+            [resizable]="true"
+            [rotatable]='false'
+            [throttleDragRotate]='0'
+            (rotateStart)="onRotateStart($event)"
+      
+            [keepRatio]="true"
+            [bounds]='{"left":40,"top":40,"right":600,"bottom":430}'
+            [renderDirections]='["nw","n","ne","w","e","sw","s","se"]'
+            [throttleResize]="0"
+            (clickGroup)="onClickGroup($event)"
+            (dragStart)="onMoveableDragStart($event)"
+            (drag)="onDrag($event)"
+            (dragGroupStart)="onDragGroupStart($event)"
+            (dragGroup)="onDragGroup($event)"
+            (resizeStart)="onResizeStart($event)"
+            (resize)="onResize($event)"
+           
+
+        ></ngx-moveable>
+        <div class="elements selecto-area " id="selecto1">
+          <img class="cube targets"  src="http://localhost/crud_api/api/imagenes/07042021163936698374.png"  />
+          <img class="cube targets"  src="http://localhost/crud_api/api/imagenes/07042021160918346172.png"  />
+        </div>
+        <div class="elements ">hola</div>
+    </div>
+</div>
+</ion-content>
