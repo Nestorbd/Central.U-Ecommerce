@@ -1,73 +1,141 @@
 <?php
-require_once 'C:\xampp\htdocs\api\api\models\clienteModel.php';
-require_once 'C:\xampp\htdocs\api\api\models\clienteIndividualModel.php';
-require_once 'C:\xampp\htdocs\api\api\models\clienteEmpresaModel.php';
+require_once 'models/clienteModel.php';
+require_once 'models/clienteIndividualModel.php';
+require_once 'models/clienteEmpresaModel.php';
 
 
 
 
-Class clienteController{
+class ClienteController
+{
 
     private $cliente;
 
-public function __construct(){
-    $this->cliente = new Cliente();
-}
+    public function __construct()
+    {
+        // $this->cliente = new Cliente();
+    }
 
-    public function getAll(){
-        
-        $data = $this->cliente->getCliente();
+    public function getAll()
+    {
+        $data = array();
+
+        $this->cliente = new Empresa;
+        $dataEmpresa = $this->cliente->getEmpresa();
+
+        $data["Empresas"] = $dataEmpresa;
+
+        $this->cliente = new Individual;
+        $dataIndividual = $this->cliente->getIndividual();
+        $data["Individuales"] = $dataIndividual;
+
 
         exit(json_encode($data));
     }
 
-    public function getOne($id){
-        if(is_array($id)){
+    public function getOne($id)
+    {
+        if (is_array($id)) {
             $id = implode('', $id);
         }
-        $data = $this->cliente->getClienteById($id);
-        if ($data == null) {
-            $data = "No hay ningun logotipo";
-         }
-         exit(json_encode($data));
-}
-
-public function insert(){
-        $data = json_decode(file_get_contents("php://input"));
-        $dataCreate = $this->cliente->createCliente($data);
-
-    if ($dataCreate) {
-        exit(json_encode(array('status' => 'success')));
-    } else {
-        exit(json_encode(array('status' => 'error')));
-    }
-
-}
-
-public function update($id){
-    if(is_array($id)){
-        $id = implode('', $id);
-    }
-        $data = json_decode(file_get_contents("php://input"));
-
-        $dataUpdate = $this->logotipo->updateLogotipos($id, $data);
-        if ($dataUpdate) {
-            $this->getOne($id);
+        $isEmpresa = $_GET["es_empresa"];
+        if( $isEmpresa === "true") {
+            $this->cliente = new Empresa;
+            $data = $this->cliente->getEmpresaById($id);
+            if ($data == null) {
+                $data = "No hay ningun logotipo";
+            } else {
+                exit(json_encode($data));
+            }
         } else {
-            exit(json_encode(array('status' => 'error')));
+            $this->cliente = new Individual;
+            $data = $this->cliente->getIndividualById($id);
+            if ($data == null) {
+                $data = "No hay ningun logotipo";
+            } else {
+                exit(json_encode($data));
+            }
         }
     }
 
-    public function delete($id){
-        if(is_array($id)){
+    public function insert()
+    {
+        $data = json_decode(file_get_contents("php://input"));
+        if ($data->es_empresa === true) {
+            $this->cliente = new Empresa;
+            $dataCreate = $this->cliente->createEmpresa($data);
+
+            if ($dataCreate) {
+                exit(json_encode(array('status' => 'success')));
+            } else {
+                exit(json_encode(array('status' => 'error')));
+            }
+        } else {
+            $this->cliente = new Individual;
+            $dataCreate = $this->cliente->createIndividual($data);
+
+            if ($dataCreate) {
+                exit(json_encode(array('status' => 'success')));
+            } else {
+                exit(json_encode(array('status' => 'error')));
+            }
+        }
+    }
+
+    public function update($id)
+    {
+        if (is_array($id)) {
             $id = implode('', $id);
         }
-                $data = $this->logotipo->deleteLogotipos($id);
+        $data = json_decode(file_get_contents("php://input"));
 
-        if (!$data) {
-            exit(json_encode("No hay ningun logotipo"));
+        if ($data->es_empresa === true) {
+            $this->cliente = new Empresa;
+            $dataCreate = $this->cliente->updateEmpresa($id, $data);
+
+            if ($dataCreate) {
+                exit(json_encode(array('status' => 'success')));
+            } else {
+                exit(json_encode(array('status' => 'error')));
+            }
         } else {
-            exit(json_encode(array('status' => 'success')));
+            $this->cliente = new Individual;
+            $dataCreate = $this->cliente->updateIndividual($id, $data);
+
+            if ($dataCreate) {
+                exit(json_encode(array('status' => 'success')));
+            } else {
+                exit(json_encode(array('status' => 'error')));
+            }
         }
+    }
+
+    public function delete($id)
+    {
+        if (is_array($id)) {
+            $id = implode('', $id);
+        }
+        $data = json_decode(file_get_contents("php://input"));
+        if($data->es_empresa === true)
+        {
+            $this->cliente = new Empresa;
+            $data = $this->cliente->deleteEmpresa($id);
+            if (!$data) {
+                exit(json_encode(array('status' => 'error')));
+            } else {
+                exit(json_encode(array('status' => 'success')));
+            }
+        }else{
+            $this->cliente = new Individual;
+            $data = $this->cliente->deleteIndividual($id);
+            if (!$data) {
+                exit(json_encode(array('status' => 'error')));
+            } else {
+                exit(json_encode(array('status' => 'success')));
+            }
+        }
+        
+
+
     }
 }

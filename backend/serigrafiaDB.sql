@@ -5,7 +5,7 @@ use serigrafiabd;
 
 drop table if EXISTS cliente_individual;
 create table cliente_individual (
-id int primary key auto_increment,
+id_individual int primary key auto_increment,
 nombre varchar(40) not null,
 apellidos varchar(40) not null,
 telefono varchar(20),
@@ -15,7 +15,7 @@ NIF varchar(20)
 
 drop table if EXISTS cliente_empresa;
 create table cliente_empresa (
-    id int primary key auto_increment,
+    id_empresa int primary key auto_increment,
     nombre varchar(40),
     telefono varchar(20),
     CIF varchar(20)
@@ -33,8 +33,8 @@ create table cliente_direccion (
     id_empresa int,
 
 
-    foreign key (id_individual) REFERENCES cliente_individual (id),
-    foreign key (id_empresa) REFERENCES cliente_empresa (id)
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
+    foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
 );
 
 drop table if EXISTS logotipos;
@@ -45,8 +45,8 @@ create table logotipos (
     id_individual int,
     id_empresa int,
 
-    foreign key (id_individual) REFERENCES cliente_individual (id),
-    foreign key (id_empresa) REFERENCES cliente_empresa (id)
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
+    foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
 );
 
 drop table if EXISTS usuario_rol;
@@ -87,8 +87,8 @@ create table pedidos (
     id_empresa int,
 
 
-    foreign key (id_individual) REFERENCES cliente_individual (id),
-    foreign key (id_empresa) REFERENCES cliente_empresa (id),
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
+    foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa),
     foreign key (id_usuario) REFERENCES usuario (id),
     foreign key (id_estado) REFERENCES estado_pedido (id)
 );
@@ -249,3 +249,6 @@ insert into cliente_individual  VALUES (null,"Gonzalo","Santana","626202874","go
 insert into cliente_empresa  VALUES (null,"KFC","626202874", "666666");
 
 insert into formulario values (null,"Datos de contacto","nombre","pepito","nombre","text","nombre", default);
+
+insert into cliente_direccion values (null,"C/ El Router", "135B", "Las Palmas", "Las Palmas", "35001", null,1);
+insert into cliente_direccion values (null,"C/ Obispo Pildain", "155", "Arucas", "Las Palmas", "35400", 1,null);

@@ -1,8 +1,8 @@
 <?php
-require_once 'C:\xampp\htdocs\api\api\models\formularioModel.php';
+require_once 'models/formularioModel.php';
 
 
-Class formularioController{
+Class FormularioController{
 
     private $formulario;
 

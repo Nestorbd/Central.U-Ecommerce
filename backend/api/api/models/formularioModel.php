@@ -107,7 +107,21 @@ class Formulario
 
     public function createFormulario($data)
     {
-        $sql = $this->conn->query("INSERT INTO formulario VALUES (null,'" . $data->apartado . "','".$data->label."','". $data->placeholder . "','". $data->value."','". $data->type."','". $data->formControlName."')");
+        $return = array();
+        $returnColum = array();
+
+        foreach ($data as $key => $val) {
+            $returnColum[$key] = $key; 
+            $return[$key] = $val;
+        }
+        
+        if(!$return["activo"]){
+            $return["activo"]=1;
+        }
+        $insData= implode("','",$return);
+        $insDataColumn = implode(",",$returnColum);
+
+        $sql = $this->conn->query("INSERT INTO formulario (".$insDataColumn.") VALUES ('".$insData."')");
 
         return $sql;
     }
@@ -120,7 +134,14 @@ class Formulario
         if ($dataOld == null) {
             return false;
         } else {
-            $sql = $this->conn->query("UPDATE formulario SET apartado = '" . $dataNew->apartado . "'  WHERE id=" . $id);
+            $return = array();
+
+            foreach ($dataNew as $key => $val) {
+                $return[$key] = $key. " = '".$val."'";
+            }
+            $insData=implode(", ",$return);
+
+            $sql = $this->conn->query("UPDATE formulario SET ".$insData. " WHERE id=" . $id);
             if ($sql) {
                 return true;
             } else {
@@ -152,6 +173,9 @@ class Formulario
         $return = array();
         foreach ($data as $key => $val) {
             $return[$key] = $val;
+        }
+        if($return['default']){
+            $return['default'] = "default '".$return['default']."'";
         }
         $insData= implode("\n",$return);
 

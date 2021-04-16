@@ -23,8 +23,12 @@ class Request
                 } else {
                     if($this->metodo == "ver"){
                         $this->metodo = "getOne";
-                    }else {
-                        exit("Este no es el metodo adecuado");
+                    }
+                    // else {
+                    //     exit("Este no es el metodo adecuado");
+                    // }
+                    if($this->controlador == "direccion" && $this->metodo == "cliente"){
+                        $this->metodo = "getAllDireccionForOneCliente";
                     }
                     
                 }

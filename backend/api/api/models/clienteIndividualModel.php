@@ -22,6 +22,10 @@ class Individual
 		}
 	}
 
+    public function __construct0(){
+        $this->conn = Connection::conexion();
+    }
+
     public function getId(){
         return $this->id;
     }
@@ -57,33 +61,43 @@ class Individual
         $this->NIF = $NIF;
     }
 
-        public function getIndividual($conn)
+        public function getIndividual()
     {
 
-        $sql = $conn->query("SELECT c.*, i.nombre, i.apellidos, i.email, i.NIF FROM cliente c JOIN cliente_individual i 
-        on c.id_individual = i.id");
-
+        $sql = $this->conn->query("SELECT * FROM cliente_individual"); 
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;
     }
 
-    public function getIndividualById($conn,$id)
+    public function getIndividualById($id)
     {
-        $id =  $conn->quote($id);
-        $sql = $conn->query("SELECT c.*, i.nombre, i.apellidos, i.email, i.NIF FROM cliente c JOIN cliente_individual i on c.id_individual = i.id WHERE i.id =" . $id);
+        $id =  $this->conn->quote($id);
+        $sql = $this->conn->query("SELECT * FROM cliente_individual WHERE id =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
         return $data;
     }
 
-    public function createIndividual($conn,$data)
+    public function createIndividual($data)
     {
-        $sql = $conn->query("INSERT INTO cliente_individual (nombre, apellidos, email, NIF) VALUES ('" . $data->nombre . "','".$data->apellidos ."','". $data->email ."','". $data->NIF."')");
-        $data = $sql->fetch(PDO::FETCH_OBJ);
-        $data = $this->getIndividualById($conn,$data->id);
+        $return = array();
+        $returnColum = array();
 
-        return $data;
+        foreach ($data as $key => $val) {
+            $returnColum[$key] = $key; 
+            $return[$key] = $val;
+        }
+        if($returnColum["es_empresa"]){
+            unset($returnColum["es_empresa"]);
+            unset($return["es_empresa"]);
+        }
+        $insData= implode("','",$return);
+        $insDataColumn = implode(",",$returnColum);
+
+        $sql = $this->conn->query("INSERT INTO cliente_individual (".$insDataColumn.") VALUES ('".$insData."')");
+
+        return $sql;
     }
 
     public function updateIndividual($id, $dataNew)
@@ -94,7 +108,17 @@ class Individual
         if ($dataOld == null) {
             return false;
         } else {
-            $sql = $this->conn->query("UPDATE cliente_individual SET nombre = '" . $dataNew->nombre . "', apellidos = '" . $dataNew->apellidos ."', email = '" . $dataNew->email . "', NIF = '" . $dataNew->NIF . "' WHERE id=" . $id);
+            $return = array();
+
+            foreach ($dataNew as $key => $val) {
+                $return[$key] = $key. " = '".$val."'";
+            }
+            if($return["es_empresa"]){
+                unset($return["es_empresa"]);
+            }
+            $insData=implode(", ",$return);
+
+            $sql = $this->conn->query("UPDATE cliente_individual SET ".$insData. " WHERE id=" . $id);
             if ($sql) {
                 return true;
             } else {
