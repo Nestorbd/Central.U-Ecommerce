@@ -56,7 +56,7 @@ class Empresa
     public function getEmpresaById($id)
     {
         $id =  $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT * FROM cliente_empresa WHERE id=". $id);
+        $sql = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=". $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
         return $data;
@@ -75,18 +75,22 @@ class Empresa
             unset($returnColum["es_empresa"]);
             unset($return["es_empresa"]);
         }
+        unset($return["id_empresa"]);
+        unset($returnColum["id_empresa"]);
+
         $insData= implode("','",$return);
         $insDataColumn = implode(",",$returnColum);
 
-        $sql = $this->conn->query("INSERT INTO cliente_empresa (".$insDataColumn.") VALUES ('".$insData."')");
-
-        return $sql;
+        $this->conn->query("INSERT INTO cliente_empresa (".$insDataColumn.") VALUES ('".$insData."')");
+        $data = $this->conn->lastInsertId();
+        
+        return $data;
     }
 
     public function updateEmpresa($id, $dataNew)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=" . $id);
         $dataOld = $sql_get->fetch();
         if ($dataOld == null) {
             return false;
@@ -101,7 +105,7 @@ class Empresa
             }
             $insData=implode(", ",$return);
 
-            $sql = $this->conn->query("UPDATE cliente_empresa SET ".$insData. " WHERE id=" . $id);
+            $sql = $this->conn->query("UPDATE cliente_empresa SET ".$insData. " WHERE id_empresa=" . $id);
             if ($sql) {
                 return true;
             } else {
@@ -113,7 +117,7 @@ class Empresa
     public function deleteEmpresa($id)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=" . $id);
         $data = $sql_get->fetch();
         if ($data == null) {
             return false;
