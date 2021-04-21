@@ -41,7 +41,8 @@ drop table if EXISTS logotipos;
 create table logotipos (
     id int primary key auto_increment,
     nombre varchar(40) not null,
-    imagen blob not null,
+    imagen_png blob not null,
+    imagen_svg blob not null,
     id_individual int,
     id_empresa int,
 
@@ -112,13 +113,23 @@ create table bocetos (
     foreign key (id_pedidos) REFERENCES pedidos(id)
 );
 
+drop table if EXISTS articulo_categoria;
+create table articulo_categoria (
+    id int primary key auto_increment,
+    nombre varchar(40),
+    activo boolean default true
+);
+
 drop table if EXISTS articulos;
 create table articulos (
     id int primary key auto_increment,
     nombre varchar(40) not null,
     codigo_barra varchar(20) not null,
     stock int not null,
-    activo boolean default true
+    activo boolean default true,
+    id_categoria int not null,
+
+    foreign key (id_categoria) references articulo_categoria(id)
 );
 
 drop table if EXISTS articulos_pedidos;
@@ -131,34 +142,40 @@ create table articulos_pedidos (
     foreign key (id_pedidos) REFERENCES pedidos(id)
 );
 
-drop table if EXISTS articulo_talla;
-create table articulo_talla (
+drop table if EXISTS talla;
+create table talla (
     id int primary key auto_increment,
     nombre varchar(40),
-    activo boolean default true,
-    id_articulo int,
-
-    foreign key (id_articulo) REFERENCES articulos(id)
+    activo boolean default true
 );
 
-drop table if EXISTS articulo_categoria;
-create table articulo_categoria (
-    id int primary key auto_increment,
-    nombre varchar(40),
+drop table if EXISTS talla_articulo;
+create table talla_articulo (
+    id_articulo int not null,
+    id_talla int not null,
     activo boolean default true,
-    id_articulo int,
 
-    foreign key (id_articulo) REFERENCES articulos(id)
+    primary key (id_articulo,id_talla),
+    foreign key (id_articulo) REFERENCES articulos(id),
+    foreign key (id_talla) REFERENCES talla(id)
 );
 
-drop table if EXISTS articulo_color;
-create table articulo_color (
+drop table if EXISTS color;
+create table color (
     id int primary key auto_increment,
     nombre varchar(40),
-    activo boolean default true,
-    id_articulo int,
+    activo boolean default true
+);
 
-    foreign key (id_articulo) REFERENCES articulos (id)
+drop table if EXISTS color_articulo;
+create table color_articulo (
+    id_articulo int not null,
+    id_color int not null,
+    activo boolean default true,
+
+    primary key (id_articulo,id_color),
+    foreign key (id_articulo) REFERENCES articulos(id),
+    foreign key (id_color) REFERENCES color(id)
 );
 
 drop table if EXISTS tarifas_categorias;
@@ -243,6 +260,37 @@ BEGIN
 end |
 DELIMITER ;
 
+DELIMITER |
+create trigger talla_AU_Trigger
+    AFTER UPDATE
+    ON talla
+    FOR EACH ROW
+BEGIN
+    Update talla_articulo set activo = new.activo where id_talla = old.id;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger color_AU_Trigger
+    AFTER UPDATE
+    ON color
+    FOR EACH ROW
+BEGIN
+    Update color_articulo set activo = new.activo where id_color = old.id;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger articulo_AU_Trigger
+    AFTER UPDATE
+    ON articulos
+    FOR EACH ROW
+BEGIN
+    Update color_articulo set activo = new.activo where id_articulo = old.id;
+    Update talla_articulo set activo = new.activo where id_articulo = old.id;
+end |
+DELIMITER ;
+
 insert into cliente_individual  VALUES (null,"nestor","batista","626202874","nestor@CU.es","54682321");
 insert into cliente_empresa  VALUES (null,"Central Uniformes", "626202874","777777");
 insert into cliente_individual  VALUES (null,"Gonzalo","Santana","626202874","gonzalo@CU.es","878454856");
@@ -252,3 +300,5 @@ insert into formulario values (null,"Datos de contacto","nombre","pepito","nombr
 
 insert into cliente_direccion values (null,"C/ El Router", "135B", "Las Palmas", "Las Palmas", "35001", null,1);
 insert into cliente_direccion values (null,"C/ Obispo Pildain", "155", "Arucas", "Las Palmas", "35400", 1,null);
+
+insert into articulo_categoria values (null,"blusa",true);

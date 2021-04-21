@@ -113,7 +113,6 @@ class Direccion
     }
     public function getDireccionByEmpresaId($id)
     {
-        print_r($id);
         $id =  $this->conn->quote($id);
         $sql = $this->conn->query("SELECT * FROM cliente_direccion WHERE id_empresa=". $id);
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -129,12 +128,26 @@ class Direccion
             $returnColum[$key] = $key; 
             $return[$key] = $val;
         }
+
+        unset($return["id"]);
+        unset($returnColum["id"]);
+
+        
+        if(empty($return["id_individual"])){
+            unset($return["id_individual"]);
+            unset($returnColum["id_individual"]);
+        }else{
+            unset($return["id_empresa"]);
+            unset($returnColum["id_empresa"]);
+        }
+        
         $insData= implode("','",$return);
         $insDataColumn = implode(",",$returnColum);
 
-        $sql = $this->conn->query("INSERT INTO cliente_direccion (".$insDataColumn.") VALUES ('".$insData."')");
-
-        return $sql;
+        $this->conn->query("INSERT INTO cliente_direccion (".$insDataColumn.") VALUES ('".$insData."')");
+        $data = $this->conn->lastInsertId();
+        
+        return $data;
     }
 
     public function updateDireccion($id, $dataNew)

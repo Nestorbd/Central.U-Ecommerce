@@ -6,7 +6,11 @@ class Logotipos
 {
     private $id;
     private $nombre;
-    private $imagen;
+    private $imagen_png;
+    private $imagen_svg;
+    private $id_individual;
+    private $id_empresa;
+
     public $conn;
 
     public function __construct()
@@ -23,11 +27,14 @@ class Logotipos
         $this->conn = Connection::conexion();
     }
 
-    public function __construct1($id, $nombre, $imagen){
+    public function __construct1($id, $nombre, $imagen_png, $imagen_svg, $id_empresa,$id_individual){
         $this->conn = Connection::conexion();
         $this->id = $id;
         $this->nombre = $nombre;
-        $this->imagen = $imagen;
+        $this->imagen_png = $imagen_png;
+        $this->imagen_svg = $imagen_svg;
+        $this->id_individual = $id_individual;
+        $this->id_empresa = $id_empresa;
     }
     public function getId(){
         return $this->id;
@@ -43,11 +50,32 @@ class Logotipos
         $this->nombre = $nombre;
     }
 
-    public function getImagen(){
-        return $this->imagen;
+    public function getImagenPNG(){
+        return $this->imagen_png;
     }
-    public function setImagen($imagen){
-        $this->imagen = $imagen;
+    public function setImagenPNG($imagen_png){
+        $this->imagen_png = $imagen_png;
+    }
+
+    public function getImagenSVG(){
+        return $this->imagen_svg;
+    }
+    public function setImagenSVG($imagen_svg){
+        $this->imagen_svg = $imagen_svg;
+    }
+
+    public function getIdEmpresa(){
+        return $this->id_empresa;
+    }
+    public function setIdEmpresa($id_empresa){
+        $this->id_empresa = $id_empresa;
+    }
+
+    public function getIdIndividual(){
+        return $this->id_individual;
+    }
+    public function setIdIndividual($id_individual){
+        $this->id_individual = $id_individual;
     }
 
     public function getLogotipos()
@@ -70,9 +98,27 @@ class Logotipos
 
     public function createLogotipos($data, $img)
     {
-        $sql = $this->conn->query("INSERT INTO logotipos (nombre, imagen) VALUES ('" . $data->nombre . "','".$img."')");
+        $return = array();
+        $returnColum = array();
 
-        return $sql;
+        foreach ($data as $key => $val) {
+            $returnColum[$key] = $key;
+            $return[$key] = $val;
+        }
+        if ($img){
+            $return["imagen_png"] = $img;
+            $returnColum["imagen_png"] = "imagen_png";
+        }
+        unset($return["id"]);
+        unset($returnColum["id"]);
+        
+        $insData = implode("','", $return);
+        $insDataColumn = implode(",", $returnColum);
+
+        $this->conn->query("INSERT INTO logotipos (".$insDataColumn.") VALUES ('" . $insData . "')");
+        $data = $this->conn->lastInsertId();
+        
+        return $data;
     }
 
     public function updateLogotipos($id, $dataNew)
@@ -107,5 +153,18 @@ class Logotipos
                 return false;
             }
         }
+    }
+
+    public function getLogotiposByCliente($id){
+        $id = $this->conn->quote($id);
+        if($_GET["es_empresa"] === "true"){
+            $sql_get = $this->conn->query("SELECT * FROM logotipos WHERE id_empresa=" . $id);
+            $data = $sql_get->fetchAll(PDO::FETCH_OBJ);
+        }else{
+            $sql_get = $this->conn->query("SELECT * FROM logotipos WHERE id_individual=" . $id);
+            $data = $sql_get->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        return $data;
     }
 }

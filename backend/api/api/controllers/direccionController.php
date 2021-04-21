@@ -30,8 +30,12 @@ class DireccionController
         $data = $this->direccion->getDireccionById($id);
         if ($data == null) {
             $data = "No hay ningun formulario con id=".$id;
+            exit(json_encode($data));
+         }else{
+            $data_r[0] = $data;
+            exit(json_encode($data_r));
          }
-         exit(json_encode($data));
+         
     }
 
     public function insert()
@@ -40,7 +44,7 @@ class DireccionController
         $dataCreate = $this->direccion->createDireccion($data);
 
     if ($dataCreate) {
-        exit(json_encode(array('status' => 'success')));
+        $this->getOne($dataCreate);
     } else {
         exit(json_encode(array('status' => 'error')));
     }
@@ -85,7 +89,7 @@ class DireccionController
         }
         }else{
             if($_GET['es_empresa'] === "false"){
-                $data = $this->direccion->getDireccionByEmpresaId($id);
+                $data = $this->direccion->getDireccionByIndividualId($id);
                 if (!$data) {
                     exit(json_encode(array('status' => 'error')));
                 } else {

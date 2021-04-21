@@ -24,8 +24,12 @@ public function __construct(){
         $data = $this->formulario->getFormularioById($id);
         if ($data == null) {
             $data = "No hay ningun formulario con id=".$id;
+            exit(json_encode($data));
+         }else{
+            $data_r[0] = $data;
+            exit(json_encode($data_r));
          }
-         exit(json_encode($data));
+         
 }
 
 public function insert(){
@@ -33,7 +37,7 @@ public function insert(){
         $dataCreate = $this->formulario->createFormulario($data);
 
     if ($dataCreate) {
-        exit(json_encode(array('status' => 'success')));
+        $this->getOne($dataCreate);
     } else {
         exit(json_encode(array('status' => 'error')));
     }
@@ -76,5 +80,11 @@ public function update($id){
         } else {
             exit(json_encode(array('status' => 'error')));
         }
+    }
+
+    public function getColumns(){
+        
+        $data = $this->formulario->getColumns();
+         exit(json_encode($data));
     }
 }
