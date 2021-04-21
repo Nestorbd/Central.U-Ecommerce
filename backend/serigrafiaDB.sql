@@ -41,15 +41,14 @@ drop table if EXISTS logotipos;
 create table logotipos (
     id int primary key auto_increment,
     nombre varchar(40) not null,
-    imagen_png blob not null,
-    imagen_svg blob not null,
+    imagen_png blob null,
+    imagen_svg blob null,
     id_individual int,
     id_empresa int,
 
     foreign key (id_individual) REFERENCES cliente_individual (id_individual),
     foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
 );
-
 drop table if EXISTS usuario_rol;
 create table usuario_rol (
     id int primary key auto_increment,
