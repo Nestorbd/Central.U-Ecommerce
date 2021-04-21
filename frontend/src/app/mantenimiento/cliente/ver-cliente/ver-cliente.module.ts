@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { VerClientePageRoutingModule } from './ver-cliente-routing.module';
 
 import { VerClientePage } from './ver-cliente.page';
+import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    MaterialModule,
     VerClientePageRoutingModule
   ],
   declarations: [VerClientePage]
