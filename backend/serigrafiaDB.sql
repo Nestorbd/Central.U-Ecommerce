@@ -33,8 +33,12 @@ create table cliente_direccion (
     id_empresa int,
 
 
-    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual)
+    on update cascade
+    on delete cascade,
     foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS logotipos;
@@ -46,8 +50,12 @@ create table logotipos (
     id_individual int,
     id_empresa int,
 
-    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual)
+    on update cascade
+    on delete cascade,
     foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
+    on update cascade
+    on delete cascade
 );
 drop table if EXISTS usuario_rol;
 create table usuario_rol (
@@ -64,6 +72,8 @@ create table usuario (
     id_rol int not null,
 
     foreign key (id_rol) REFERENCES usuario_rol(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS estado_pedido;
@@ -87,10 +97,18 @@ create table pedidos (
     id_empresa int,
 
 
-    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
-    foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa),
-    foreign key (id_usuario) REFERENCES usuario (id),
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual)
+    on update cascade
+    on delete cascade,
+    foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
+    on update cascade
+    on delete cascade,
+    foreign key (id_usuario) REFERENCES usuario (id)
+    on update cascade
+    on delete cascade,
     foreign key (id_estado) REFERENCES estado_pedido (id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS logotipos_pedido;
@@ -99,8 +117,12 @@ create table logotipos_pedido (
     id_pedidos int not null,
 
     primary key (id_logotipos, id_pedidos),
-    foreign key (id_pedidos) REFERENCES pedidos(id),
+    foreign key (id_pedidos) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_logotipos) REFERENCES logotipos(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS bocetos;
@@ -110,6 +132,8 @@ create table bocetos (
     id_pedidos int,
 
     foreign key (id_pedidos) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS articulo_categoria;
@@ -129,6 +153,8 @@ create table articulos (
     id_categoria int not null,
 
     foreign key (id_categoria) references articulo_categoria(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS articulos_pedidos;
@@ -137,8 +163,12 @@ create table articulos_pedidos (
     id_pedidos int not null,
 
     primary key (id_articulo, id_pedidos),
-    foreign key (id_articulo) REFERENCES articulos(id),
+    foreign key (id_articulo) REFERENCES articulos(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_pedidos) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS talla;
@@ -155,8 +185,12 @@ create table talla_articulo (
     activo boolean default true,
 
     primary key (id_articulo,id_talla),
-    foreign key (id_articulo) REFERENCES articulos(id),
+    foreign key (id_articulo) REFERENCES articulos(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_talla) REFERENCES talla(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS color;
@@ -173,8 +207,12 @@ create table color_articulo (
     activo boolean default true,
 
     primary key (id_articulo,id_color),
-    foreign key (id_articulo) REFERENCES articulos(id),
+    foreign key (id_articulo) REFERENCES articulos(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_color) REFERENCES color(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS tarifas_categorias;
@@ -197,8 +235,12 @@ create table categorias_tipo (
     id_tipo int not null,
 
     primary key (id_categoria, id_tipo),
-    foreign key (id_categoria) REFERENCES tarifas_categorias(id),
+    foreign key (id_categoria) REFERENCES tarifas_categorias(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_tipo) REFERENCES tarifas_tipo(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS tarifas;
@@ -211,8 +253,12 @@ create table tarifas (
     id_categoria int not null,
     id_tipo int not null,
 
-    foreign key (id_categoria) REFERENCES tarifas_categorias(id),
+    foreign key (id_categoria) REFERENCES tarifas_categorias(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_tipo) REFERENCES tarifas_tipo(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS pedidos_tarifas;
@@ -221,8 +267,12 @@ create table pedidos_tarifas (
     id_pedido int not null,
 
     primary key (id_tarifa,id_pedido),
-    foreign key (id_tarifa) REFERENCES tarifas(id),
+    foreign key (id_tarifa) REFERENCES tarifas(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_pedido) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS update_precio;
@@ -233,6 +283,8 @@ create table update_precio (
     id_tarifa int not null,
 
     foreign key (id_tarifa) REFERENCES tarifas(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS formulario;
