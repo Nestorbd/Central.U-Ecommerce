@@ -2,7 +2,7 @@
 require_once 'connection.php';
 
 
-class Color
+class TipoTarifa
 {
     private $id;
     private $nombre;
@@ -60,25 +60,25 @@ class Color
         $this->activo = $activo;
     }
 
-    public function getColors()
+    public function getTipos()
     {
 
-        $sql = $this->conn->query("SELECT * FROM color");
+        $sql = $this->conn->query("SELECT * FROM tarifas_tipo");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;
     }
 
-    public function getColorById($id)
+    public function getTipoById($id)
     {
         $id =  $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT * FROM color WHERE id =" . $id);
+        $sql = $this->conn->query("SELECT * FROM tarifas_tipo WHERE id =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
         return $data;
     }
 
-    public function createColor($data)
+    public function createTipo($data)
     {
         $return = array();
         $returnColum = array();
@@ -96,16 +96,16 @@ class Color
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);
 
-        $this->conn->query("INSERT INTO color (" . $insDataColumn . ") VALUES ('" . $insData . "')");
+        $this->conn->query("INSERT INTO tarifas_tipo (" . $insDataColumn . ") VALUES ('" . $insData . "')");
         $data = $this->conn->lastInsertId();
 
         return $data;
     }
 
-    public function updateColor($id, $dataNew)
+    public function updateTipo($id, $dataNew)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM color WHERE id=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM tarifas_tipo WHERE id=" . $id);
         $dataOld = $sql_get->fetch();
         if ($dataOld == null) {
             return false;
@@ -117,7 +117,7 @@ class Color
             }
             $insData = implode(", ", $return);
 
-            $sql = $this->conn->query("UPDATE color SET " . $insData . " WHERE id=" . $id);
+            $sql = $this->conn->query("UPDATE tarifas_tipo SET " . $insData . " WHERE id=" . $id);
             if ($sql) {
                 return true;
             } else {
@@ -126,15 +126,15 @@ class Color
         }
     }
 
-    public function deleteColor($id)
+    public function deleteTipo($id)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM color WHERE id=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM tarifas_tipo WHERE id=" . $id);
         $data = $sql_get->fetch();
         if ($data == null) {
             return false;
         } else {
-            $sql = "DELETE FROM color WHERE id=" . $id;
+            $sql = "DELETE FROM tarifas_tipo WHERE id=" . $id;
             if ($this->conn->query($sql) == TRUE) {
                 return true;
             } else {
@@ -143,9 +143,9 @@ class Color
         }
     }
 
-    public function getColoresByArticulo($id){
+    public function getTiposByCategoria($id){
         $id = $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT c.id, c.nombre, c_a.activo FROM color c JOIN color_articulo c_a ON c.id = c_a.id_color WHERE c_a.id_articulo = ".$id);
+        $sql = $this->conn->query("SELECT t.id, t.nombre, c_t.activo FROM tarifas_tipo t JOIN categorias_tipo c_t ON t.id = c_t.id_tipo WHERE c_t.id_categoria = ".$id);
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;

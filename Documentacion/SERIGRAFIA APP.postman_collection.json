@@ -1,0 +1,2185 @@
+{
+	"info": {
+		"_postman_id": "0898a078-b8e3-4916-af87-413718f82dc6",
+		"name": "SERIGRAFIA APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PRUEBAS",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/api/logotipo/ver/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"ver",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/logotipo/ver/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"ver",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "PrototipoImagen78",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/maqui/Pictures/Product/1.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/logotipo/insertar/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"insertar",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"pruebita\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/logotipo/actualizar/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"actualizar",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/logotipo/eliminar/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"eliminar",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Direccion",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/direccion",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"direccion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/direccion/ver/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"direccion",
+										"ver",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"calle\": \"C/ Prueba\",\r\n    \"numero\": 555,\r\n    \"municipio\":\"PruebaM\",\r\n    \"provincia\":\"pruebaP\",\r\n    \"codigo_postal\":\"5445\",\r\n    \"id_individual\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/direccion/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"direccion",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"calle\": \"C/ Prueba2\",\r\n    \"numero\": 555,\r\n    \"municipio\":\"PruebaM22\",\r\n    \"provincia\":\"pruebaP\",\r\n    \"codigo_postal\":\"89\",\r\n    \"id_individual\":2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/direccion/actualizar/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"direccion",
+										"actualizar",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/direccion/eliminar/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"direccion",
+										"eliminar",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL FOR EMPRESA",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/direccion/cliente/1?es_empresa=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"direccion",
+										"cliente",
+										"1"
+									],
+									"query": [
+										{
+											"key": "es_empresa",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL FOR INDIVIDUAL",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/direccion/cliente/1?es_empresa=false",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"direccion",
+										"cliente",
+										"1"
+									],
+									"query": [
+										{
+											"key": "es_empresa",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE INDIVIDUAL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/cliente/ver/1?es_empresa=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"cliente",
+								"ver",
+								"1"
+							],
+							"query": [
+								{
+									"key": "es_empresa",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "es_empresa",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE EMPRESA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/cliente/ver/1?es_empresa=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"cliente",
+								"ver",
+								"1"
+							],
+							"query": [
+								{
+									"key": "es_empresa",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT INDIVIDUAL",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"telefono\":\"12345\",\r\n    \"es_empresa\":false,\r\n    \"nombre\":\"pepe\",\r\n    \"apellidos\":\"ramirez\",\r\n    \"email\":\"pepe@gmail.com\",\r\n    \"NIF\":\"456217\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/cliente/insertar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"cliente",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT EMPRESA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"telefono\":\"1245656\",\r\n    \"es_empresa\":true,\r\n    \"nombre\":\"empresaPrueba\",\r\n    \"CIF\":\"789456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/cliente/insertar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"cliente",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE EMPRESA",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"telefono\":\"1245656\",\r\n    \"es_empresa\":true,\r\n    \"nombre\":\"empresaPruebaUpdate\",\r\n    \"CIF\":\"789456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/cliente/actualizar/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"cliente",
+								"actualizar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE INDIVIDUAL",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"telefono\":\"12345\",\r\n    \"es_empresa\":false,\r\n    \"nombre\":\"PEPE\",\r\n    \"apellidos\":\"ramirez\",\r\n    \"email\":\"pepe@gmail.com\",\r\n    \"NIF\":\"456217\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/cliente/actualizar/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"cliente",
+								"actualizar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Formulario",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/formulario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"formulario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/formulario/ver/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"formulario",
+								"ver",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"apartado\":\"Tipo de trabajo\",\r\n    \"label\":\"tipologia\",\r\n    \"placeholder\":\"serigrafia\",\r\n    \"value\":\"tipologia\",\r\n    \"type\":\"text\",\r\n    \"formControlName\":\"tipologia\",\r\n    \"activo\":\"holiiii\",\r\n    \"nuevaColumna\":\"SOY EL CREATE\"\r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/formulario/insertar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"formulario",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"apartado\": \"Tipo de trabajo2\",\r\n    \"activo\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/formulario/actualizar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"formulario",
+								"actualizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/formulario/eliminar/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"formulario",
+								"eliminar",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE COLUMN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"nuevaColumna\",\r\n    \"define\":\"varchar(40)\",\r\n    \"default\":\"DEFAULT\",\r\n    \"nullable\":\"not null\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/formulario/insertarColumna",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"formulario",
+								"insertarColumna"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET COLUMNS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/formulario/verColumnas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"formulario",
+								"verColumnas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logotipo",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/logotipo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/logotipo/ver/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"ver",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "Logotipooo",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/maqui/Pictures/Product/2.png"
+								},
+								{
+									"key": "id_individual",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/logotipo/insertar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"logotipoActualizado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/logotipo/actualizar/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"actualizar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/logotipo/eliminar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LOGOTIPOS BY CLIENTE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/logotipo/cliente/1?es_empresa=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logotipo",
+								"cliente",
+								"1"
+							],
+							"query": [
+								{
+									"key": "es_empresa",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Articulo",
+			"item": [
+				{
+					"name": "Categoria",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/categoriaArticulo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaArticulo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/categoriaArticulo/ver/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaArticulo",
+										"ver",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"pantalon\",\r\n    \"activo\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/categoriaArticulo/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaArticulo",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"activo\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/categoriaArticulo/actualizar/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaArticulo",
+										"actualizar",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/categoriaArticulo/eliminar/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaArticulo",
+										"eliminar",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Talla",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/talla",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"talla"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/talla/ver/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"talla",
+										"ver",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"XL\",\r\n    \"activo\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/talla/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"talla",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"xxl\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/talla/actualizar/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"talla",
+										"actualizar",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/talla/eliminar/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"talla",
+										"eliminar",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET TALLA BY ARTICULO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/talla/articulo/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"talla",
+										"articulo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Color",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/color",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"color"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/color/ver/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"color",
+										"ver",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"lila\",\r\n    \"activo\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/color/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"color",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"malva\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/color/actualizar/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"color",
+										"actualizar",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/color/eliminar/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"color",
+										"eliminar",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET COLOR BY ARTICULO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/color/articulo/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"color",
+										"articulo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/articulo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/articulo/ver/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"ver",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"articuloPrueba\",\r\n    \"codigo_barra\":5645645,\r\n    \"stock\":54,\r\n    \"activo\":false,\r\n    \"id_categoria\":1,\r\n    \"tallas\":[2,3,4],\r\n    \"colores\":[2,3,4]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articulo/insertar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"articuloPrueba actualizado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articulo/actualizar/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"actualizar",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/articulo/eliminar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ARTICULO BY TALLA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/articulo/talla/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"talla",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ARTICULO BY COLOR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/articulo/color/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"color",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD TALLA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"tallas\":[2,5]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articulo/agregarTallas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"agregarTallas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD COLOR",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":3,\r\n    \"colores\": [2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articulo/agregarColores",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"agregarColores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DISABLE COLOR FOR ARTICULO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":3,\r\n    \"id_color\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articulo/desactivarColor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"desactivarColor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DISABLE TALLA FOR ARTICULO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":3,\r\n    \"id_talla\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articulo/desactivarTalla",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"desactivarTalla"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ENABLE COLOR FOR ARTICULO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":3,\r\n    \"id_color\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articulo/activarColor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"activarColor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ENABLE TALLA FOR ARTICULO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":3,\r\n    \"id_talla\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articulo/activarTalla",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articulo",
+								"activarTalla"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tarifa",
+			"item": [
+				{
+					"name": "Categoria",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa/ver/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa",
+										"ver",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Serigrafia\",\r\n    \"tipos\":[1]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Serigrafia 2.0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa/actualizar/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa",
+										"actualizar",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa/eliminar/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa",
+										"eliminar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET CATEGORIA BY TIPO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa/tipo/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa",
+										"tipo",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ADD TIPOS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":4,\r\n    \"tipos\":[4]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa/agregarTipos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa",
+										"agregarTipos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DISABLE TIPO FOR CATEGORIA",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":4,\r\n    \"id_tipo\":4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa/desactivarTipo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa",
+										"desactivarTipo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ENABLE TIPO FOR CATEGORIA",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":4,\r\n    \"id_tipo\":4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/categoriaTarifa/activarTipo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categoriaTarifa",
+										"activarTipo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tipo",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/tipo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"tipo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/tipo/ver/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"tipo",
+										"ver",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Creación\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/tipo/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"tipo",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Creación actualizado\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/tipo/actualizar/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"tipo",
+										"actualizar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/tipo/eliminar/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"tipo",
+										"eliminar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET TIPOS BY CATEGORIA",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/tipo/categoria/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"tipo",
+										"categoria",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/tarifa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tarifa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/tarifa/ver/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tarifa",
+								"ver",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"tarifaPrueba\",\r\n    \"precio\":5,\r\n    \"id_categoria\":1,\r\n    \"id_tipo\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/tarifa/insertar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tarifa",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"precio\":3.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/tarifa/actualizar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tarifa",
+								"actualizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PRECIO ANTERIOR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/tarifa/verPrecioAnterior/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tarifa",
+								"verPrecioAnterior",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PRECIOS ANTERIORES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/tarifa/verPreciosAnteriores/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tarifa",
+								"verPreciosAnteriores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

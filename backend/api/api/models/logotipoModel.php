@@ -106,6 +106,7 @@ class Logotipos
             $return[$key] = $val;
         }
         if ($img){
+            $img = str_replace(DS,'/',$img);
             $return["imagen_png"] = $img;
             $returnColum["imagen_png"] = "imagen_png";
         }
@@ -129,7 +130,14 @@ class Logotipos
         if ($dataOld == null) {
             return false;
         } else {
-            $sql = $this->conn->query("UPDATE logotipos SET nombre = '" . $dataNew->nombre . "'  WHERE id=" . $id);
+            $return = array();
+
+            foreach ($dataNew as $key => $val) {
+                $return[$key] = $key . " = '" . $val . "'";
+            }
+            $insData = implode(", ", $return);
+
+            $sql = $this->conn->query("UPDATE logotipos SET ".$insData."  WHERE id=" . $id);
             if ($sql) {
                 return true;
             } else {

@@ -107,7 +107,7 @@ class Articulo
         foreach ($data as $key => $values) {
             $tallas = $talla->getTallasByArticulo($values->id);
             $colores = $color->getColoresByArticulo($values->id);
-            
+
             $values->tallas = $tallas;
             $values->colores = $colores;
         }
@@ -143,6 +143,7 @@ class Articulo
             $return[$key] = $val;
         }
         $return["activo"] = 1;
+        $returnColum["activo"] = "activo";
 
         $tallas = $return["tallas"];
         $colores = $return["colores"];
@@ -213,7 +214,7 @@ class Articulo
     public function getArticulosByTalla($id)
     {
         $id = $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT a.* FROM articulos a JOIN talla_articulo t_a ON a.id = t_a.id_articulo WHERE t_a.id_talla =".$id." AND t_a.activo = true");
+        $sql = $this->conn->query("SELECT a.* FROM articulos a JOIN talla_articulo t_a ON a.id = t_a.id_articulo WHERE t_a.id_talla =" . $id . " AND t_a.activo = true");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         $talla = new Talla;
@@ -222,7 +223,7 @@ class Articulo
         foreach ($data as $key => $values) {
             $tallas = $talla->getTallasByArticulo($values->id);
             $colores = $color->getColoresByArticulo($values->id);
-            
+
             $values->tallas = $tallas;
             $values->colores = $colores;
         }
@@ -233,7 +234,7 @@ class Articulo
     public function getArticulosByColor($id)
     {
         $id = $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT a.* FROM articulos a JOIN color_articulo c_a ON a.id = c_a.id_articulo WHERE c_a.id_color =".$id." AND c_a.activo = true");
+        $sql = $this->conn->query("SELECT a.* FROM articulos a JOIN color_articulo c_a ON a.id = c_a.id_articulo WHERE c_a.id_color =" . $id . " AND c_a.activo = true");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         $talla = new Talla;
@@ -242,7 +243,7 @@ class Articulo
         foreach ($data as $key => $values) {
             $tallas = $talla->getTallasByArticulo($values->id);
             $colores = $color->getColoresByArticulo($values->id);
-            
+
             $values->tallas = $tallas;
             $values->colores = $colores;
         }
@@ -252,39 +253,35 @@ class Articulo
 
     public function añadirTallas($data)
     {
-        if(is_array($data)){
+        if (is_array($data)) {
             $id_articulo = $data['id'];
             unset($data["id"]);
             foreach ($data as $key) {
                 $this->conn->query("Insert into talla_articulo (id_articulo, id_talla, activo) values (" . $id_articulo . "," . $key . ", true)");
             }
-            
-        }else{
+        } else {
             $id_articulo = $data->id;
             foreach ($data->tallas as $key) {
                 $this->conn->query("Insert into talla_articulo (id_articulo, id_talla, activo) values (" . $id_articulo . "," . $key . ", true)");
             }
         }
-        
-
 
         return true;
     }
     public function añadirColores($data)
     {
-        if(is_array($data)){
+        if (is_array($data)) {
             $id_articulo = $data['id'];
             unset($data["id"]);
             foreach ($data as $key) {
                 $this->conn->query("Insert into color_articulo (id_articulo, id_color, activo) values (" . $id_articulo . "," . $key . ", true)");
             }
-        }else{
+        } else {
             $id_articulo = $data->id;
             foreach ($data->colores as $key) {
                 $this->conn->query("Insert into color_articulo (id_articulo, id_color, activo) values (" . $id_articulo . "," . $key . ", true)");
             }
         }
-
 
         return true;
     }
@@ -300,7 +297,7 @@ class Articulo
     public function desactivarColor($data)
     {
 
-        $sql = $this->conn->query("UPDATE color_articulo SET activo = False WHERE id_articulo=" . $data->id. " AND id_color=" . $data->id_color);
+        $sql = $this->conn->query("UPDATE color_articulo SET activo = False WHERE id_articulo=" . $data->id . " AND id_color=" . $data->id_color);
 
         return $sql;
     }
@@ -316,7 +313,7 @@ class Articulo
     public function activarColor($data)
     {
 
-        $sql = $this->conn->query("UPDATE color_articulo SET activo = True WHERE id_articulo=" . $data->id. " AND id_color=" . $data->id_color);
+        $sql = $this->conn->query("UPDATE color_articulo SET activo = True WHERE id_articulo=" . $data->id . " AND id_color=" . $data->id_color);
 
         return $sql;
     }

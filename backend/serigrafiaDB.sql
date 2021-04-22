@@ -150,6 +150,7 @@ create table articulos (
     codigo_barra varchar(20) not null,
     stock int not null,
     activo boolean default true,
+    imagen blob, 
     id_categoria int not null,
 
     foreign key (id_categoria) references articulo_categoria(id)
@@ -233,6 +234,7 @@ drop table if EXISTS categorias_tipo;
 create table categorias_tipo (
     id_categoria int not null,
     id_tipo int not null,
+    activo boolean default true,
 
     primary key (id_categoria, id_tipo),
     foreign key (id_categoria) REFERENCES tarifas_categorias(id)
@@ -248,7 +250,8 @@ create table tarifas (
     id int primary key auto_increment,
     nombre varchar(40) not null,
     precio float not null,
-    timestamp timestamp,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+    fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     activo boolean default true,
     id_categoria int not null,
     id_tipo int not null,
@@ -279,7 +282,7 @@ drop table if EXISTS update_precio;
 create table update_precio (
     id int primary key auto_increment,
     precio_anterior float not null,
-    timestamp timestamp,
+    precio_actualizacion_tarifa TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     id_tarifa int not null,
 
     foreign key (id_tarifa) REFERENCES tarifas(id)
@@ -299,15 +302,16 @@ create table formulario (
     activo boolean default true
 );
 
-
 DELIMITER |
 create trigger tarifas_AU_Trigger
     AFTER UPDATE
     ON tarifas
     FOR EACH ROW
 BEGIN
-    INSERT into update_precio (precio_anterior, id_tarifa)
-        values (id, old.precio);
+IF new.precio != old.precio THEN
+    INSERT into update_precio (id_tarifa, precio_anterior)
+        values (old.id, old.precio);
+END IF;
 end |
 DELIMITER ;
 
@@ -339,6 +343,26 @@ create trigger articulo_AU_Trigger
 BEGIN
     Update color_articulo set activo = new.activo where id_articulo = old.id;
     Update talla_articulo set activo = new.activo where id_articulo = old.id;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger categoriaTarifa_AU_Trigger
+    AFTER UPDATE
+    ON tarifas_categorias
+    FOR EACH ROW
+BEGIN
+    Update categorias_tipo set activo = new.activo where id_categoria = old.id;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger tipoTarifa_AU_Trigger
+    AFTER UPDATE
+    ON tarifas_tipo
+    FOR EACH ROW
+BEGIN
+    Update categorias_tipo set activo = new.activo where id_tipo = old.id;
 end |
 DELIMITER ;
 

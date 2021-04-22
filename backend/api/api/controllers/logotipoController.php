@@ -89,7 +89,7 @@ function uploadImage($imgName)
 
     if (isset($_FILES[$imgName])) {
         $img_tmp = $_FILES[$imgName]['tmp_name'];
-        $imgFolder = '../imagenes/';
+        $imgFolder = ROOT. 'imagenes'. DS;
 
         if (!file_exists($imgFolder)) {
             mkdir($imgFolder, 0777, true);

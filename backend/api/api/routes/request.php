@@ -56,6 +56,22 @@ class Request
                         $this->metodo = "getTallasByArticulo";
                         $isCorrectMetod = true;
                     }
+                    if($this->controlador == "categoriaTarifa" && $this->metodo == "tipo"){
+                        $this->metodo = "getCategoriasByTipo";
+                        $isCorrectMetod = true;
+                    }
+                    if($this->controlador == "tipo" && $this->metodo == "categoria"){
+                        $this->metodo = "getTiposByCategoria";
+                        $isCorrectMetod = true;
+                    }
+                    if($this->controlador == "tarifa" && $this->metodo == "verPrecioAnterior"){
+                        $this->metodo = "getPrecioAnterior";
+                        $isCorrectMetod = true;
+                    }  
+                    if($this->controlador == "tarifa" && $this->metodo == "verPreciosAnteriores"){
+                        $this->metodo = "getPreciosAnteriores";
+                        $isCorrectMetod = true;
+                    }
                 }
             }
 
@@ -77,10 +93,15 @@ class Request
                     $this->metodo = "añadirColores";
                     $isCorrectMetod = true;
                 }
+                if ($this->controlador == "categoriaTarifa" && $this->metodo == "agregarTipos") {
+                    $this->metodo = "añadirTipos";
+                    $isCorrectMetod = true;
+                }
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
                 if ($this->metodo == "actualizar") {
+                    
                     $this->metodo = "update";
                     $isCorrectMetod = true;
                 }
@@ -94,6 +115,12 @@ class Request
                     $isCorrectMetod = true;
                 }
                 if ($this->controlador == "articulo" && $this->metodo == "activarColor") {
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "categoriaTarifa" && $this->metodo == "desactivarTipo") {
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "categoriaTarifa" && $this->metodo == "activarTipo") {
                     $isCorrectMetod = true;
                 }
             }

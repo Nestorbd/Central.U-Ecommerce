@@ -88,6 +88,7 @@ class Talla
             $return[$key] = $val;
         }
         $return["activo"] = 1;
+        $returnColum["activo"] = "activo";
 
         unset($return["id"]);
         unset($returnColum["id"]);
