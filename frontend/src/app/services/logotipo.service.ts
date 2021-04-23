@@ -9,6 +9,8 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LogotipoService {
+  id: number;
+  imagen: string;
 
   currentId: number
   logotipos: Logotipo[]
@@ -17,9 +19,26 @@ export class LogotipoService {
   ) { }
 
 
+
+  setIdLogo(id: number){
+    this.id = id;
+  }
+
+  setImagenLogo(imagen: string){
+    this.imagen = imagen
+  }
+
+  getIdLogo(){
+    return this.id
+  }
+  getIdImagen(){
+    return this.imagen
+  }
+
+
   getLogos(): Observable<Logotipo[]> {
 
-    return this.httpClient.get<Logotipo[]>("http://localhost/crud_api/api/logotipos/")
+    return this.httpClient.get<Logotipo[]>("http://192.168.0.90/serigrafia/backend/api/logotipo")
     .pipe(
       
       tap(logotipos => console.log('Get logotipos')),
@@ -30,7 +49,18 @@ export class LogotipoService {
 
   getLogoById(id: number) {
    
-    return this.httpClient.get("http://localhost:80/crud_api/api/logotipo/"+ id).pipe(
+    return this.httpClient.get("http://192.168.0.90/serigrafia/backend/api/logotipo/ver/"+ id).pipe(
+        tap(data => {
+        
+        }, err => {
+          console.log(err);
+        }));
+  }
+
+
+  getLogoByClientId(id: number, tf: boolean) {
+    console.log(id, tf)
+    return this.httpClient.get("http://192.168.0.90/serigrafia/backend/api/logotipo/cliente/"+ id+"?es_empresa="+tf).pipe(
         tap(data => {
           console.log(data);
         }, err => {
@@ -39,11 +69,10 @@ export class LogotipoService {
   }
 
 
+  updateLogo(id: number, nombre: string) {
 
-  updateLogo(id: number, logotipo: Logotipo) {
-
-    this.httpClient.put("http://localhost:80/crud_api/api/actualizarLogotipo/" + id,
-      { 'nombre': logotipo.nombre
+    this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/logotipo/actualizar/" + id,
+      { 'nombre': nombre
       }).subscribe(data => {
         console.log(data);
       }, err => {
@@ -52,10 +81,12 @@ export class LogotipoService {
 
   }
 
-  addLogo( formData: FormData) {
 
+  updateLogoToSetIndividual(id: number, id_individual: number) {
 
-    this.httpClient.post("http://localhost:80/api/logotipo/insertar", formData).subscribe(data => {
+    this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/logotipo/actualizar/" + id,
+      { 'id_individual': id_individual
+      }).subscribe(data => {
         console.log(data);
       }, err => {
         console.log(err);
@@ -63,8 +94,35 @@ export class LogotipoService {
 
   }
 
+  updateLogoToSetBusiness(id: number, id_empresa: number) {
+
+    this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/logotipo/actualizar/" + id,
+      { 'id_empresa': id_empresa
+      }).subscribe(data => {
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+
+  }
+
+
+  addLogo( formData: FormData) {
+
+return new Promise((resolve, reject) =>{
+  this.httpClient.post("http://192.168.0.90/serigrafia/backend/api/logotipo/insertar", formData).subscribe(data => {
+    resolve(this.setIdLogo(data[0].id) )
+    resolve(this.setImagenLogo(data[0].imagen_png));
+  }, err => {
+    console.log(err);
+  });
+})
+
+
+  }
+
   deleteLogo(id: number, ){
-    this.httpClient.delete("http://localhost:80/crud_api/api/eliminarLogotipo/" + id ).subscribe(data => {
+    this.httpClient.delete("http://192.168.0.90/serigrafia/backend/api/eliminarLogotipo/" + id ).subscribe(data => {
       console.log(data);
     }, err =>{
       console.log(err);

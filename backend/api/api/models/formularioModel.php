@@ -107,6 +107,7 @@ class Formulario
 
     public function createFormulario($data)
     {
+     
         $return = array();
         $returnColum = array();
 
@@ -114,10 +115,9 @@ class Formulario
             $returnColum[$key] = $key; 
             $return[$key] = $val;
         }
+        print_r($return);
+        $return["activo"]=1;
         
-        if(!$return["activo"]){
-            $return["activo"]=1;
-        }
         $insData= implode("','",$return);
         $insDataColumn = implode(",",$returnColum);
 

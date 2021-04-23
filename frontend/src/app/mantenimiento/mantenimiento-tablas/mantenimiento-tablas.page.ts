@@ -18,4 +18,12 @@ export class MantenimientoTablasPage implements OnInit {
   goToFormulario(){
     this.router.navigateByUrl("ver-input")
   }
+
+  goToCliente(){
+    this.router.navigateByUrl("ver-cliente")
+  }
+
+  goToArticulo(){
+    this.router.navigateByUrl("articulos");
+  }
 }

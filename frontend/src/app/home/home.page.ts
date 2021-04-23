@@ -27,7 +27,11 @@ export class HomePage implements OnInit {
   }
 
   goToNewInvoice(){
-    this.router.navigateByUrl("prenda-selector")
+    this.router.navigateByUrl("form-page")
+  }
+
+  goToCRUD(){
+    this.router.navigateByUrl("mantenimiento-tablas");
   }
 
   toggleMenu() {

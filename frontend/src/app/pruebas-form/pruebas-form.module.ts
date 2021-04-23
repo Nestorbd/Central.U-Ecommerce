@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgxSelectoModule } from "ngx-selecto";
+import { NgxMoveableModule } from "ngx-moveable";
 import { IonicModule } from '@ionic/angular';
 
 import { PruebasFormPageRoutingModule } from './pruebas-form-routing.module';
@@ -16,6 +17,8 @@ import { MaterialModule } from '../material.module';
     IonicModule,
     ReactiveFormsModule,
     MaterialModule,
+    NgxSelectoModule,
+    NgxMoveableModule,
     PruebasFormPageRoutingModule
   ],
   declarations: [PruebasFormPage]

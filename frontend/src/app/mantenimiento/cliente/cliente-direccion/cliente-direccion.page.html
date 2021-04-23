@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Editar datos del cliente</ion-title>
+    <button *ngIf="isDireccion == true" mat-button slot="end">Añadir una nueva dirección</button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <mat-tab-group>
-    <mat-tab label="Datos del cliente">
+    <mat-tab label="Datos del cliente" (onChange)="isDireccion = false">
        <div class="container">
         <form [formGroup]="clientUpdateForm" (ngSubmit)="onFormSubmit()">
           <ion-item>
@@ -43,7 +44,7 @@
         </form>
        </div>
       </mat-tab>
-    <mat-tab label="Dirección/es del cliente">
+    <mat-tab label="Dirección/es del cliente" (onChange)="isDireccion = true">
       <div class="mat-elevation-z8">
         <br/>
         <mat-form-field>
@@ -55,27 +56,27 @@
         <table mat-table [dataSource]="formulario">
       
           <ng-container matColumnDef="calle">
-            <th mat-header-cell *matHeaderCellDef> Apartado </th>
+            <th mat-header-cell *matHeaderCellDef> Calle </th>
             <td  *matCellDef="let form" (keyup)="changeValue($event)" (blur)="updateList(displayedColumns[0], form.id)" [contentEditable]="contentEditable" mat-cell > {{form.calle}} </td>
           </ng-container>
       
           <ng-container matColumnDef="numero">
-            <th mat-header-cell *matHeaderCellDef> Label </th>
+            <th mat-header-cell *matHeaderCellDef> Numero </th>
             <td mat-cell *matCellDef="let form"  (keyup)="changeValue($event)" (blur)="updateList(displayedColumns[1], form.id)" [contentEditable]="contentEditable"> {{form.numero}} </td>
           </ng-container>
       
           <ng-container matColumnDef="municipio">
-            <th mat-header-cell *matHeaderCellDef> Tipo </th>
+            <th mat-header-cell *matHeaderCellDef> Municipio </th>
             <td mat-cell *matCellDef="let form"  (keyup)="changeValue($event)" (blur)="updateList(displayedColumns[2], form.id)" [contentEditable]="contentEditable"> {{form.municipio}} </td>
           </ng-container>
       
           <ng-container matColumnDef="provincia">
-            <th mat-header-cell *matHeaderCellDef> Form Control Name </th>
+            <th mat-header-cell *matHeaderCellDef> Provincia </th>
             <td mat-cell *matCellDef="let form" (keyup)="changeValue($event)" (blur)="updateList(displayedColumns[3], form.id)" [contentEditable]="contentEditable"> {{form.provincia}} </td>
           </ng-container>
     
           <ng-container matColumnDef="codigo_postal">
-            <th mat-header-cell *matHeaderCellDef> Place Holder</th>
+            <th mat-header-cell *matHeaderCellDef> Codigo Postal</th>
             <td mat-cell *matCellDef="let form" (keyup)="changeValue($event)" (blur)="updateList(displayedColumns[4], form.id)" [contentEditable]="contentEditable"> {{form.codigo_postal}} </td>
           </ng-container>
     
@@ -114,14 +115,38 @@
         <mat-paginator [pageIndex]=0 [length]="elements"
                   [pageSize]="5"
                   [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons  > 
+                 
         </mat-paginator>
       </div>
 
       
       </mat-tab>
-    <mat-tab label="Logo/s del cliente">
-       Content 3 
-      </mat-tab>
+    <mat-tab label="Logo/s del cliente" (onChange)="isDireccion = false">
+
+      <ion-grid >
+        <ion-row  >
+          <ion-col size="4"   *ngFor="let l of logotipo">
+            <div>
+             <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title (keyup)="changeValue($event)" (blur)="updateLogo(l.id)" [contentEditable]="nombreEditable">{{l.nombre}}</mat-card-title>
+          <mat-card-subtitle>Nombre del logo
+          
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{l.imagen_png}}">
+        <mat-card-actions>
+          <button *ngIf="!nombreEditable" mat-button (click)="nombreEditable = true">Editar nombre</button>
+          <button *ngIf="nombreEditable" mat-button (click)="nombreEditable = false">Finalizar</button>
+        </mat-card-actions>
+      </mat-card>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
+    </mat-tab>
   </mat-tab-group>
 
 </ion-content>

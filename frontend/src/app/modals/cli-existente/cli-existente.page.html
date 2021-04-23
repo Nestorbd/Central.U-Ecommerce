@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Selecciona el cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="mat-elevation-z8">
+    <br/>
+    <mat-form-field>
+      <mat-label>Filtrar por</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Nombre del cliente" #input>
+    </mat-form-field>
+
+
+    <table mat-table [dataSource]="cliente">
+  
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td  *matCellDef="let form" mat-cell > {{form.nombre}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Tipo de cliente">
+        <th mat-header-cell *matHeaderCellDef> Tipo de cliente </th>
+        <td mat-cell *matCellDef="let form" ><p *ngIf="!form.id_individual"> Empresa </p>
+          <p *ngIf="form.id_individual"> Individual </p> </td>
+       
+      </ng-container>
+  
+
+      <ng-container matColumnDef="seleccionar">
+        <th mat-header-cell *matHeaderCellDef> Seleccionar</th>
+        <td mat-cell *matCellDef="let form">
+          <button *ngIf="!form.id_individual" (click)="getEmpresa()" mat-button><mat-icon>check</mat-icon></button>
+          <button *ngIf="form.id_individual" (click)="getIndividual()"  mat-button><mat-icon>check</mat-icon></button>
+        </td>
+      </ng-container>
+  
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No se encuentra ningún dato con: "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageIndex]=0 [length]="elements"
+              [pageSize]="5"
+              [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons  > 
+    </mat-paginator>
+  </div>
+
+</ion-content>

@@ -1,0 +1,26 @@
+ion-item{
+    width: 300px;
+ 
+}
+
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 500px 1fr;
+    grid-template-rows: 100px, 200px;
+    place-items: center;
+    border: 5px;
+    width: min-content;
+    border-style: groove;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+}
+i{
+padding: 20%;
+}
+
+#botones{
+color: white;
+left: 44%;
+}

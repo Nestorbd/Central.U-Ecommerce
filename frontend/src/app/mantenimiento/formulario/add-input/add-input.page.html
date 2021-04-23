@@ -1,9 +1,69 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>addInput</ion-title>
+    <ion-title>Añadir un nuevo campo al formulario</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="inputForm" (ngSubmit)="onFormSubmit()">
 
+    <div class="grid">
+      <i>
+        <ion-item>
+          <ion-label position="floating">Nombre de la sección</ion-label>
+          <ion-input formControlName="apartado" type="text" required></ion-input>
+        </ion-item>
+      </i>
+      <i>
+        <ion-item>
+          <ion-label position="floating">Nombre del Campo del formulario</ion-label>
+          <ion-input formControlName="label" type="text" required></ion-input>
+        </ion-item>
+      </i>
+      <i>
+
+        <ion-item>
+          <ion-label position="floating">Tipo</ion-label>
+          <ion-select formControlName="type" type="text" required>
+            <ion-select-option value="text">Text</ion-select-option>
+            <ion-select-option value="number">Number</ion-select-option>
+            <ion-select-option value="password">Password</ion-select-option>
+            <ion-select-option value="email">E-mail</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+      </i>
+      <i>
+
+        <ion-item>
+          <ion-label position="floating">Referencia a la columna</ion-label>
+          <ion-input formControlName="formControlName" type="text" required></ion-input>
+        </ion-item>
+      </i>
+      <i>
+        <ion-item>
+          <ion-label position="floating">Ejemplo del campo</ion-label>
+          <ion-input formControlName="placeholder" type="text" required></ion-input>
+        </ion-item>
+      </i>
+      <i>
+        <ion-item>
+          <ion-label position="floating">Activo</ion-label>
+          <ion-select formControlName="activo" type="text" required>
+            <ion-select-option value="1">Si</ion-select-option>
+            <ion-select-option value="0">No</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+      </i>
+
+      
+         
+     
+    </div>
+<hr/>
+    <button mat-button id="botones" type="submit" >Añade un nuevo campo</button>
+   
+
+  </form>
 </ion-content>

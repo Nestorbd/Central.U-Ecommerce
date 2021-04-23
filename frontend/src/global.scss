@@ -29,6 +29,7 @@
 ion-toolbar{
     height: 100px;
     color: white;
+    --background: linear-gradient(to bottom, #6EDFD4, #1B3864);
 }
 ion-title{
     margin-top: 15px;
@@ -56,3 +57,9 @@ ion-title{
     height: 60px;
     width: 70px;
 }
+
+.modal-wrapper {
+    height: 95%!important;
+    width: 90%!important;
+ 
+ }
