@@ -12,6 +12,7 @@ import { Direccion } from '../model/direccion';
   providedIn: 'root'
 })
 export class ClienteService {
+apiUrl: string = "http://192.168.0.90/serigrafia/backend/api/";
 isId: boolean = false;
 cliente: Cliente_Individual[];
 idIndividual: number = 1;
@@ -24,7 +25,7 @@ idEmpresa: number;
 
   getData(): Observable<Cliente[]> {
 
-    return this.httpClient.get<Cliente[]>("http://192.168.0.90/serigrafia/backend/api/cliente")
+    return this.httpClient.get<Cliente[]>("http://localhost/api/cliente")
     .pipe(
       
       tap(logotipos => console.log('Get Formulario')),
@@ -35,7 +36,7 @@ idEmpresa: number;
 
   // getDireccionByUserId(id:number, tf: boolean): Observable<Direccion[]> {
   
-  //   return this.httpClient.get<Direccion[]>("http://192.168.0.90/serigrafia/backend/api/direccion/cliente/"+id+"?es_empresa="+tf)
+  //   return this.httpClient.get<Direccion[]>("http://localhost/api/direccion/cliente/"+id+"?es_empresa="+tf)
   //   .pipe(
       
   //     tap(direccion => console.log('Get direccion')),
@@ -67,11 +68,14 @@ idEmpresa: number;
 
 
   addIndividual(cliente: Cliente_Individual){
+    console.log(cliente)
    return new Promise((resolve, reject)=> { 
     
-        this.httpClient.post("http://192.168.0.90/serigrafia/backend/api/cliente/insertar", cliente).subscribe(data => {
-          
-        resolve(this.setIndividualId(data[0].id_individual))
+        this.httpClient.post(this.apiUrl + "cliente/insertar", cliente).subscribe(data => {
+          console.log(data[0].id_individual)
+        resolve(
+          this.setIndividualId(data[0].id_individual)
+          )
       }, err => {
         console.log(err);
       })
@@ -81,7 +85,7 @@ idEmpresa: number;
 
   updateIndividual(id: number, cliente: Cliente_Individual) {
 
-    this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/cliente/actualizar/" + id,
+    this.httpClient.put(this.apiUrl + "cliente/actualizar/" + id,
      
       cliente).subscribe(data => {
         console.log(data);
@@ -94,7 +98,7 @@ idEmpresa: number;
   
   updateEmpresa(id: number, cliente: Cliente_Empresa) {
 
-    this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/cliente/actualizar/" + id,
+    this.httpClient.put(this.apiUrl + "cliente/actualizar/" + id,
      
       cliente).subscribe(data => {
         console.log(data);
@@ -107,7 +111,7 @@ idEmpresa: number;
   addEmpresa(cliente: Cliente_Empresa){
     return new Promise((resolve, reject)=> { 
     
-      this.httpClient.post("http://192.168.0.90/serigrafia/backend/api/cliente/insertar", cliente).subscribe(data => {
+      this.httpClient.post(this.apiUrl + "cliente/insertar", cliente).subscribe(data => {
         
       resolve(this.setEmpresaId(data[0].id_empresa))
     }, err => {
@@ -119,32 +123,19 @@ idEmpresa: number;
 
 
   getClienteByID(id: number, tf: boolean): Observable<Cliente>{
-    return this.httpClient.get<Cliente>("http://192.168.0.90/serigrafia/backend/api/cliente/ver/"+id+"?es_empresa="+tf)
- 
+    return this.httpClient.get<Cliente>(this.apiUrl + "cliente/ver/"+id+"?es_empresa="+tf)
+
   }
 
   addDireccion(direccion: Direccion){
     console.log(direccion)
-    this.httpClient.post("http://192.168.0.90/serigrafia/backend/api/direccion/insertar", direccion).subscribe(data => {
+    this.httpClient.post(this.apiUrl + "direccion/insertar", direccion).subscribe(data => {
       console.log(data)
       this.isId = false;
     }, err => {
       console.log(err);
     });
   }
-
-  // actualizarFormulario(id: number, columna:string, put:string){
-    
-  //   var jsonVariable = {};
-  //   for(var i=1; i < 3; i++) {
-  //     jsonVariable[columna] = put;        
-  //   }
-  //   this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/formulario/actualizar/"+id, jsonVariable).subscribe(data => {
-  //     console.log(data);
-  //   }, err => {
-  //     console.log(err);
-  //   });
-  // }
 
 
 

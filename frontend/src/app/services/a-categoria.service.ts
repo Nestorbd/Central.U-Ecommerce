@@ -9,6 +9,7 @@ import { aCategoria } from '../model/aCategoria';
 })
 export class ACategoriaService {
 
+  apiUrl: string = "http://192.168.0.90/serigrafia/backend/api/";
   categoria: aCategoria[];
   
   constructor(
@@ -18,7 +19,7 @@ export class ACategoriaService {
 
   getData(): Observable<aCategoria[]> {
 
-    return this.httpClient.get<aCategoria[]>("http://192.168.0.90/serigrafia/backend/api/categoriaArticulo")
+    return this.httpClient.get<aCategoria[]>(this.apiUrl + "categoriaArticulo")
     .pipe(
       
       tap(acategoria => console.log('Get a_categoria')),
@@ -29,7 +30,7 @@ export class ACategoriaService {
 
   addCategoria(categoria: aCategoria){
     console.log(categoria)
-    this.httpClient.post("http://192.168.0.90/serigrafia/backend/api/categoriaArticulo/insertar", categoria).subscribe(data => {
+    this.httpClient.post(this.apiUrl + "categoriaArticulo/insertar", categoria).subscribe(data => {
       console.log(data);
     }, err => {
       console.log(err);
@@ -42,7 +43,7 @@ export class ACategoriaService {
     for(var i=1; i < 3; i++) {
       jsonVariable[columna] = put;        
     }
-    this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/categoriaArticulo/actualizar/"+id, jsonVariable).subscribe(data => {
+    this.httpClient.put(this.apiUrl + "categoriaArticulo/actualizar/"+id, jsonVariable).subscribe(data => {
       console.log(data);
     }, err => {
       console.log(err);

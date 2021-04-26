@@ -8,6 +8,7 @@ import { Direccion } from '../model/direccion';
   providedIn: 'root'
 })
 export class DireccionService {
+  apiUrl: string = "http://192.168.0.90/serigrafia/backend/api/";
   id: number;
   tf: boolean;
   direccion: Direccion[];
@@ -39,7 +40,7 @@ export class DireccionService {
 
   getDireccionByUserId(id:number, tf: boolean): Observable<Direccion[]> {
   
-    return this.httpClient.get<Direccion[]>("http://192.168.0.90/serigrafia/backend/api/direccion/cliente/"+id+"?es_empresa="+tf)
+    return this.httpClient.get<Direccion[]>(this.apiUrl + "direccion/cliente/"+id+"?es_empresa="+tf)
     .pipe(
       
       tap(direccion => console.log('Get direccion')),
@@ -55,7 +56,7 @@ export class DireccionService {
     for(var i=1; i < 3; i++) {
       jsonVariable[columna] = put;        
     }
-    this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/direccion/actualizar/"+id, jsonVariable).subscribe(data => {
+    this.httpClient.put(this.apiUrl + "direccion/actualizar/"+id, jsonVariable).subscribe(data => {
       console.log(data);
     }, err => {
       console.log(err);
@@ -64,7 +65,7 @@ export class DireccionService {
 
   eliminarDireccionById(id: number){
     
-    this.httpClient.delete("http://192.168.0.90/serigrafia/backend/api/direccion/eliminar/"+id).subscribe(data => {
+    this.httpClient.delete(this.apiUrl + "direccion/eliminar/"+id).subscribe(data => {
       console.log(data);
     }, err =>{
       console.log(err);

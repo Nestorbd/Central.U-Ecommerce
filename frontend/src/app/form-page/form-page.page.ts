@@ -168,7 +168,7 @@ ionViewWillEnter(){
       let clienteIndividual = {
         id_individual: null,
         nombre: this.clienteForm.value.nombre,
-        es_empresa: false,
+        es_empresa: 0,
         apellidos: this.clienteForm.value.apellidos,
         telefono: this.clienteForm.value.telefono,
         nif: this.clienteForm.value.nif,
@@ -177,6 +177,7 @@ ionViewWillEnter(){
       console.log(clienteIndividual);
 
        this.clienteSrv.addIndividual(clienteIndividual).then(()=>{
+        console.log("hola")
         this.addDirecciónIndividual().then(()=>{
           let id_individual = this.clienteSrv.getIndividualId();
         
@@ -236,7 +237,7 @@ ionViewWillEnter(){
   addDirecciónIndividual(){
     return new Promise((resolve, reject)=>{
       let id_individual = this.clienteSrv.getIndividualId();
- 
+      console.log(id_individual)
     let direccion = {
       id: null,
       id_individual: id_individual,
@@ -259,7 +260,7 @@ ionViewWillEnter(){
   addDirecciónEmpresa(){
     return new Promise((resolve, reject)=>{
     let id_empresa = this.clienteSrv.getEmpresaId();
-    
+    console.log(id_empresa)
     let direccion = {
       id: null,
       id_individual: null,
@@ -303,6 +304,7 @@ ionViewWillEnter(){
        const logo = {"id": id_aux, "imagen_png": imagen}
        
          this.logosEnPantalla.push(logo)
+         console.log(this.logosEnPantalla)
     })
     }
 

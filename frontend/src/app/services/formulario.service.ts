@@ -8,7 +8,7 @@ import { Formulario } from '../model/formulario';
   providedIn: 'root'
 })
 export class FormularioService {
-
+  apiUrl: string = "http://192.168.0.90/serigrafia/backend/api/";
   constructor(
     private httpClient: HttpClient
     ) { }
@@ -16,7 +16,7 @@ export class FormularioService {
 
   getData(): Observable<Formulario[]> {
 
-    return this.httpClient.get<Formulario[]>("http://192.168.0.90/serigrafia/backend/api/formulario")
+    return this.httpClient.get<Formulario[]>(this.apiUrl + "formulario")
     .pipe(
       
       tap(logotipos => console.log('Get Formulario')),
@@ -27,7 +27,7 @@ export class FormularioService {
 
   addFormulario(formulario: Formulario){
     console.log(formulario)
-    this.httpClient.post("http://192.168.0.90/serigrafia/backend/api/formulario/insertar", formulario).subscribe(data => {
+    this.httpClient.post(this.apiUrl + "formulario/insertar", formulario).subscribe(data => {
       console.log(data);
     }, err => {
       console.log(err);
@@ -40,7 +40,7 @@ export class FormularioService {
     for(var i=1; i < 3; i++) {
       jsonVariable[columna] = put;        
     }
-    this.httpClient.put("http://192.168.0.90/serigrafia/backend/api/formulario/actualizar/"+id, jsonVariable).subscribe(data => {
+    this.httpClient.put(this.apiUrl + "formulario/actualizar/"+id, jsonVariable).subscribe(data => {
       console.log(data);
     }, err => {
       console.log(err);
