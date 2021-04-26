@@ -73,7 +73,7 @@ class Individual
     public function getIndividualById($id)
     {
         $id =  $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT * FROM cliente_individual WHERE id =" . $id);
+        $sql = $this->conn->query("SELECT * FROM cliente_individual WHERE id_individual =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
         return $data;
@@ -92,18 +92,23 @@ class Individual
             unset($returnColum["es_empresa"]);
             unset($return["es_empresa"]);
         }
+
+        unset($return["id_individual"]);
+        unset($returnColum["id_individual"]);
+
         $insData= implode("','",$return);
         $insDataColumn = implode(",",$returnColum);
 
-        $sql = $this->conn->query("INSERT INTO cliente_individual (".$insDataColumn.") VALUES ('".$insData."')");
-
-        return $sql;
+        $this->conn->query("INSERT INTO cliente_individual (".$insDataColumn.") VALUES ('".$insData."')");
+        $data = $this->conn->lastInsertId();
+        
+        return $data;
     }
 
     public function updateIndividual($id, $dataNew)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM cliente_individual WHERE id=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM cliente_individual WHERE id_individual=" . $id);
         $dataOld = $sql_get->fetch();
         if ($dataOld == null) {
             return false;
@@ -118,7 +123,7 @@ class Individual
             }
             $insData=implode(", ",$return);
 
-            $sql = $this->conn->query("UPDATE cliente_individual SET ".$insData. " WHERE id=" . $id);
+            $sql = $this->conn->query("UPDATE cliente_individual SET ".$insData. " WHERE id_individual=" . $id);
             if ($sql) {
                 return true;
             } else {
@@ -130,12 +135,12 @@ class Individual
     public function deleteIndividual($id)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM cliente_individual WHERE id=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM cliente_individual WHERE id_individual=" . $id);
         $data = $sql_get->fetch();
         if ($data == null) {
             return false;
         } else {
-            $sql = "DELETE FROM cliente_individual WHERE id=" . $id;
+            $sql = "DELETE FROM cliente_individual WHERE id_individual=" . $id;
             if ($this->conn->query($sql) == TRUE) {
                 return true;
             } else {

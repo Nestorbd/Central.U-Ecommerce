@@ -25,11 +25,17 @@ public function __construct(){
         $data = $this->logotipo->getLogotiposById($id);
         if ($data == null) {
             $data = "No hay ningun logotipo";
+            exit(json_encode($data));
+         }else{
+            $data_r[0] = $data;
+            exit(json_encode($data_r));
          }
-         exit(json_encode($data));
+        
 }
 
 public function insert(){
+    print_r($_FILES);
+    
         if (isset($_FILES['imagen'])) {
         $img = uploadImage('imagen');
         $jsonString = json_encode($_POST);
@@ -37,7 +43,7 @@ public function insert(){
         $dataCreate = $this->logotipo->createLogotipos($decodedArray, $img);
 
     if ($dataCreate) {
-        exit(json_encode(array('status' => 'success')));
+        $this->getOne($dataCreate);
     } else {
         exit(json_encode(array('status' => 'error')));
     }
@@ -70,6 +76,12 @@ public function update($id){
             exit(json_encode(array('status' => 'success')));
         }
     }
+
+    public function getLogotiposByCliente($id){
+        $data = $this->logotipo->getLogotiposByCliente($id); 
+
+        exit(json_encode($data));
+    }
 }
 
 function uploadImage($imgName)
@@ -77,7 +89,7 @@ function uploadImage($imgName)
 
     if (isset($_FILES[$imgName])) {
         $img_tmp = $_FILES[$imgName]['tmp_name'];
-        $imgFolder = '../imagenes/';
+        $imgFolder = ROOT. 'imagenes'. DS;
 
         if (!file_exists($imgFolder)) {
             mkdir($imgFolder, 0777, true);
@@ -98,8 +110,8 @@ function uploadImage($imgName)
             } else if ($imgsize['mime'] == 'image/gif') {
                 $img_src = imagecreatefromgif($img_tmp);
             }
-            $new_width = 1920;
-            $new_height = 1080;
+            $new_width = 400;
+            $new_height = 380;
             $image_finale = imagecreatetruecolor($new_width, $new_height);
 
 

@@ -1,18 +1,18 @@
 <?php
-require_once 'models/formularioModel.php';
+require_once 'models/tarifaModel.php';
 
 
-Class FormularioController{
+Class TarifaController{
 
-    private $formulario;
+    private $tarifa;
 
 public function __construct(){
-    $this->formulario = new Formulario();
+    $this->tarifa = new Tarifa();
 }
 
     public function getAll(){
         
-        $data = $this->formulario->getFormulario();
+        $data = $this->tarifa->getTarifa();
 
         exit(json_encode($data));
     }
@@ -21,9 +21,9 @@ public function __construct(){
         if(is_array($id)){
             $id = implode('', $id);
         }
-        $data = $this->formulario->getFormularioById($id);
+        $data = $this->tarifa->getTarifaById($id);
         if ($data == null) {
-            $data = "No hay ningun formulario con id=".$id;
+            $data = "No hay ningun tarifa con id=".$id;
             exit(json_encode($data));
          }else{
             $data_r[0] = $data;
@@ -34,7 +34,7 @@ public function __construct(){
 
 public function insert(){
         $data = json_decode(file_get_contents("php://input"));
-        $dataCreate = $this->formulario->createFormulario($data);
+        $dataCreate = $this->tarifa->createTarifa($data);
 
     if ($dataCreate) {
         $this->getOne($dataCreate);
@@ -50,7 +50,7 @@ public function update($id){
     }
         $data = json_decode(file_get_contents("php://input"));
 
-        $dataUpdate = $this->formulario->updateFormulario($id, $data);
+        $dataUpdate = $this->tarifa->updateTarifa($id, $data);
         if ($dataUpdate) {
             $this->getOne($id);
         } else {
@@ -62,29 +62,37 @@ public function update($id){
         if(is_array($id)){
             $id = implode('', $id);
         }
-                $data = $this->formulario->deleteFormulario($id);
+                $data = $this->tarifa->deleteTarifa($id);
 
         if (!$data) {
-            exit(json_encode("No hay ningun logotipo"));
+            exit(json_encode("No hay ninguna tarifa con id= ".$id));
         } else {
             exit(json_encode(array('status' => 'success')));
         }
     }
 
-    public function createColumn(){
-        $data = json_decode(file_get_contents("php://input"));
-        $dataCreate = $this->formulario->createColumn($data);
+    public function getPrecioAnterior($id){
+        if(is_array($id)){
+            $id = implode('', $id);
+        }
+        $data = $this->tarifa->getPrecioAnterior($id);
 
-        if ($dataCreate) {
-            exit(json_encode(array('status' => 'success')));
+        if (!$data) {
+            exit(json_encode("No hay ninguna tarifa con id= ".$id));
         } else {
-            exit(json_encode(array('status' => 'error')));
+            exit(json_encode($data));
         }
     }
+    public function getPreciosAnteriores($id){
+        if(is_array($id)){
+            $id = implode('', $id);
+        }
+        $data = $this->tarifa->getPreciosAnteriores($id);
 
-    public function getColumns(){
-        
-        $data = $this->formulario->getColumns();
-         exit(json_encode($data));
+        if (!$data) {
+            exit(json_encode("No hay ninguna tarifa con id= ".$id));
+        } else {
+            exit(json_encode($data));
+        }
     }
 }

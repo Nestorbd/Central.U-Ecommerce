@@ -1,5 +1,4 @@
 <?php
-require_once 'models/clienteModel.php';
 require_once 'models/clienteIndividualModel.php';
 require_once 'models/clienteEmpresaModel.php';
 
@@ -23,13 +22,13 @@ class ClienteController
         $this->cliente = new Empresa;
         $dataEmpresa = $this->cliente->getEmpresa();
 
-        $data["Empresas"] = $dataEmpresa;
+      //  $data["Empresas"] = $dataEmpresa;
 
         $this->cliente = new Individual;
         $dataIndividual = $this->cliente->getIndividual();
-        $data["Individuales"] = $dataIndividual;
+      //  $data["Individuales"] = $dataIndividual;
 
-
+        array_push($data, $dataEmpresa, $dataIndividual);
         exit(json_encode($data));
     }
 
@@ -43,18 +42,24 @@ class ClienteController
             $this->cliente = new Empresa;
             $data = $this->cliente->getEmpresaById($id);
             if ($data == null) {
-                $data = "No hay ningun logotipo";
-            } else {
+                $data = "No hay ningun cliente";
                 exit(json_encode($data));
+            } else {
+               $data_r[0] = $data;
+               exit(json_encode($data_r));
             }
+            
         } else {
             $this->cliente = new Individual;
             $data = $this->cliente->getIndividualById($id);
             if ($data == null) {
-                $data = "No hay ningun logotipo";
-            } else {
+                $data = "No hay ningun cliente";
                 exit(json_encode($data));
+            } else {
+                $data_r[0] = $data;
+                exit(json_encode($data_r));
             }
+            
         }
     }
 
@@ -66,7 +71,8 @@ class ClienteController
             $dataCreate = $this->cliente->createEmpresa($data);
 
             if ($dataCreate) {
-                exit(json_encode(array('status' => 'success')));
+                $_GET["es_empresa"] = "true";
+                $this->getOne($dataCreate);
             } else {
                 exit(json_encode(array('status' => 'error')));
             }
@@ -75,7 +81,7 @@ class ClienteController
             $dataCreate = $this->cliente->createIndividual($data);
 
             if ($dataCreate) {
-                exit(json_encode(array('status' => 'success')));
+                $this->getOne($dataCreate);
             } else {
                 exit(json_encode(array('status' => 'error')));
             }

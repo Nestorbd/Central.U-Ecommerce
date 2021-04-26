@@ -33,22 +33,30 @@ create table cliente_direccion (
     id_empresa int,
 
 
-    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual)
+    on update cascade
+    on delete cascade,
     foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS logotipos;
 create table logotipos (
     id int primary key auto_increment,
     nombre varchar(40) not null,
-    imagen blob not null,
+    imagen_png blob null,
+    imagen_svg blob null,
     id_individual int,
     id_empresa int,
 
-    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual)
+    on update cascade
+    on delete cascade,
     foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
+    on update cascade
+    on delete cascade
 );
-
 drop table if EXISTS usuario_rol;
 create table usuario_rol (
     id int primary key auto_increment,
@@ -64,6 +72,8 @@ create table usuario (
     id_rol int not null,
 
     foreign key (id_rol) REFERENCES usuario_rol(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS estado_pedido;
@@ -87,10 +97,18 @@ create table pedidos (
     id_empresa int,
 
 
-    foreign key (id_individual) REFERENCES cliente_individual (id_individual),
-    foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa),
-    foreign key (id_usuario) REFERENCES usuario (id),
+    foreign key (id_individual) REFERENCES cliente_individual (id_individual)
+    on update cascade
+    on delete cascade,
+    foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
+    on update cascade
+    on delete cascade,
+    foreign key (id_usuario) REFERENCES usuario (id)
+    on update cascade
+    on delete cascade,
     foreign key (id_estado) REFERENCES estado_pedido (id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS logotipos_pedido;
@@ -99,8 +117,12 @@ create table logotipos_pedido (
     id_pedidos int not null,
 
     primary key (id_logotipos, id_pedidos),
-    foreign key (id_pedidos) REFERENCES pedidos(id),
+    foreign key (id_pedidos) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_logotipos) REFERENCES logotipos(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS bocetos;
@@ -110,6 +132,15 @@ create table bocetos (
     id_pedidos int,
 
     foreign key (id_pedidos) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade
+);
+
+drop table if EXISTS articulo_categoria;
+create table articulo_categoria (
+    id int primary key auto_increment,
+    nombre varchar(40),
+    activo boolean default true
 );
 
 drop table if EXISTS articulos;
@@ -118,7 +149,13 @@ create table articulos (
     nombre varchar(40) not null,
     codigo_barra varchar(20) not null,
     stock int not null,
-    activo boolean default true
+    activo boolean default true,
+    imagen blob, 
+    id_categoria int not null,
+
+    foreign key (id_categoria) references articulo_categoria(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS articulos_pedidos;
@@ -127,38 +164,56 @@ create table articulos_pedidos (
     id_pedidos int not null,
 
     primary key (id_articulo, id_pedidos),
-    foreign key (id_articulo) REFERENCES articulos(id),
+    foreign key (id_articulo) REFERENCES articulos(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_pedidos) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade
 );
 
-drop table if EXISTS articulo_talla;
-create table articulo_talla (
+drop table if EXISTS talla;
+create table talla (
     id int primary key auto_increment,
     nombre varchar(40),
-    activo boolean default true,
-    id_articulo int,
+    activo boolean default true
+);
 
+drop table if EXISTS talla_articulo;
+create table talla_articulo (
+    id_articulo int not null,
+    id_talla int not null,
+    activo boolean default true,
+
+    primary key (id_articulo,id_talla),
     foreign key (id_articulo) REFERENCES articulos(id)
+    on update cascade
+    on delete cascade,
+    foreign key (id_talla) REFERENCES talla(id)
+    on update cascade
+    on delete cascade
 );
 
-drop table if EXISTS articulo_categoria;
-create table articulo_categoria (
+drop table if EXISTS color;
+create table color (
     id int primary key auto_increment,
     nombre varchar(40),
-    activo boolean default true,
-    id_articulo int,
+    activo boolean default true
+);
 
+drop table if EXISTS color_articulo;
+create table color_articulo (
+    id_articulo int not null,
+    id_color int not null,
+    activo boolean default true,
+
+    primary key (id_articulo,id_color),
     foreign key (id_articulo) REFERENCES articulos(id)
-);
-
-drop table if EXISTS articulo_color;
-create table articulo_color (
-    id int primary key auto_increment,
-    nombre varchar(40),
-    activo boolean default true,
-    id_articulo int,
-
-    foreign key (id_articulo) REFERENCES articulos (id)
+    on update cascade
+    on delete cascade,
+    foreign key (id_color) REFERENCES color(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS tarifas_categorias;
@@ -179,10 +234,15 @@ drop table if EXISTS categorias_tipo;
 create table categorias_tipo (
     id_categoria int not null,
     id_tipo int not null,
+    activo boolean default true,
 
     primary key (id_categoria, id_tipo),
-    foreign key (id_categoria) REFERENCES tarifas_categorias(id),
+    foreign key (id_categoria) REFERENCES tarifas_categorias(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_tipo) REFERENCES tarifas_tipo(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS tarifas;
@@ -190,13 +250,18 @@ create table tarifas (
     id int primary key auto_increment,
     nombre varchar(40) not null,
     precio float not null,
-    timestamp timestamp,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+    fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     activo boolean default true,
     id_categoria int not null,
     id_tipo int not null,
 
-    foreign key (id_categoria) REFERENCES tarifas_categorias(id),
+    foreign key (id_categoria) REFERENCES tarifas_categorias(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_tipo) REFERENCES tarifas_tipo(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS pedidos_tarifas;
@@ -205,18 +270,24 @@ create table pedidos_tarifas (
     id_pedido int not null,
 
     primary key (id_tarifa,id_pedido),
-    foreign key (id_tarifa) REFERENCES tarifas(id),
+    foreign key (id_tarifa) REFERENCES tarifas(id)
+    on update cascade
+    on delete cascade,
     foreign key (id_pedido) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS update_precio;
 create table update_precio (
     id int primary key auto_increment,
     precio_anterior float not null,
-    timestamp timestamp,
+    precio_actualizacion_tarifa TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     id_tarifa int not null,
 
     foreign key (id_tarifa) REFERENCES tarifas(id)
+    on update cascade
+    on delete cascade
 );
 
 drop table if EXISTS formulario;
@@ -231,15 +302,67 @@ create table formulario (
     activo boolean default true
 );
 
-
 DELIMITER |
 create trigger tarifas_AU_Trigger
     AFTER UPDATE
     ON tarifas
     FOR EACH ROW
 BEGIN
-    INSERT into update_precio (precio_anterior, id_tarifa)
-        values (id, old.precio);
+IF new.precio != old.precio THEN
+    INSERT into update_precio (id_tarifa, precio_anterior)
+        values (old.id, old.precio);
+END IF;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger talla_AU_Trigger
+    AFTER UPDATE
+    ON talla
+    FOR EACH ROW
+BEGIN
+    Update talla_articulo set activo = new.activo where id_talla = old.id;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger color_AU_Trigger
+    AFTER UPDATE
+    ON color
+    FOR EACH ROW
+BEGIN
+    Update color_articulo set activo = new.activo where id_color = old.id;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger articulo_AU_Trigger
+    AFTER UPDATE
+    ON articulos
+    FOR EACH ROW
+BEGIN
+    Update color_articulo set activo = new.activo where id_articulo = old.id;
+    Update talla_articulo set activo = new.activo where id_articulo = old.id;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger categoriaTarifa_AU_Trigger
+    AFTER UPDATE
+    ON tarifas_categorias
+    FOR EACH ROW
+BEGIN
+    Update categorias_tipo set activo = new.activo where id_categoria = old.id;
+end |
+DELIMITER ;
+
+DELIMITER |
+create trigger tipoTarifa_AU_Trigger
+    AFTER UPDATE
+    ON tarifas_tipo
+    FOR EACH ROW
+BEGIN
+    Update categorias_tipo set activo = new.activo where id_tipo = old.id;
 end |
 DELIMITER ;
 
@@ -252,3 +375,5 @@ insert into formulario values (null,"Datos de contacto","nombre","pepito","nombr
 
 insert into cliente_direccion values (null,"C/ El Router", "135B", "Las Palmas", "Las Palmas", "35001", null,1);
 insert into cliente_direccion values (null,"C/ Obispo Pildain", "155", "Arucas", "Las Palmas", "35400", 1,null);
+
+insert into articulo_categoria values (null,"blusa",true);
