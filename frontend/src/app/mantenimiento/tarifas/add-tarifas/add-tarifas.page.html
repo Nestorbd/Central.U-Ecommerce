@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>addTarifas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="tarifaForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data">
+
+    <div class="grid">
+      <i>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="nombre" type="text" required></ion-input>
+        </ion-item>
+      </i>
+      <i>
+        <ion-item>
+          <ion-label position="floating">Precio</ion-label>
+          <ion-input formControlName="precio" type="number" required></ion-input>
+        </ion-item>
+      </i>
+     
+      <i>
+        <mat-form-field  appearance="fill">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="id_categoria">
+            <mat-option *ngFor="let c of tCategoria" value="{{c.id}}">{{c.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </i>
+
+      <i>
+        <mat-form-field  appearance="fill">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="id_tipo">
+            <mat-option *ngFor="let t of tTipo" value="{{t.id}}">{{t.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </i>
+      <br/>
+    </div>
+<hr/>
+    <button mat-button id="botones" type="submit" >Añade un nuevo articulo</button>
+   
+
+  </form>
+</ion-content>

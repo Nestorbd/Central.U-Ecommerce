@@ -123,6 +123,7 @@ class Formulario
 
     public function createFormulario($data)
     {
+     
         $return = array();
         $returnColum = array();
 
@@ -130,8 +131,11 @@ class Formulario
             $returnColum[$key] = $key;
             $return[$key] = $val;
         }
-        $return["activo"] = 1;
-        $returnColum["activo"] = "activo";
+        print_r($return);
+        $return["activo"]=1;
+        
+        $insData= implode("','",$return);
+        $insDataColumn = implode(",",$returnColum);
 
         unset($return["id"]);
         unset($returnColum["id"]);

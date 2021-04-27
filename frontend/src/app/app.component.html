@@ -13,33 +13,20 @@
 
           Home
         </ion-item>
-        <ion-item [routerLink]="['cart']">
+        <ion-item [routerLink]="['form-page']">
           <ion-icon name="book-outline"></ion-icon>
-          Catalogue
+          Nuevo encargo
         </ion-item>
         <ion-item [routerLink]="['profile']">
           <ion-icon name="person-circle-outline"></ion-icon>
-          My profile
-        </ion-item>
-        <ion-item [routerLink]="['track']">
-          <ion-icon name="basket-outline"></ion-icon>
-          My profile
-        </ion-item>
-
-        <ion-item [routerLink]="['contact-page']">
-          <ion-icon name="business-outline"></ion-icon>
-          Contact page
-        </ion-item>
-        <ion-item [routerLink]="['logout']">
-          <ion-icon name="log-out-outline"></ion-icon>
-          Log-out
+          Seguimiento
         </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
 
 
-  <ion-menu side="start" menuId="administrador" contentId="main">
+  <!-- <ion-menu side="start" menuId="administrador" contentId="main">
     <ion-header>
       <ion-toolbar color="medium">
         <ion-title>Admin Menu</ion-title>
@@ -74,6 +61,6 @@
         </ion-item>
       </ion-list>
     </ion-content>
-  </ion-menu>
+  </ion-menu> -->
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

@@ -1,37 +1,40 @@
-.mat-stepper-vertical {
-    margin-top: 8px;
-  }
-  
-  .mat-form-field {
-    margin-top: 16px;
-  }
-
-
 #centrarForm{
     position: absolute;
    width: 100%;
+    height: auto;
     border-style: groove;
     box-shadow: 10px, 10px, rgba(129, 129, 129, 0.671);
-  
+    
+    
+}
+
+#p{
+    text-align: center;
+    font-size: 20px;
+   
+}
+
+#botones{
+    color: white;
+width: 15%;
     
 }
 
 
-
-#centrarBar{
-    position: fixed;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    height: 1%;
+#header{
+    text-align: center;
+}
+.botones{
+    margin-left: 41%;
+    
+   
 }
 
-#imagen{
-    position: fixed;
-    top: 93%;
-    left: 95%;
-    transform: translate(-50%, -50%);
-      height: 8%;
-      width: 5%;
+#contorno{
+    border: 10px;
+    border-style: solid;
 }
+
+
+
+

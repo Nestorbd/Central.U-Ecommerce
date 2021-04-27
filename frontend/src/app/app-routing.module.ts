@@ -12,20 +12,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'add-logo',
-    loadChildren: () => import('./mantenimiento/logo/add-logo/add-logo.module').then( m => m.AddLogoPageModule)
-  },
-  {
-    path: 'update-logo',
-    loadChildren: () => import('./mantenimiento/logo/update-logo/update-logo.module').then( m => m.UpdateLogoPageModule)
-  },
-  {
     path: 'pruebas',
     loadChildren: () => import('./pruebas/pruebas.module').then( m => m.PruebasPageModule)
-  },
-  {
-    path: 'prenda-selector',
-    loadChildren: () => import('./prenda-selector/prenda-selector.module').then( m => m.PrendaSelectorPageModule)
   },
   {
     path: 'form-page',
@@ -34,7 +22,8 @@ const routes: Routes = [
   {
     path: 'pruebas-form',
     loadChildren: () => import('./pruebas-form/pruebas-form.module').then( m => m.PruebasFormPageModule)
-  },  {
+  },
+  {
     path: 'add-input',
     loadChildren: () => import('./mantenimiento/formulario/add-input/add-input.module').then( m => m.AddInputPageModule)
   },
@@ -49,7 +38,91 @@ const routes: Routes = [
   {
     path: 'ver-input',
     loadChildren: () => import('./mantenimiento/formulario/ver-input/ver-input.module').then( m => m.VerInputPageModule)
+  },
+  {
+    path: 'cli-existente',
+    loadChildren: () => import('./modals/cli-existente/cli-existente.module').then( m => m.CliExistentePageModule)
+  },
+  {
+    path: 'ver-cliente',
+    loadChildren: () => import('./mantenimiento/cliente/ver-cliente/ver-cliente.module').then( m => m.VerClientePageModule)
+  },
+  {
+    path: 'cliente-direccion',
+    loadChildren: () => import('./mantenimiento/cliente/cliente-direccion/cliente-direccion.module').then( m => m.ClienteDireccionPageModule)
+  },
+  {
+    path: 'ver-categoria',
+    loadChildren: () => import('./mantenimiento/articulos/categoria/ver-categoria/ver-categoria.module').then( m => m.VerCategoriaPageModule)
+  },
+  {
+    path: 'articulos',
+    loadChildren: () => import('./mantenimiento/articulos/articulos/articulos.module').then( m => m.ArticulosPageModule)
+  },
+  {
+    path: 'add-categoria',
+    loadChildren: () => import('./mantenimiento/articulos/categoria/add-categoria/add-categoria.module').then( m => m.AddCategoriaPageModule)
+  },
+  {
+    path: 'boceto',
+    loadChildren: () => import('./modals/boceto/boceto.module').then( m => m.BocetoPageModule)
+  },
+  {
+    path: 'ver-talla',
+    loadChildren: () => import('./mantenimiento/articulos/talla/ver-talla/ver-talla.module').then( m => m.VerTallaPageModule)
+  },
+  {
+    path: 'add-talla',
+    loadChildren: () => import('./mantenimiento/articulos/talla/add-talla/add-talla.module').then( m => m.AddTallaPageModule)
+  },
+  {
+    path: 'add-color',
+    loadChildren: () => import('./mantenimiento/articulos/color/add-color/add-color.module').then( m => m.AddColorPageModule)
+  },
+  {
+    path: 'ver-color',
+    loadChildren: () => import('./mantenimiento/articulos/color/ver-color/ver-color.module').then( m => m.VerColorPageModule)
+  },
+  {
+    path: 'ver-articulo',
+    loadChildren: () => import('./mantenimiento/articulos/ver-articulo/ver-articulo.module').then( m => m.VerArticuloPageModule)
+  },
+  {
+    path: 'add-articulo',
+    loadChildren: () => import('./mantenimiento/articulos/add-articulo/add-articulo.module').then( m => m.AddArticuloPageModule)
+  },
+  {
+    path: 'pruebacdk',
+    loadChildren: () => import('./pruebacdk/pruebacdk.module').then( m => m.PruebacdkPageModule)
+  },
+  {
+    path: 'ver-tarifas',
+    loadChildren: () => import('./mantenimiento/tarifas/ver-tarifas/ver-tarifas.module').then( m => m.VerTarifasPageModule)
+  },
+  {
+    path: 'add-tarifas',
+    loadChildren: () => import('./mantenimiento/tarifas/add-tarifas/add-tarifas.module').then( m => m.AddTarifasPageModule)
+  },
+  {
+    path: 'ver-tipo',
+    loadChildren: () => import('./mantenimiento/tarifas/tipo/ver-tipo/ver-tipo.module').then( m => m.VerTipoPageModule)
+  },
+  {
+    path: 'add-tipo',
+    loadChildren: () => import('./mantenimiento/tarifas/tipo/add-tipo/add-tipo.module').then( m => m.AddTipoPageModule)
+  },
+  {
+    path: 'ver-categoria-t',
+    loadChildren: () => import('./mantenimiento/tarifas/categoria/ver-categoria-t/ver-categoria-t.module').then( m => m.VerCategoriaTPageModule)
+  },  {
+    path: 'add-categoria-t',
+    loadChildren: () => import('./mantenimiento/tarifas/categoria/add-categoria-t/add-categoria-t.module').then( m => m.AddCategoriaTPageModule)
   }
+
+
+
+
+
 
 
 

@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { VerInputPageRoutingModule } from './ver-input-routing.module';
 
 import { VerInputPage } from './ver-input.page';
+import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    MaterialModule,
     VerInputPageRoutingModule
   ],
   declarations: [VerInputPage]

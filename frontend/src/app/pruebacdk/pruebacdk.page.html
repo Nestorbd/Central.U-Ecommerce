@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pruebacdk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="target" #target>Target</div>
+  <ngx-moveable
+      [target]="target"
+      [rotatable]='true'
+      [throttleRotate]='0'
+      [rotationPosition]='"top"'
+      [zoom]='1'
+      [origin]='true'
+      [padding]='{"left":0,"top":0,"right":0,"bottom":0}'
+      (rotateStart)="onRotateStart($event)"
+      (rotate)="onRotate($event)"
+      ></ngx-moveable>
+</ion-content>

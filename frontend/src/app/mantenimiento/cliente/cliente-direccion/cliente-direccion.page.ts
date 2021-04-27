@@ -18,6 +18,7 @@ import { LogotipoService } from 'src/app/services/logotipo.service';
   styleUrls: ['./cliente-direccion.page.scss'],
 })
 export class ClienteDireccionPage implements OnInit {
+  isDireccion : boolean = false;
   id: number;
   tf: boolean;
   direccion: Direccion[];
@@ -25,6 +26,7 @@ export class ClienteDireccionPage implements OnInit {
   logotipo: Logotipo[];
   formulario;
   contentEditable: boolean = false;
+  nombreEditable: boolean = false;
   editField: string;
   elements : number = 0;
   displayedColumns: string[] = ['calle', 'numero', 'municipio', 'provincia', 'codigo_postal', 'editar'];
@@ -79,8 +81,11 @@ export class ClienteDireccionPage implements OnInit {
     this.clienteSrv.getClienteByID(this.id, this.tf).subscribe((p) => {
 
       if (p.id_empresa >= 0) {
-        this.clienteSrv.setEmpresaId(p.id_empresa);
         this.isEmpresa = true;
+       
+
+        this.clienteSrv.setEmpresaId(p.id_empresa);
+       
         this.clientUpdateForm = this.fb.group({
           nombre: p.nombre,
           telefono: p.telefono,
@@ -101,7 +106,6 @@ export class ClienteDireccionPage implements OnInit {
           nif: clienteAux[1].NIF,
           email: clienteAux[1].email
         })
-
       }
 
     })
@@ -192,17 +196,35 @@ editar(){
   this.contentEditable = true;
   console.log(this.contentEditable)
 }
+
+
+
  // LOGOTIPOS
 ///////////////////////////////////////////////////////////////////////////
 
 
 getLogo() {
-  this.logoService.getLogos().subscribe((logotipo: any) => {
+  if(this.isEmpresa){
+    console.log("llega")
+  this.logoService.getLogoByClientId(this.id,  this.tf).subscribe((logotipo: any) => {
+    this.logotipo = logotipo;
+    console.log(this.logotipo)
+
+  });
+}else{
+  this.logoService.getLogoByClientId(this.id,  this.tf).subscribe((logotipo: any) => {
     this.logotipo = logotipo;
     console.log(this.logotipo)
 
   });
 }
+}
+
+updateLogo(id: number){
+  console.log( id, this.editField)
+   
+   this.logoService.updateLogo(id, this.editField)
+ }
 
 
 }
