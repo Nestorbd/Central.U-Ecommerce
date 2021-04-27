@@ -90,12 +90,11 @@ create table pedidos (
     fecha_terminacion_trabajo date,
     observaciones varchar(500),
     validado boolean,
-    timestamp timestamp,
-    id_usuario int,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+    fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     id_estado int,
     id_individual int,
     id_empresa int,
-
 
     foreign key (id_individual) REFERENCES cliente_individual (id_individual)
     on update cascade
@@ -103,10 +102,25 @@ create table pedidos (
     foreign key (id_empresa) REFERENCES cliente_empresa (id_empresa)
     on update cascade
     on delete cascade,
-    foreign key (id_usuario) REFERENCES usuario (id)
+    foreign key (id_estado) REFERENCES estado_pedido (id)
+    on update cascade
+    on delete cascade
+);
+
+drop table if EXISTS usuario_act_pedido;
+create table usuario_act_pedido (
+    id_usuario int,
+    id_pedido int,
+    id_estado int,
+
+    primary key (id_usuario, id_pedido, id_estado),
+    foreign key (id_usuario) REFERENCES usuario(id)
     on update cascade
     on delete cascade,
-    foreign key (id_estado) REFERENCES estado_pedido (id)
+    foreign key (id_pedido) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade,
+    foreign key (id_estado) REFERENCES estado_pedido(id)
     on update cascade
     on delete cascade
 );
@@ -158,20 +172,6 @@ create table articulos (
     on delete cascade
 );
 
-drop table if EXISTS articulos_pedidos;
-create table articulos_pedidos (
-    id_articulo int not null,
-    id_pedidos int not null,
-
-    primary key (id_articulo, id_pedidos),
-    foreign key (id_articulo) REFERENCES articulos(id)
-    on update cascade
-    on delete cascade,
-    foreign key (id_pedidos) REFERENCES pedidos(id)
-    on update cascade
-    on delete cascade
-);
-
 drop table if EXISTS talla;
 create table talla (
     id int primary key auto_increment,
@@ -209,6 +209,29 @@ create table color_articulo (
 
     primary key (id_articulo,id_color),
     foreign key (id_articulo) REFERENCES articulos(id)
+    on update cascade
+    on delete cascade,
+    foreign key (id_color) REFERENCES color(id)
+    on update cascade
+    on delete cascade
+);
+
+drop table if EXISTS articulos_pedidos;
+create table articulos_pedidos (
+    id_articulo int not null,
+    id_pedidos int not null,
+    id_talla int,
+    id_color int,
+    cantidad int not null,
+
+    primary key (id_articulo, id_pedidos),
+    foreign key (id_articulo) REFERENCES articulos(id)
+    on update cascade
+    on delete cascade,
+    foreign key (id_pedidos) REFERENCES pedidos(id)
+    on update cascade
+    on delete cascade,
+    foreign key (id_talla) REFERENCES talla(id)
     on update cascade
     on delete cascade,
     foreign key (id_color) REFERENCES color(id)

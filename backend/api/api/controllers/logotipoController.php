@@ -34,7 +34,6 @@ public function __construct(){
 }
 
 public function insert(){
-    print_r($_FILES);
     
         if (isset($_FILES['imagen'])) {
         $img = uploadImage('imagen');
@@ -78,9 +77,30 @@ public function update($id){
     }
 
     public function getLogotiposByCliente($id){
-        $data = $this->logotipo->getLogotiposByCliente($id); 
+        if (is_array($id)) {
+            $id = implode('', $id);
+        }
+        $data_get = $this->logotipo->getLogotiposByCliente($id);
 
-        exit(json_encode($data));
+        if (!$data_get) {
+            exit(json_encode("este cliente no tiene asignado ningun logotipo"));
+        } else {
+            exit(json_encode($data_get));
+        }
+    }
+
+    public function getLogotiposByPedido($id)
+    {
+        if (is_array($id)) {
+            $id = implode('', $id);
+        }
+        $data_get = $this->logotipo->getLogotiposByPedido($id);
+
+        if (!$data_get) {
+            exit(json_encode("este pedido no tiene asignada ningun logotipo"));
+        } else {
+            exit(json_encode($data_get));
+        }
     }
 }
 

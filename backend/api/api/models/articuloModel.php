@@ -2,6 +2,7 @@
 require_once 'connection.php';
 require_once 'tallaModel.php';
 require_once 'colorModel.php';
+require_once 'categoriaArticuloModel.php';
 
 
 class Articulo
@@ -100,18 +101,21 @@ class Articulo
         $sql = $this->conn->query("SELECT * FROM articulos");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
-        $talla = new Talla;
-        $color = new Color;
+        if ($data) {
+            $talla = new Talla;
+            $color = new Color;
+            $categoria = new CategoriaArticulo;
 
 
-        foreach ($data as $key => $values) {
-            $tallas = $talla->getTallasByArticulo($values->id);
-            $colores = $color->getColoresByArticulo($values->id);
+            foreach ($data as $key => $values) {
+                $values->categoria = $categoria->getCategoriaById($values->id_categoria);
+                $values->tallas = $talla->getTallasByArticulo($values->id);
+                $values->colores = $color->getColoresByArticulo($values->id);
+                
 
-            $values->tallas = $tallas;
-            $values->colores = $colores;
+                unset($values->id_categoria);
+            }
         }
-
 
         return $data;
     }
@@ -122,18 +126,23 @@ class Articulo
         $sql = $this->conn->query("SELECT * FROM articulos WHERE id =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
-        $talla = new Talla;
-        $color = new Color;
+        if ($data) {
+            $talla = new Talla;
+            $color = new Color;
+            $categoria = new CategoriaArticulo;
 
-        $tallas = $talla->getTallasByArticulo($data->id);
-        $colores = $color->getColoresByArticulo($data->id);
-        $data->tallas = $tallas;
-        $data->colores = $colores;
+            $data->categoria = $categoria->getCategoriaById($data->id_categoria);
+            $data->tallas = $talla->getTallasByArticulo($data->id);
+            $data->colores = $color->getColoresByArticulo($data->id);
+
+            unset($data->id_categoria);
+        }
+
 
         return $data;
     }
 
-    public function createArticulo($data)
+    public function createArticulo($data, $img)
     {
         $return = array();
         $returnColum = array();
@@ -142,6 +151,14 @@ class Articulo
             $returnColum[$key] = $key;
             $return[$key] = $val;
         }
+
+        if ($img) {
+            $img = str_replace("C:" . DS . "xampp" . DS . "htdocs" . DS, "http://localhost/", $img);
+            $img = str_replace(DS, '/', $img);
+            $return["imagen"] = $img;
+            $returnColum["imagen"] = "imagen";
+        }
+
         $return["activo"] = 1;
         $returnColum["activo"] = "activo";
 
@@ -257,12 +274,20 @@ class Articulo
             $id_articulo = $data['id'];
             unset($data["id"]);
             foreach ($data as $key) {
-                $this->conn->query("Insert into talla_articulo (id_articulo, id_talla, activo) values (" . $id_articulo . "," . $key . ", true)");
+                $exist = $this->conn->query("SELECT * FROM talla_articulo WHERE id_articulo =" . $id_articulo . " AND id_talla =" . $key);
+                $exist = $exist->fetch();
+                if (!$exist) {
+                    $this->conn->query("INSERT INTO talla_articulo (id_articulo, id_talla, activo) values (" . $id_articulo . "," . $key . ", true)");
+                }
             }
         } else {
             $id_articulo = $data->id;
             foreach ($data->tallas as $key) {
-                $this->conn->query("Insert into talla_articulo (id_articulo, id_talla, activo) values (" . $id_articulo . "," . $key . ", true)");
+                $exist = $this->conn->query("SELECT * FROM talla_articulo WHERE id_articulo =" . $id_articulo . " AND id_talla =" . $key);
+                $exist = $exist->fetch();
+                if (!$exist) {
+                    $this->conn->query("INSERT INTO  talla_articulo (id_articulo, id_talla, activo) values (" . $id_articulo . "," . $key . ", true)");
+                }
             }
         }
 
@@ -274,12 +299,20 @@ class Articulo
             $id_articulo = $data['id'];
             unset($data["id"]);
             foreach ($data as $key) {
-                $this->conn->query("Insert into color_articulo (id_articulo, id_color, activo) values (" . $id_articulo . "," . $key . ", true)");
+                $exist = $this->conn->query("SELECT * FROM talla_articulo WHERE id_articulo =" . $id_articulo . " AND id_color =" . $key);
+                $exist = $exist->fetch();
+                if (!$exist) {
+                    $this->conn->query("INSERT INTO color_articulo (id_articulo, id_color, activo) values (" . $id_articulo . "," . $key . ", true)");
+                }
             }
         } else {
             $id_articulo = $data->id;
             foreach ($data->colores as $key) {
-                $this->conn->query("Insert into color_articulo (id_articulo, id_color, activo) values (" . $id_articulo . "," . $key . ", true)");
+                $exist = $this->conn->query("SELECT * FROM talla_articulo WHERE id_articulo =" . $id_articulo . " AND id_color =" . $key);
+                $exist = $exist->fetch();
+                if (!$exist) {
+                    $this->conn->query("INSERT INTO  color_articulo (id_articulo, id_color, activo) values (" . $id_articulo . "," . $key . ", true)");
+                }
             }
         }
 
@@ -316,5 +349,19 @@ class Articulo
         $sql = $this->conn->query("UPDATE color_articulo SET activo = True WHERE id_articulo=" . $data->id . " AND id_color=" . $data->id_color);
 
         return $sql;
+    }
+
+    public function getArticulosByPedido($id_pedido)
+    {
+        $id_pedido = $this->conn->quote($id_pedido);
+        $sql = $this->conn->query("SELECT a.nombre AS 'articulo', c.nombre AS 'color' , t.nombre AS 'talla' , a_p.cantidad 
+        From articulos_pedidos a_p 
+        JOIN articulos a ON a.id = a_p.id_articulo 
+        JOIN color c ON c.id = a_p.id_color 
+        JOIN talla t ON t.id = a_p.id_talla
+        WHERE a_p.id_pedidos = " . $id_pedido);
+        $data = $sql->fetchAll(PDO::FETCH_OBJ);
+
+        return $data;
     }
 }

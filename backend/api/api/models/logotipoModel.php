@@ -1,5 +1,7 @@
 <?php
 require_once 'connection.php';
+require_once 'clienteEmpresaModel.php';
+require_once 'clienteIndividualModel.php';
 
 
 class Logotipos 
@@ -84,6 +86,24 @@ class Logotipos
         $sql = $this->conn->query("SELECT * FROM logotipos");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
+        if($data){
+            foreach($data as $key => $val){
+                if($val->id_empresa != null){
+                    $cliente = new Empresa;
+                    $val->empresa = $cliente->getEmpresaById($val->id_empresa);
+                    unset($val->empresa->logotipos);
+                    unset($val->empresa->direcciones);
+                }else{
+                    $cliente = new Individual;
+                    $val->individual = $cliente->getIndividualById($val->id_individual);
+                    unset($val->individual->logotipos);
+                    unset($val->individual->direcciones);
+                }
+                unset($val->id_empresa);
+                unset($val->id_individual);
+            }
+        }
+
         return $data;
     }
 
@@ -92,6 +112,22 @@ class Logotipos
         $id =  $this->conn->quote($id);
         $sql = $this->conn->query("SELECT * FROM logotipos WHERE id =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
+
+        if($data){
+            if($data->id_empresa != null){
+                $cliente = new Empresa;
+                    $data->empresa = $cliente->getEmpresaById($data->id_empresa);
+                    unset($data->empresa->logotipos);
+                    unset($data->empresa->direcciones);
+            }else{
+                $cliente = new Individual;
+                    $data->individual = $cliente->getIndividualById($data->id_individual);
+                    unset($data->individual->logotipos);
+                    unset($data->individual->direcciones);
+            }
+            unset($data->id_empresa);
+            unset($data->id_individual);
+        }
 
         return $data;
     }
@@ -106,6 +142,7 @@ class Logotipos
             $return[$key] = $val;
         }
         if ($img){
+            $img = str_replace("C:".DS."xampp".DS."htdocs".DS,"http://localhost/", $img);
             $img = str_replace(DS,'/',$img);
             $return["imagen_png"] = $img;
             $returnColum["imagen_png"] = "imagen_png";
@@ -172,6 +209,14 @@ class Logotipos
             $sql_get = $this->conn->query("SELECT * FROM logotipos WHERE id_individual=" . $id);
             $data = $sql_get->fetchAll(PDO::FETCH_OBJ);
         }
+
+        return $data;
+    }
+
+    public function getLogotiposByPedido($id_pedido){
+        $id_pedido = $this->conn->quote($id_pedido);
+        $sql = $this->conn->query("SELECT l.* FROM logotipos l JOIN logotipos_pedido l_p ON l.id = l_p.id_logotipos WHERE l_p.id_pedidos = ".$id_pedido);
+        $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;
     }

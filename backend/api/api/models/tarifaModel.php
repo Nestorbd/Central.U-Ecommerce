@@ -1,6 +1,7 @@
 <?php
 require_once 'connection.php';
-
+require_once 'categoriaTarifaModel.php';
+require_once 'tipoTarifaModel.php';
 
 class Tarifa
 {
@@ -121,6 +122,20 @@ class Tarifa
         $sql = $this->conn->query("SELECT * FROM tarifas");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
+        if($data){
+            $categoria = new CategoriaTarifa;
+            $tipo = new TipoTarifa;
+
+            foreach($data as $key => $val){
+                $val->categoria = $categoria->getCategoriaById($val->id_categoria);
+                $val->tipo = $tipo->getTipoById($val->id_tipo);
+
+                unset($val->id_categoria);
+                unset($val->id_tipo);
+                unset($val->categoria->tipos);
+            }
+        }
+
         return $data;
     }
 
@@ -129,6 +144,19 @@ class Tarifa
         $id =  $this->conn->quote($id);
         $sql = $this->conn->query("SELECT * FROM tarifas WHERE id =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
+
+        if($data){
+            $categoria = new CategoriaTarifa;
+            $tipo = new TipoTarifa;
+
+            $data->categoria = $categoria->getCategoriaById($data->id_categoria);
+            $data->tipo = $tipo->getTipoById($data->id_tipo);
+
+            unset($data->id_categoria);
+            unset($data->id_tipo);
+            unset($data->categoria->tipos);
+
+        }
 
         return $data;
     }
@@ -208,6 +236,21 @@ class Tarifa
     public function getPreciosAnteriores($id){
         $id = $this->conn->quote($id);
         $sql = $this->conn->query("SELECT * FROM update_precio WHERE id_tarifa = ".$id." ORDER BY precio_actualizacion_tarifa desc");
+        $data = $sql->fetchAll(PDO::FETCH_OBJ);
+
+        return $data;
+    }
+
+    public function getTarifasByPedido($id_pedido){
+        $id_pedido = $this->conn->quote($id_pedido);
+        $sql = $this->conn->query("SELECT t.* FROM tarifas t JOIN pedidos_tarifas p_t ON t.id = p_t.id_tarifa WHERE p_t.id_pedido = ".$id_pedido);
+        $data = $sql->fetchAll(PDO::FETCH_OBJ);
+
+        return $data;
+    }
+
+    public function getTarifasByCategoriaAndTipo($data){
+        $sql = $this->conn->query("SELECT * FROM tarifas WHERE id_categoria=".$data->id_categoria." AND id_tipo=".$data->id_tipo);
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;

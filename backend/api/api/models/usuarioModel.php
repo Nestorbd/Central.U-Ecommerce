@@ -1,15 +1,17 @@
 <?php
 require_once 'connection.php';
-require_once 'clienteDireccionModel.php';
-require_once 'logotipoModel.php';
+require_once 'rolUsuarioModel.php';
 
-class Empresa
+
+class Usuario
 {
     private $id;
     private $nombre;
-    private $CIF;
+    private $activo;
+    private $id_rol;
 
-    private $conn;
+
+    public $conn;
 
     public function __construct()
     {
@@ -26,6 +28,13 @@ class Empresa
         $this->conn = Connection::conexion();
     }
 
+    public function __construct1($id, $nombre, $activo)
+    {
+        $this->conn = Connection::conexion();
+        $this->id = $id;
+        $this->$nombre = $nombre;
+        $this->activo = $activo;
+    }
     public function getId()
     {
         return $this->id;
@@ -44,54 +53,58 @@ class Empresa
         $this->nombre = $nombre;
     }
 
-    public function getCIF()
+    public function getActivo()
     {
-        return $this->CIF;
+        return $this->activo;
     }
-    public function setCIF($CIF)
+    public function setActivo($activo)
     {
-        $this->CIF = $CIF;
+        $this->activo = $activo;
+    }
+    public function getIdRol()
+    {
+        return $this->id_rol;
+    }
+    public function setIdRol($id_rol)
+    {
+        $this->id_rol = $id_rol;
     }
 
-    public function getEmpresa()
+    public function getUsuarios()
     {
 
-        $sql = $this->conn->query("SELECT * FROM  cliente_empresa");
+        $sql = $this->conn->query("SELECT * FROM usuario");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         if ($data) {
-            $direccion = new Direccion;
-            $logotipo = new Logotipos;
+            $rol = new Rol;
 
             foreach ($data as $key => $val) {
-                $val->direcciones = $direccion->getDireccionByEmpresaId($val->id_empresa);
-                $_GET["es_empresa"]="true";
-                $val->logotipos = $logotipo->getLogotiposByCliente($val->id_empresa);
+                $val->rol = $rol->getRolById($val->id_rol);
+                unset($val->id_rol);
             }
         }
 
         return $data;
     }
 
-    public function getEmpresaById($id)
+    public function getUsuarioById($id)
     {
         $id =  $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=" . $id);
+        $sql = $this->conn->query("SELECT * FROM usuario WHERE id =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
         if ($data) {
-            $direccion = new Direccion();
-            $logotipo = new Logotipos;
+            $rol = new Rol;
 
-            $data->direcciones = $direccion->getDireccionByEmpresaId($data->id_empresa);
-            $_GET["es_empresa"]="true";
-                $data->logotipos = $logotipo->getLogotiposByCliente($data->id_empresa);
+            $data->rol = $rol->getRolById($data->id_rol);
+            unset($data->id_rol);
         }
 
         return $data;
     }
 
-    public function createEmpresa($data)
+    public function createUsuario($data)
     {
         $return = array();
         $returnColum = array();
@@ -100,26 +113,25 @@ class Empresa
             $returnColum[$key] = $key;
             $return[$key] = $val;
         }
-        if ($returnColum["es_empresa"]) {
-            unset($returnColum["es_empresa"]);
-            unset($return["es_empresa"]);
-        }
-        unset($return["id_empresa"]);
-        unset($returnColum["id_empresa"]);
+        $return["activo"] = 1;
+        $returnColum["activo"] = "activo";
+
+        unset($return["id"]);
+        unset($returnColum["id"]);
 
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);
 
-        $this->conn->query("INSERT INTO cliente_empresa (" . $insDataColumn . ") VALUES ('" . $insData . "')");
+        $this->conn->query("INSERT INTO usuario (" . $insDataColumn . ") VALUES ('" . $insData . "')");
         $data = $this->conn->lastInsertId();
 
         return $data;
     }
 
-    public function updateEmpresa($id, $dataNew)
+    public function updateUsuario($id, $dataNew)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM usuario WHERE id=" . $id);
         $dataOld = $sql_get->fetch();
         if ($dataOld == null) {
             return false;
@@ -129,12 +141,9 @@ class Empresa
             foreach ($dataNew as $key => $val) {
                 $return[$key] = $key . " = '" . $val . "'";
             }
-            if ($return["es_empresa"]) {
-                unset($return["es_empresa"]);
-            }
             $insData = implode(", ", $return);
 
-            $sql = $this->conn->query("UPDATE cliente_empresa SET " . $insData . " WHERE id_empresa=" . $id);
+            $sql = $this->conn->query("UPDATE usuario SET " . $insData . " WHERE id=" . $id);
             if ($sql) {
                 return true;
             } else {
@@ -143,20 +152,30 @@ class Empresa
         }
     }
 
-    public function deleteEmpresa($id)
+    public function deleteUsuario($id)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM usuario WHERE id=" . $id);
         $data = $sql_get->fetch();
         if ($data == null) {
             return false;
         } else {
-            $sql = "DELETE FROM cliente_empresa WHERE id=" . $id;
+            $sql = "DELETE FROM usuario WHERE id=" . $id;
             if ($this->conn->query($sql) == TRUE) {
                 return true;
             } else {
                 return false;
             }
         }
+    }
+
+    public function getUsuariosByPedido($id_pedido)
+    {
+        $id_pedido =  $this->conn->quote($id_pedido);
+        $sql = $this->conn->query("SELECT u.*, e.nombre FROM usuario_act_pedido u_a_p JOIN usuario u JOIN estado_pedido e 
+        ON u.id = u_a_p.id_usuario ON e.id = u_a_p.id_estado WHERE u_a_p.id_pedido = " . $id_pedido);
+        $data = $sql->fetchAll(PDO::FETCH_OBJ);
+
+        return $data;
     }
 }

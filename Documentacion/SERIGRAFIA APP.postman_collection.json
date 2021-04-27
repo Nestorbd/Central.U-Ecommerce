@@ -6,152 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "PRUEBAS",
-			"item": [
-				{
-					"name": "GET ALL",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost/api/logotipo/ver/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"logotipo",
-								"ver",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ONE",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost/api/logotipo/ver/8",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"logotipo",
-								"ver",
-								"8"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CREATE",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "nombre",
-									"value": "PrototipoImagen78",
-									"type": "text"
-								},
-								{
-									"key": "imagen",
-									"type": "file",
-									"src": "/C:/Users/maqui/Pictures/Product/1.png"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost/api/logotipo/insertar/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"logotipo",
-								"insertar",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UPDATE",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"pruebita\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/logotipo/actualizar/8",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"logotipo",
-								"actualizar",
-								"8"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost/api/logotipo/eliminar/8",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"logotipo",
-								"eliminar",
-								"8"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Cliente",
 			"item": [
 				{
@@ -788,13 +642,13 @@
 							"formdata": [
 								{
 									"key": "nombre",
-									"value": "Logotipooo",
+									"value": "Logotipo3",
 									"type": "text"
 								},
 								{
 									"key": "imagen",
 									"type": "file",
-									"src": "/C:/Users/maqui/Pictures/Product/2.png"
+									"src": "/C:/Users/maqui/Pictures/Product/1.png"
 								},
 								{
 									"key": "id_individual",
@@ -1076,7 +930,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"XL\",\r\n    \"activo\":true\r\n}",
+									"raw": "{\r\n    \"nombre\":\"L\",\r\n    \"activo\":true\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1222,7 +1076,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"lila\",\r\n    \"activo\":false\r\n}",
+									"raw": "{\r\n    \"nombre\":\"amarillo\",\r\n    \"activo\":false\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1364,13 +1218,65 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"articuloPrueba\",\r\n    \"codigo_barra\":5645645,\r\n    \"stock\":54,\r\n    \"activo\":false,\r\n    \"id_categoria\":1,\r\n    \"tallas\":[2,3,4],\r\n    \"colores\":[2,3,4]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/maqui/Pictures/Product/1.png"
+								},
+								{
+									"key": "nombre",
+									"value": "art3",
+									"type": "text"
+								},
+								{
+									"key": "codigo_barra",
+									"value": "456",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "id_categoria",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "tallas[0]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "tallas[1]",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "tallas[2]",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "colores[0]",
+									"value": "1",
+									"contentType": "",
+									"type": "text"
+								},
+								{
+									"key": "colores[1]",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "colores[2]",
+									"value": "3",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost/api/articulo/insertar",
@@ -1810,7 +1716,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\":4,\r\n    \"tipos\":[4]\r\n}",
+									"raw": "{\r\n    \"id\":1,\r\n    \"tipos\":[1]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2085,7 +1991,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"tarifaPrueba\",\r\n    \"precio\":5,\r\n    \"id_categoria\":1,\r\n    \"id_tipo\":1\r\n}",
+							"raw": "{\r\n    \"nombre\":\"tarifa3\",\r\n    \"precio\":6.5,\r\n    \"id_categoria\":1,\r\n    \"id_tipo\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2114,7 +2020,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"precio\":3.5\r\n}",
+							"raw": "{\r\n    \"nombre\":\"art2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2122,7 +2028,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/tarifa/actualizar/1",
+							"raw": "http://localhost/api/tarifa/actualizar/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2131,7 +2037,7 @@
 								"api",
 								"tarifa",
 								"actualizar",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -2173,6 +2079,797 @@
 								"api",
 								"tarifa",
 								"verPreciosAnteriores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY CATEGORA AND TIPO",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_categoria\": 1,\r\n    \"id_tipo\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/tarifa/categoriaYTipo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tarifa",
+								"categoriaYTipo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Rol",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/rol",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"rol"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/rol/ver/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"rol",
+										"ver",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/rol/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"rol",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"admin act\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/rol/actualizar/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"rol",
+										"actualizar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/rol/eliminar/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"rol",
+										"eliminar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/usuario/ver/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"usuario",
+								"ver",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"usu1\",\r\n    \"id_rol\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/usuario/insertar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"usuario",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"usu1 act\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/usuario/actualizar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"usuario",
+								"actualizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/usuario/eliminar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"usuario",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Estado",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/estado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"estado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/estado/ver/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"estado",
+										"ver",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"creado\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/estado/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"estado",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"creado act\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/estado/actualizar/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"estado",
+										"actualizar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/estado/eliminar/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"estado",
+										"eliminar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Boceto",
+					"item": [
+						{
+							"name": "GET ALL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/boceto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"boceto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/boceto/ver/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"boceto",
+										"ver",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INSERT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/maqui/Pictures/Product/2.png"
+										},
+										{
+											"key": "id_pedidos",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost/api/boceto/insertar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"boceto",
+										"insertar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/boceto/eliminar/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"boceto",
+										"eliminar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET BOCETOS BY PEDIDO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/boceto/pedido/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"boceto",
+										"pedido",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/pedido/ver/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"ver",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"esta_firmado\":\"false\",\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-05\",\r\n    \"observaciones\": \"hay que diseñar un logo\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_individual\":1,\r\n    \"id_empresa\":null,\r\n    \"id_usuario\": 1,\r\n    \"logotipos\":[1,2,3],\r\n    \"tarifas\":[1,2,3],\r\n    \"articulos\":[{\r\n        \"id_articulo\":1,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":50\r\n    },\r\n    {\r\n         \"id_articulo\":2,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":150\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/pedido/insertar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"esta_firmado\":true,\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-05\",\r\n    \"observaciones\": \"hay que diseñar un logo\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_usuario\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/pedido/actualizar/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"actualizar",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/pedido/eliminar/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"eliminar",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD LOGOTIPOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"logotipos\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/pedido/agregarLogotipos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"agregarLogotipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD TARIFAS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"tarifas\":[1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/pedido/agregarTarifas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"agregarTarifas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD USUARIOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"id_usuario\": 1,\r\n    \"id_estado\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/pedido/agregarUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"agregarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD ARTICULOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"articulos\":[{\r\n         \"id_articulo\":1,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":50\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/pedido/agregarArticulos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"agregarArticulos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PEDIDOS BY USUARIO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/pedido/usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pedido",
+								"usuario",
 								"1"
 							]
 						}
