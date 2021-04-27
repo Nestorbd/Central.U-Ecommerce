@@ -3,6 +3,7 @@ import { NgxMoveableComponent } from "ngx-moveable";
 import { NgxSelectoComponent } from "ngx-selecto";
 import type { OnRotate, OnPinch } from 'moveable';
 import { Frame } from 'scenejs';
+import { ArticuloService } from "src/app/services/articulo.service";
 @Component({
   selector: 'app-boceto',
   templateUrl: './boceto.page.html',
@@ -11,6 +12,7 @@ import { Frame } from 'scenejs';
 export class BocetoPage implements OnInit {
   @ViewChild('moveable', { static: false }) moveable: NgxMoveableComponent;
   @ViewChild('selecto', { static: false }) selecto: NgxSelectoComponent;
+  src: string;
   cubes = [];
   targets = [];
   frameMap = new Map();
@@ -21,9 +23,12 @@ export class BocetoPage implements OnInit {
 
 
 
-  constructor() { }
+  constructor(
+    private articuloSrv: ArticuloService
+  ) { }
 
   ngOnInit() {
+    this.getSrc()
     const cubes = [];
 
     for (let i = 0; i < 30; ++i) {
@@ -32,21 +37,21 @@ export class BocetoPage implements OnInit {
     this.cubes = cubes;
   }
 
-  //   onRotateStart(e) {
-  //     e.set(this.frame.rotate);
-  // }
-  // onRotate(e) {
-  //   console.log("llega")
-  //     this.frame.rotate = e.beforeRotate;
-  // }
-
-  // onRender(e) {
-  //   const { translate, rotate} = this.frame;
-  //   e.target.style.transform = `translate(${translate[0]}px, ${translate[1]}px)`
-  //       +  ` rotate(${rotate}deg)`;
-  // }
 
 
+  ionViewWillEnter(){
+    this.src
+  }
+  
+  getBackgroundImageUrl(){
+    console.log(this.src)
+    return this.src
+  }
+
+  getSrc(){
+    
+    this.src = this.articuloSrv.getImagen()
+  }
 
   onClickGroup(e) {
     this.selecto.clickTarget(e.inputEvent, e.inputTarget);

@@ -27,10 +27,18 @@
             [draggable]='true'
             [target]='targets'
             [resizable]="true"
-            [rotatable]='false'
+            [rotatable]='true'
             [throttleDragRotate]='0'
             (rotateStart)="onRotateStart($event)"
-      
+            [target]="target"
+            [rotatable]='rotatable'
+            [throttleRotate]='throttleRotate'
+            [rotationPosition]='rotationPosition'
+            [zoom]='zoom'
+            [origin]='origin'
+            [padding]='padding'
+            (rotateStart)="onRotateStart($event)"
+            (rotate)="onRotate($event)"
             [keepRatio]="true"
             [bounds]='{"left":40,"top":40,"right":600,"bottom":430}'
             [renderDirections]='["nw","n","ne","w","e","sw","s","se"]'
@@ -45,11 +53,18 @@
            
 
         ></ngx-moveable>
-        <div class="elements selecto-area " id="selecto1">
-          <img class="cube targets"  src="http://localhost/crud_api/api/imagenes/07042021163936698374.png"  />
-          <img class="cube targets"  src="../../assets/icon/prueba.svg"  />
+
+
+      
+        <div class="example-boundary"class="elements selecto-area " id="selecto1">
+          <img style="position: absolute; display: block;   pointer-events: none;" src="{{src}}"/>
+          <img #target style="position: absolute;"class="cube targets target"  src="http://localhost/crud_api/api/imagenes/07042021163936698374.png"  />
+          <img style="position: absolute;" class="cube targets"  src="../../assets/icon/prueba.svg"  />
         </div>
-        <div class="elements ">hola</div>
+        <div class="elements "></div>
     </div>
+
+
+
 </div>
 </ion-content>

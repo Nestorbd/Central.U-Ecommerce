@@ -25,7 +25,7 @@ idEmpresa: number;
 
   getData(): Observable<Cliente[]> {
 
-    return this.httpClient.get<Cliente[]>("http://localhost/api/cliente")
+    return this.httpClient.get<Cliente[]>(this.apiUrl + "cliente")
     .pipe(
       
       tap(logotipos => console.log('Get Formulario')),

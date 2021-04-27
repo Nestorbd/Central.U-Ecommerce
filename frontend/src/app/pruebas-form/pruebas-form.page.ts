@@ -1,423 +1,74 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { CliExistentePage } from '../modals/cli-existente/cli-existente.page';
-import { Cliente } from '../model/cliente';
-import { Cliente_Empresa } from '../model/cliente_empresa';
-import { Cliente_Individual } from '../model/cliente_individual';
-import { Formulario } from '../model/formulario';
-import { Logotipo } from '../model/logotipo';
-import { ClienteService } from '../services/cliente.service';
-import { FormularioService } from '../services/formulario.service';
-import { LogotipoService } from '../services/logotipo.service';
-import { NgxMoveableComponent } from "ngx-moveable";
-import { NgxSelectoComponent } from "ngx-selecto";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from "@angular/animations";
+import { ArticuloService } from "../services/articulo.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { Articulo } from "../model/articulo";
+import { aTalla } from "../model/aTalla";
+import { MatPaginator } from "@angular/material/paginator";
 @Component({
   selector: 'app-pruebas-form',
   templateUrl: './pruebas-form.page.html',
   styleUrls: ['./pruebas-form.page.scss'],
+  animations: [
+    trigger("detailExpand", [
+      state(
+        "collapsed",
+        style({ height: "0px", minHeight: "0", display: "none" })
+      ),
+      state("expanded", style({ height: "*" })),
+      transition(
+        "expanded <=> collapsed",
+        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
+      )
+    ])
+  ],
 })
+
 export class PruebasFormPage implements OnInit {
-  @ViewChild('moveable', { static: false }) moveable: NgxMoveableComponent;
-  @ViewChild('selecto', { static: false }) selecto: NgxSelectoComponent;
-  cubes = [];
-  targets = [];
-  frameMap = new Map();
-  frame = {
-    translate: [0, 0],
-    rotate: 0,
-  };
-  image: any
-  logoForm: FormGroup;
-  isIndividual: boolean;
-  isEmpresa: boolean = true;
-  contador: number = 0;
-  dynamicForm: FormGroup;
-  submitted = false;
-  formArray: Formulario[] = [];
-  clienteForm: FormGroup;
-  direccionForm: FormGroup;
-  cliente: Cliente[];
-  logotipos: Logotipo[]
+  aTalla;
+  elements : number = 0;
+  columnsToDisplay : string[] = ['nombre', 'tallas','colores', 'codigo_barra', 'stock', 'activo' ]
+  expandedElement: aTalla | null;
 
-  clienteIndividual: Cliente_Individual[];
-  clienteEmpresa: Cliente_Empresa[];
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.aTalla.filter = filterValue.trim().toLowerCase();
+  }
 
 
-  logosEnPantalla: Array<{id: string, imagen_png: string}> = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
-
-  /*@ViewChild('moveable', { static: false }) moveable: NgxMoveableComponent;
-  @ViewChild('selecto', { static: false }) selecto: NgxSelectoComponent;
-  cubes = [];
-  targets = [];
-  frameMap = new Map();
-  frame = {
-    translate: [0, 0],
-    rotate: 0,
-  };*/
-
-  
   constructor(
-    private formBuilder: FormBuilder,
-    private httpClient: HttpClient,
-    private frmService: FormularioService,
-    private clienteSrv: ClienteService,
-    private modalCtrl: ModalController,
-    private logoService: LogotipoService,
-    private router: Router)
-     {
-
-      this.clienteForm = this.formBuilder.group({
-        nombre: [''],
-        telefono: [''],
-        cif: [''],
-        apellidos: [''], 
-        nif: [''],
-        email: ['']
-      })
-      this.direccionForm = this.formBuilder.group({
-        calle: [''],
-        numero: [''],
-        municipio: [''],
-        provincia: [''], 
-        codigo_postal: ['']
-      })
-
-
-      this.logoForm = this.formBuilder.group({
-        nombre: [''],
-        imagen: ['']
-      })
-
-
-     }
-
-  ngOnInit() {
-
-    const cubes = [];
-
-    for (let i = 0; i < 30; ++i) {
-      cubes.push(i);
-    }
-    this.cubes = cubes;
-    this.getForm();
-    let group = {};
-    this.formArray.forEach(function (value) {
-
-      group[value.value] = new FormControl('', Validators.required);
-
-    })
-
-    this.dynamicForm = this.formBuilder.group({
-      numeroPrendas: ['', Validators.required],
-      prendas: new FormArray([])
-    });
-
-   /* const cubes = [];
-
-    for (let i = 0; i < 30; ++i) {
-      cubes.push(i);
-    }
-    this.cubes = cubes;*/
+    private articuloSrv: ArticuloService
+  ){}
   
+  ngOnInit(){
+    this.getData();
   }
 
-
-  onClickGroup(e) {
-    this.selecto.clickTarget(e.inputEvent, e.inputTarget);
-  }
-  onMoveableDragStart(e) {
-    const target = e.target;
-
-    if (!this.frameMap.has(target)) {
-      this.frameMap.set(target, {
-
-        translate: [0, 0],
-      });
-    }
-    const frame = this.frameMap.get(target);
-
-    e.set(frame.translate);
-  }
-
-
-  onDrag(e) {
-    const target = e.target;
-    const frame = this.frameMap.get(target);
-
-    frame.translate = e.beforeTranslate;
-    target.style.transform = `translate(${frame.translate[0]}px, ${frame.translate[1]}px)`;
-  }
-  onDragGroupStart(e) {
-    e.events.forEach(ev => {
-      const target = ev.target;
-
-      if (!this.frameMap.has(target)) {
-        this.frameMap.set(target, {
-          translate: [0, 0],
-        });
-      }
-      const frame = this.frameMap.get(target);
-
-      ev.set(frame.translate);
-    });
-  }
-
-  onDragGroup(e) {
-    e.events.forEach(ev => {
-      const target = ev.target;
-      const frame = this.frameMap.get(target);
-
-      frame.translate = ev.beforeTranslate;
-      target.style.transform = `translate(${frame.translate[0]}px, ${frame.translate[1]}px)`;
-    });
-  }
-  onDragStart(e) {
-    const target = e.inputEvent.target;
-
-    if (
-      this.moveable.isMoveableElement(target)
-      || this.targets.some(t => t === target || t.contains(target))
-    ) {
-
-      e.stop();
-    }
-  }
-  onSelectEnd(e) {
-    this.targets = e.selected;
-
-    if (e.isDragStart) {
-      e.inputEvent.preventDefault();
-
-      setTimeout(() => {
-        this.moveable.ngDragStart(e.inputEvent);
-      });
-    }
-  }
-
-  onResizeStart(e) {
-    e.setOrigin(["%", "%"]);
-    e.dragStart && e.dragStart.set(this.frame.translate);
-  }
-  onResize(e) {
-    const beforeTranslate = e.drag.beforeTranslate;
-
-    this.frame.translate = beforeTranslate;
-    e.target.style.width = `${e.width}px`;
-    e.target.style.height = `${e.height}px`;
-    e.target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
-  }
-  onDragEnd($event) {
-    console.log("lol")
-  }
-
-
-ionViewWillEnter(){
-  this.logotipos;
-}
-
-
-  getForm() {
-    this.frmService.getData().subscribe((formularioData: any) => {
-      this.formArray = formularioData;
-      console.log(formularioData)
-    })
-
-  }
-  // convenience getters for easy access to form fields
-  get f() { return this.dynamicForm.controls; }
-  get t() { return this.f.prendas as FormArray; }
-
-  onChangeTickets() {
-    this.contador++;
-
-    if (this.contador <= 8) {
-      const numberOfTickets = this.contador || 0;
-      let group = {}
-      this.formArray.forEach(function (value) {
-
-        group[value.value] = new FormControl('', Validators.required);
-
-      })
-      if (this.t.length < numberOfTickets) {
-
-        for (let i = this.t.length; i < numberOfTickets; i++) {
-          this.t.push(
-            new FormGroup(group)
-          )
-
-        }
-      } else {
-        for (let i = this.t.length; i >= numberOfTickets; i--) {
-          this.t.removeAt(i);
-        }
-      }
-
-    }
-  }
-
-  async onSubmit() {
-    console.log(this.t.value)
-
-
-    if(this.isIndividual){
-
-      let clienteIndividual = {
-        id_individual: null,
-        nombre: this.clienteForm.value.nombre,
-        es_empresa: false,
-        apellidos: this.clienteForm.value.apellidos,
-        telefono: this.clienteForm.value.telefono,
-        nif: this.clienteForm.value.nif,
-        email: this.clienteForm.value.email
-      }
-      console.log(clienteIndividual);
-
-       this.clienteSrv.addIndividual(clienteIndividual).then(()=>{
-        this.addDirecciónIndividual().then(()=>{
-          let id_individual = this.clienteSrv.getIndividualId();
-        
-          this.logosEnPantalla.forEach(element => {
-            console.log(element.id)
-            this.logoService.updateLogoToSetIndividual(parseInt(element.id), id_individual)
-          });
-        });
-      })
-     
-      
-    }else{
-      let clienteEmpresa = {
-        id_empresa: null,
-        nombre: this.clienteForm.value.nombre,
-        es_empresa: true,
-        telefono: this.clienteForm.value.telefono,
-        cif: this.clienteForm.value.cif
-      }
- 
-
-
-      this.clienteSrv.addEmpresa(clienteEmpresa).then(()=>{
-        this.addDirecciónEmpresa().then(()=>{
-          let id_empresa = this.clienteSrv.getEmpresaId();
-          this.logosEnPantalla.forEach(element => {
-            console.log(element.id)
-            this.logoService.updateLogoToSetBusiness(parseInt(element.id), id_empresa)
-          });
-
-        });
-      })
-    }
-  }
-
-
-
-
-
-  clienteExistente() {
-    this.modalCtrl.create(
-      { component: CliExistentePage }).then((modalElement) => {
-        modalElement.present();
-
-      })
-  }
-
-  clienteNuevo() {
-    this.modalCtrl.create(
-      { component: CliExistentePage }).then((modalElement) => {
-        modalElement.present();
-
-      })
-  }
-
-
-  addDirecciónIndividual(){
-    return new Promise((resolve, reject)=>{
-      let id_individual = this.clienteSrv.getIndividualId();
- 
-    let direccion = {
-      id: null,
-      id_individual: id_individual,
-      id_empresa: null,
-      calle: this.direccionForm.value.calle,
-      numero: this.direccionForm.value.numero,
-      municipio: this.direccionForm.value.municipio,
-      provincia: this.direccionForm.value.provincia,
-      codigo_postal: this.direccionForm.value.codigo_postal,
-
-
-    }
-    console.log(direccion)
-
-    resolve(this.clienteSrv.addDireccion(direccion));
-  })
-  }
-
-  
-  addDirecciónEmpresa(){
-    return new Promise((resolve, reject)=>{
-    let id_empresa = this.clienteSrv.getEmpresaId();
+  getData() {
     
-    let direccion = {
-      id: null,
-      id_individual: null,
-      id_empresa: id_empresa,
-      calle: this.direccionForm.value.calle,
-      numero: this.direccionForm.value.numero,
-      municipio: this.direccionForm.value.municipio,
-      provincia: this.direccionForm.value.provincia,
-      codigo_postal: this.direccionForm.value.codigo_postal,
+    this.articuloSrv.getData().subscribe((formularioData: any) => {
+      console.log(formularioData)
+      formularioData.forEach(element => {
+        console.log(element.tallas)
+      });
+      this.aTalla = formularioData;
+      this.aTalla = new MatTableDataSource<Articulo[]>(formularioData);
+      this.aTalla.paginator = this.paginator;
+      console.log(this.aTalla)
+      formularioData.forEach(element =>{
+        this.elements++;
+      })
+    });
 
-
-    }
-
-    resolve(this.clienteSrv.addDireccion(direccion));
-  })
+   
   }
-
-
-
-
-
-
-
-
-  selectedFile(event) {
-    this.image = event.target.files[0];
-  }
-
-  onClick() {
-    if (!this.logoForm.valid) {
-      return false;
-    } else {
-      const formData = new FormData();
-      formData.append('imagen', this.image);
-      formData.append('nombre', this.logoForm.value.nombre)
-
-      this.logoService.addLogo(formData).then(()=>{
-       let id = this.logoService.getIdLogo();
-       let id_aux = id.toString()
-       let imagen = this.logoService.getIdImagen();
-       const logo = {"id": id_aux, "imagen_png": imagen}
-       
-         this.logosEnPantalla.push(logo)
-    })
-    }
-
-
-  
 }
 
-
-
-
-
-
-////////////////////////MOVEABLE LOGOS
-///////////////////////////////////////////////////
-
-
-}

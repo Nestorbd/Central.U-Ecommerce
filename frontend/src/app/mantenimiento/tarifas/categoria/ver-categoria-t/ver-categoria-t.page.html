@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mantenimiento de Categoría</ion-title>
+    <button mat-button slot="end" (click)="goToAddCategoria()">Añadir una nueva categoria</button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="mat-elevation-z8">
+    <br/>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Blusa, Pantalón..." #input>
+    </mat-form-field>
+
+
+    <table mat-table [dataSource]="tCategoria">
+  
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Categoría </th>
+        <td  *matCellDef="let form" (keyup)="changeValue($event)" (blur)="updateList(displayedColumns[0], form.id)" [contentEditable]="contentEditable" mat-cell > {{form.nombre}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="tipos">
+        <th mat-header-cell *matHeaderCellDef> Tipo/s</th>
+        <td mat-cell *matCellDef="let form">
+          <span *ngFor="let tipos of form.tipos">{{tipos.nombre}} &nbsp;&nbsp;</span>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="activo">
+        <th mat-header-cell *matHeaderCellDef> Activo </th>
+        <td mat-cell *matCellDef="let form" (keyup)="changeValue($event)" (blur)="updateList(displayedColumns[1], form.id)" [contentEditable]="contentEditable">
+          <p *ngIf="form.activo == 1">Si</p>
+          <p *ngIf="form.activo == 0">No</p>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef> Editar</th>
+        <td mat-cell *matCellDef="let form"> 
+          <button *ngIf="contentEditable == false" mat-button (click)="editar(form.id)"><mat-icon>edit</mat-icon></button> 
+          <button *ngIf="contentEditable == true" mat-button (click)="contentEditable = false"><mat-icon>check</mat-icon></button>
+        </td>
+      </ng-container>
+  
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No se encuentra ningún dato con: "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageIndex]=0 [length]="elements"
+              [pageSize]="5"
+              [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons  > 
+    </mat-paginator>
+  </div>
+</ion-content>

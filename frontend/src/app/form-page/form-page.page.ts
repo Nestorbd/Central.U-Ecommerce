@@ -15,6 +15,10 @@ import { ClienteService } from '../services/cliente.service';
 import { FormularioService } from '../services/formulario.service';
 import { LogotipoService } from '../services/logotipo.service';
 import { BocetoPage } from '../modals/boceto/boceto.page';
+import { ArticuloService } from '../services/articulo.service';
+import { Articulo } from '../model/articulo';
+import { MatCarousel, MatCarouselComponent } from 'ng-mat-carousel';
+
 
 @Component({
   selector: 'app-form-page',
@@ -34,24 +38,13 @@ export class FormPagePage implements OnInit {
   direccionForm: FormGroup;
   cliente: Cliente[];
   logotipos: Logotipo[]
-
+  articulo: Articulo[]
   clienteIndividual: Cliente_Individual[];
   clienteEmpresa: Cliente_Empresa[];
 
 
   logosEnPantalla: Array<{id: string, imagen_png: string}> = [];
 
-
-
-  /*@ViewChild('moveable', { static: false }) moveable: NgxMoveableComponent;
-  @ViewChild('selecto', { static: false }) selecto: NgxSelectoComponent;
-  cubes = [];
-  targets = [];
-  frameMap = new Map();
-  frame = {
-    translate: [0, 0],
-    rotate: 0,
-  };*/
 
   
   constructor(
@@ -61,6 +54,7 @@ export class FormPagePage implements OnInit {
     private clienteSrv: ClienteService,
     private modalCtrl: ModalController,
     private logoService: LogotipoService,
+    private articuloSrv: ArticuloService,
     private router: Router)
      {
 
@@ -93,6 +87,7 @@ export class FormPagePage implements OnInit {
 
  
     this.getForm();
+    this.getArticulo();
     let group = {};
     this.formArray.forEach(function (value) {
 
@@ -105,13 +100,7 @@ export class FormPagePage implements OnInit {
       prendas: new FormArray([])
     });
 
-   /* const cubes = [];
 
-    for (let i = 0; i < 30; ++i) {
-      cubes.push(i);
-    }
-    this.cubes = cubes;*/
-  
   }
 
 
@@ -219,7 +208,8 @@ ionViewWillEnter(){
 
   clienteExistente() {
     this.modalCtrl.create(
-      { component: CliExistentePage }).then((modalElement) => {
+      { component: CliExistentePage,
+        cssClass: 'cli-modal' }).then((modalElement) => {
         modalElement.present();
 
       })
@@ -227,7 +217,8 @@ ionViewWillEnter(){
 
   addLogo() {
     this.modalCtrl.create(
-      { component: BocetoPage }).then((modalElement) => {
+      { component: BocetoPage,
+      cssClass: 'boceto-modal' }).then((modalElement) => {
         modalElement.present();
 
       })
@@ -317,9 +308,24 @@ ionViewWillEnter(){
 
 
 
-////////////////////////MOVEABLE LOGOS
-///////////////////////////////////////////////////
+////////////////  ARTICULOS
+//////////////////////////////////////////
+
+getArticulo() {
+    
+  this.articuloSrv.getData().subscribe((formularioData: any) => {
+    console.log(formularioData)
+    this.articulo = formularioData;
+
+  });
+
+ 
+}
 
 
+getArticuloId(id: number, imagen: string){
+this.articuloSrv.setId(id);
+this.articuloSrv.setImagen(imagen);
+}
 
 }

@@ -92,7 +92,10 @@ h1, .description {
 }
 
 .selecto-area {
-    background-image: url("http://localhost/crud_api/api/imagenes/08042021122817308672.png");
+    width: 400px;
+    height: 400px;
+    max-width: 100%;
+    border: dotted #ccc 2px;
     background-repeat: no-repeat;
     background-size:contain;
     padding: 20px;
@@ -151,3 +154,12 @@ h1, .description {
     transform: translate(-100%, -100%);
     z-index: 3001;
   }
+
+  .modal-wrapper {
+    height: 95%!important;
+    width: 90%!important;
+ 
+ }
+
+
+

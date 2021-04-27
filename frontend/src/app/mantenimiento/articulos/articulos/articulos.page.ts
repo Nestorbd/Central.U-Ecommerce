@@ -19,4 +19,11 @@ export class ArticulosPage implements OnInit {
   goToCategoria(){
     this.router.navigateByUrl("ver-categoria")
   }
+
+  goToTalla(){
+    this.router.navigateByUrl("ver-talla")
+  }
+  goToColor(){
+    this.router.navigateByUrl("ver-color")
+  }
 }

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>addTalla</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="tallaForm" (ngSubmit)="onFormSubmit()">
+
+    <div class="grid">
+      <i>
+        <ion-item>
+          <ion-label position="floating">Nombre de la talla</ion-label>
+          <ion-input formControlName="nombre" type="text" required></ion-input>
+        </ion-item>
+      </i>
+ 
+      <i>
+        <ion-item>
+          <ion-label position="floating">Activo</ion-label>
+          <ion-select formControlName="activo" type="text" required>
+            <ion-select-option value="1">Si</ion-select-option>
+            <ion-select-option value="0">No</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+      </i>
+
+      
+         
+     
+    </div>
+<hr/>
+    <button mat-button id="botones" type="submit" >Añade una nueva talla</button>
+   
+
+  </form>
+</ion-content>

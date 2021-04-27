@@ -58,8 +58,14 @@ ion-title{
     width: 70px;
 }
 
-.modal-wrapper {
+.boceto-modal .modal-wrapper {
     height: 95%!important;
     width: 90%!important;
  
+ }
+
+
+ .cli-modal .modal-wrapper{
+    height: 50!important;
+    width: 50%!important;
  }

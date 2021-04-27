@@ -9,6 +9,7 @@ import { BocetoPageRoutingModule } from './boceto-routing.module';
 import { BocetoPage } from './boceto.page';
 import { NgxSelectoModule } from 'ngx-selecto';
 import { NgxMoveableModule } from "ngx-moveable";
+import { MaterialModule } from 'src/app/material.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +17,8 @@ import { NgxMoveableModule } from "ngx-moveable";
     IonicModule,
     BocetoPageRoutingModule,
     NgxSelectoModule,
-    NgxMoveableModule
+    NgxMoveableModule,
+    MaterialModule
   ],
   declarations: [BocetoPage]
 })
