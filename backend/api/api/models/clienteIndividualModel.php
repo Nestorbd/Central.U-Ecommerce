@@ -1,6 +1,7 @@
 <?php
 require_once 'connection.php';
-
+require_once 'clienteDireccionModel.php';
+require_once 'logotipoModel.php';
 
 class Individual
 {
@@ -13,59 +14,81 @@ class Individual
     private $conn;
 
     public function __construct()
-	{
-		$params = func_get_args();
-		$num_params = func_num_args();
-		$funcion_constructor ='__construct'.$num_params;
-		if (method_exists($this,$funcion_constructor)) {
-			call_user_func_array(array($this,$funcion_constructor),$params);
-		}
-	}
+    {
+        $params = func_get_args();
+        $num_params = func_num_args();
+        $funcion_constructor = '__construct' . $num_params;
+        if (method_exists($this, $funcion_constructor)) {
+            call_user_func_array(array($this, $funcion_constructor), $params);
+        }
+    }
 
-    public function __construct0(){
+    public function __construct0()
+    {
         $this->conn = Connection::conexion();
     }
 
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
-    public function setId($id){
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    public function getNombre(){
+    public function getNombre()
+    {
         return $this->nombre;
     }
-    public function setNombre($nombre){
+    public function setNombre($nombre)
+    {
         $this->nombre = $nombre;
     }
 
-    public function getApellidos(){
+    public function getApellidos()
+    {
         return $this->apellidos;
     }
-    public function setApellidos($apellidos){
+    public function setApellidos($apellidos)
+    {
         $this->apellidos = $apellidos;
     }
 
-    public function getEmail(){
+    public function getEmail()
+    {
         return $this->email;
     }
-    public function setEmail($email){
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    public function getNIF(){
+    public function getNIF()
+    {
         return $this->NIF;
     }
-    public function setNIF($NIF){
+    public function setNIF($NIF)
+    {
         $this->NIF = $NIF;
     }
 
-        public function getIndividual()
+    public function getIndividual()
     {
 
-        $sql = $this->conn->query("SELECT * FROM cliente_individual"); 
+        $sql = $this->conn->query("SELECT * FROM cliente_individual");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
+
+        if ($data) {
+            $direccion = new Direccion();
+            $logotipo = new Logotipos;
+
+            foreach ($data as $key => $val) {
+                $val->direcciones = $direccion->getDireccionByIndividualId($val->id_individual);
+                $_GET["es_empresa"]="false";
+                $val->logotipos = $logotipo->getLogotiposByCliente($val->id_individual);
+            }
+        }
 
         return $data;
     }
@@ -76,6 +99,15 @@ class Individual
         $sql = $this->conn->query("SELECT * FROM cliente_individual WHERE id_individual =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
 
+        if ($data) {
+            $direccion = new Direccion();
+            $logotipo = new Logotipos;
+
+            $data->direcciones = $direccion->getDireccionByIndividualId($data->id_individual);
+            $_GET["es_empresa"]="false";
+            $data->logotipos = $logotipo->getLogotiposByCliente($data->id_individual);
+        }
+
         return $data;
     }
 
@@ -85,10 +117,10 @@ class Individual
         $returnColum = array();
 
         foreach ($data as $key => $val) {
-            $returnColum[$key] = $key; 
+            $returnColum[$key] = $key;
             $return[$key] = $val;
         }
-        if($returnColum["es_empresa"]){
+        if ($returnColum["es_empresa"]) {
             unset($returnColum["es_empresa"]);
             unset($return["es_empresa"]);
         }
@@ -96,12 +128,12 @@ class Individual
         unset($return["id_individual"]);
         unset($returnColum["id_individual"]);
 
-        $insData= implode("','",$return);
-        $insDataColumn = implode(",",$returnColum);
+        $insData = implode("','", $return);
+        $insDataColumn = implode(",", $returnColum);
 
-        $this->conn->query("INSERT INTO cliente_individual (".$insDataColumn.") VALUES ('".$insData."')");
+        $this->conn->query("INSERT INTO cliente_individual (" . $insDataColumn . ") VALUES ('" . $insData . "')");
         $data = $this->conn->lastInsertId();
-        
+
         return $data;
     }
 
@@ -116,14 +148,14 @@ class Individual
             $return = array();
 
             foreach ($dataNew as $key => $val) {
-                $return[$key] = $key. " = '".$val."'";
+                $return[$key] = $key . " = '" . $val . "'";
             }
-            if($return["es_empresa"]){
+            if ($return["es_empresa"]) {
                 unset($return["es_empresa"]);
             }
-            $insData=implode(", ",$return);
+            $insData = implode(", ", $return);
 
-            $sql = $this->conn->query("UPDATE cliente_individual SET ".$insData. " WHERE id_individual=" . $id);
+            $sql = $this->conn->query("UPDATE cliente_individual SET " . $insData . " WHERE id_individual=" . $id);
             if ($sql) {
                 return true;
             } else {

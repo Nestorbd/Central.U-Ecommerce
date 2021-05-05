@@ -1,5 +1,7 @@
 <?php
-
+require_once 'connection.php';
+require_once 'clienteEmpresaModel.php';
+require_once 'clienteIndividualModel.php';
 
 class Direccion
 {
@@ -91,6 +93,24 @@ class Direccion
         $sql = $this->conn->query("SELECT * FROM  cliente_direccion");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
+        if($data){
+            foreach($data as $key => $val){
+                if($val->id_empresa != null){
+                    $cliente = new Empresa;
+                    $val->empresa = $cliente->getEmpresaById($val->id_empresa);
+                    unset($val->empresa->logotipos);
+                    unset($val->empresa->direcciones);
+                }else{
+                    $cliente = new Individual;
+                    $val->individual = $cliente->getIndividualById($val->id_individual);
+                    unset($val->individual->logotipos);
+                    unset($val->individual->direcciones);
+                }
+                unset($val->id_empresa);
+                unset($val->id_individual);
+            }
+        }
+
         return $data;
     }
 
@@ -99,6 +119,22 @@ class Direccion
         $id =  $this->conn->quote($id);
         $sql = $this->conn->query("SELECT * FROM cliente_direccion WHERE id=". $id);
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
+
+        if($data){
+            if($data->id_empresa != null){
+                $cliente = new Empresa;
+                    $data->empresa = $cliente->getEmpresaById($data->id_empresa);
+                    unset($data->empresa->logotipos);
+                    unset($data->empresa->direcciones);
+            }else{
+                $cliente = new Individual;
+                    $data->individual = $cliente->getIndividualById($data->id_individual);
+                    unset($data->individual->logotipos);
+                    unset($data->individual->direcciones);
+            }
+            unset($data->id_empresa);
+            unset($data->id_individual);
+        }
 
         return $data;
     }

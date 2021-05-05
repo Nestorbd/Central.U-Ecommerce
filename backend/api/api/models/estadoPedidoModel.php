@@ -1,15 +1,13 @@
 <?php
 require_once 'connection.php';
-require_once 'clienteDireccionModel.php';
-require_once 'logotipoModel.php';
 
-class Empresa
+
+class Estado
 {
     private $id;
     private $nombre;
-    private $CIF;
 
-    private $conn;
+    public $conn;
 
     public function __construct()
     {
@@ -26,6 +24,13 @@ class Empresa
         $this->conn = Connection::conexion();
     }
 
+    public function __construct1($id, $nombre, $activo)
+    {
+        $this->conn = Connection::conexion();
+        $this->id = $id;
+        $this->$nombre = $nombre;
+        $this->activo = $activo;
+    }
     public function getId()
     {
         return $this->id;
@@ -44,54 +49,25 @@ class Empresa
         $this->nombre = $nombre;
     }
 
-    public function getCIF()
-    {
-        return $this->CIF;
-    }
-    public function setCIF($CIF)
-    {
-        $this->CIF = $CIF;
-    }
-
-    public function getEmpresa()
+    public function getEstados()
     {
 
-        $sql = $this->conn->query("SELECT * FROM  cliente_empresa");
+        $sql = $this->conn->query("SELECT * FROM estado_pedido");
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
-        if ($data) {
-            $direccion = new Direccion;
-            $logotipo = new Logotipos;
-
-            foreach ($data as $key => $val) {
-                $val->direcciones = $direccion->getDireccionByEmpresaId($val->id_empresa);
-                $_GET["es_empresa"]="true";
-                $val->logotipos = $logotipo->getLogotiposByCliente($val->id_empresa);
-            }
-        }
-
         return $data;
     }
 
-    public function getEmpresaById($id)
+    public function getEstadoById($id)
     {
         $id =  $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=" . $id);
+        $sql = $this->conn->query("SELECT * FROM estado_pedido WHERE id =" . $id);
         $data = $sql->fetch(PDO::FETCH_OBJ);
-
-        if ($data) {
-            $direccion = new Direccion();
-            $logotipo = new Logotipos;
-
-            $data->direcciones = $direccion->getDireccionByEmpresaId($data->id_empresa);
-            $_GET["es_empresa"]="true";
-                $data->logotipos = $logotipo->getLogotiposByCliente($data->id_empresa);
-        }
 
         return $data;
     }
 
-    public function createEmpresa($data)
+    public function createEstado($data)
     {
         $return = array();
         $returnColum = array();
@@ -100,26 +76,23 @@ class Empresa
             $returnColum[$key] = $key;
             $return[$key] = $val;
         }
-        if ($returnColum["es_empresa"]) {
-            unset($returnColum["es_empresa"]);
-            unset($return["es_empresa"]);
-        }
-        unset($return["id_empresa"]);
-        unset($returnColum["id_empresa"]);
+
+        unset($return["id"]);
+        unset($returnColum["id"]);
 
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);
 
-        $this->conn->query("INSERT INTO cliente_empresa (" . $insDataColumn . ") VALUES ('" . $insData . "')");
+        $this->conn->query("INSERT INTO estado_pedido (" . $insDataColumn . ") VALUES ('" . $insData . "')");
         $data = $this->conn->lastInsertId();
 
         return $data;
     }
 
-    public function updateEmpresa($id, $dataNew)
+    public function updateEstado($id, $dataNew)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM estado_pedido WHERE id=" . $id);
         $dataOld = $sql_get->fetch();
         if ($dataOld == null) {
             return false;
@@ -129,12 +102,9 @@ class Empresa
             foreach ($dataNew as $key => $val) {
                 $return[$key] = $key . " = '" . $val . "'";
             }
-            if ($return["es_empresa"]) {
-                unset($return["es_empresa"]);
-            }
             $insData = implode(", ", $return);
 
-            $sql = $this->conn->query("UPDATE cliente_empresa SET " . $insData . " WHERE id_empresa=" . $id);
+            $sql = $this->conn->query("UPDATE estado_pedido SET " . $insData . " WHERE id=" . $id);
             if ($sql) {
                 return true;
             } else {
@@ -143,15 +113,15 @@ class Empresa
         }
     }
 
-    public function deleteEmpresa($id)
+    public function deleteEstado($id)
     {
         $id = $this->conn->quote($id);
-        $sql_get = $this->conn->query("SELECT * FROM cliente_empresa WHERE id_empresa=" . $id);
+        $sql_get = $this->conn->query("SELECT * FROM estado_pedido WHERE id=" . $id);
         $data = $sql_get->fetch();
         if ($data == null) {
             return false;
         } else {
-            $sql = "DELETE FROM cliente_empresa WHERE id=" . $id;
+            $sql = "DELETE FROM estado_pedido WHERE id=" . $id;
             if ($this->conn->query($sql) == TRUE) {
                 return true;
             } else {

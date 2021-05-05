@@ -32,6 +32,10 @@ class Request
                         $this->metodo = "getLogotiposByCliente";
                         $isCorrectMetod = true;
                     }
+                    if($this->controlador == "logotipo" && $this->metodo == "pedido"){
+                        $this->metodo = "getLogotiposByPedido";
+                        $isCorrectMetod = true;
+                    }
                     if ($this->controlador == "direccion" && $this->metodo == "cliente") {
                         $this->metodo = "getAllDireccionForOneCliente";
                         $isCorrectMetod = true;
@@ -72,6 +76,26 @@ class Request
                         $this->metodo = "getPreciosAnteriores";
                         $isCorrectMetod = true;
                     }
+                    if ($this->controlador == "pedido" && $this->metodo == "usuario") {
+                        $this->metodo = "getPedidosByUsuario";
+                        $isCorrectMetod = true;
+                    }
+                    if ($this->controlador == "usuario" && $this->metodo == "pedido") {
+                        $this->metodo = "getUsuariosByPedido";
+                        $isCorrectMetod = true;
+                    }
+                    if ($this->controlador == "tarifa" && $this->metodo == "pedido") {
+                        $this->metodo = "getTarifasByPedido";
+                        $isCorrectMetod = true;
+                    }
+                    if ($this->controlador == "tarifa" && $this->metodo == "categoriaYTipo") {
+                        $this->metodo = "getTarifasByCategoriaAndTipo";
+                        $isCorrectMetod = true;
+                    }
+                    if ($this->controlador == "boceto" && $this->metodo == "pedido") {
+                        $this->metodo = "getBocetosByPedido";
+                        $isCorrectMetod = true;
+                    }
                 }
             }
 
@@ -95,6 +119,22 @@ class Request
                 }
                 if ($this->controlador == "categoriaTarifa" && $this->metodo == "agregarTipos") {
                     $this->metodo = "añadirTipos";
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "pedido" && $this->metodo == "agregarLogotipos") {
+                    $this->metodo = "añadirLogotipos";
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "pedido" && $this->metodo == "agregarTarifas") {
+                    $this->metodo = "añadirTarifas";
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "pedido" && $this->metodo == "agregarUsuario") {
+                    $this->metodo = "añadirUsuario";
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "pedido" && $this->metodo == "agregarArticulos") {
+                    $this->metodo = "añadirArticulos";
                     $isCorrectMetod = true;
                 }
             }
@@ -121,6 +161,10 @@ class Request
                     $isCorrectMetod = true;
                 }
                 if ($this->controlador == "categoriaTarifa" && $this->metodo == "activarTipo") {
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "pedido" && $this->metodo == "validar") {
+                    $this->metodo = "validarPedido";
                     $isCorrectMetod = true;
                 }
             }

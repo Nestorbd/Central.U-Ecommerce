@@ -29,23 +29,25 @@ class ArticuloController
         if ($data == null) {
             $data = "No hay ningun articulo con id=" . $id;
             exit(json_encode($data));
-        }else{
-            $data_r[0]= $data;
+        } else {
+            $data_r[0] = $data;
             exit(json_encode($data_r));
         }
-
-        
     }
 
     public function insert()
     {
-        $data = json_decode(file_get_contents("php://input"));
-        $dataCreate = $this->articulo->createArticulo($data);
+        if (isset($_FILES['imagen'])) {
+            $img = uploadImage('imagen');
+            $jsonString = json_encode($_POST);
+            $decodedArray = json_decode($jsonString);
+            $dataCreate = $this->articulo->createArticulo($decodedArray, $img);
 
-        if ($dataCreate) {
-            $this->getOne($dataCreate);
-        } else {
-            exit(json_encode(array('status' => 'error')));
+            if ($dataCreate) {
+                $this->getOne($dataCreate);
+            } else {
+                exit(json_encode(array('status' => 'error')));
+            }
         }
     }
 
@@ -78,7 +80,8 @@ class ArticuloController
         }
     }
 
-    public function getArticulosByTalla($id){
+    public function getArticulosByTalla($id)
+    {
         if (is_array($id)) {
             $id = implode('', $id);
         }
@@ -91,7 +94,8 @@ class ArticuloController
         }
     }
 
-    public function getArticulosByColor($id){
+    public function getArticulosByColor($id)
+    {
         if (is_array($id)) {
             $id = implode('', $id);
         }
@@ -104,7 +108,8 @@ class ArticuloController
         }
     }
 
-    public function añadirTallas(){
+    public function añadirTallas()
+    {
         $data = json_decode(file_get_contents("php://input"));
         $añadir = $this->articulo->añadirTallas($data);
 
@@ -113,9 +118,9 @@ class ArticuloController
         } else {
             exit(json_encode(array('status' => 'error')));
         }
-
     }
-    public function añadirColores(){
+    public function añadirColores()
+    {
         $data = json_decode(file_get_contents("php://input"));
         $añadir = $this->articulo->añadirColores($data);
 
@@ -124,10 +129,10 @@ class ArticuloController
         } else {
             exit(json_encode(array('status' => 'error')));
         }
-
     }
 
-    public function desactivarTalla(){
+    public function desactivarTalla()
+    {
         $data = json_decode(file_get_contents("php://input"));
         $desactivado = $this->articulo->desactivarTalla($data);
 
@@ -138,7 +143,8 @@ class ArticuloController
         }
     }
 
-    public function desactivarColor(){
+    public function desactivarColor()
+    {
         $data = json_decode(file_get_contents("php://input"));
         $desactivado = $this->articulo->desactivarColor($data);
 
@@ -149,7 +155,8 @@ class ArticuloController
         }
     }
 
-    public function activarTalla(){
+    public function activarTalla()
+    {
         $data = json_decode(file_get_contents("php://input"));
         $desactivado = $this->articulo->activarTalla($data);
 
@@ -160,7 +167,8 @@ class ArticuloController
         }
     }
 
-    public function activarColor(){
+    public function activarColor()
+    {
         $data = json_decode(file_get_contents("php://input"));
         $desactivado = $this->articulo->activarColor($data);
 
@@ -168,6 +176,64 @@ class ArticuloController
             exit(json_encode(array('status' => 'success')));
         } else {
             exit(json_encode(array('status' => 'error')));
+        }
+    }
+
+    public function getArticulosByPedido($id)
+    {
+        if (is_array($id)) {
+            $id = implode('', $id);
+        }
+        $data_get = $this->articulo->getArticulosByPedido($id);
+
+        if (!$data_get) {
+            exit(json_encode("este pedido no tiene asignada ningun articulo"));
+        } else {
+            exit(json_encode($data_get));
+        }
+    }
+}
+
+function uploadImage($imgName)
+{
+
+    if (isset($_FILES[$imgName])) {
+        $img_tmp = $_FILES[$imgName]['tmp_name'];
+        $imgFolder = ROOT . 'imagenes' . DS . 'articulos' . DS;
+
+        if (!file_exists($imgFolder)) {
+            mkdir($imgFolder, 0777, true);
+        }
+
+
+        if (file_exists($img_tmp)) {
+            $taille_maxi = 100000;
+            $taille = filesize($_FILES[$imgName]['tmp_name']);
+            $imgsize = getimagesize($_FILES[$imgName]['tmp_name']);
+            $extensions = array('.png', '.gif', '.jpg', '.jpeg');
+            $extensions = strtolower(strrchr($_FILES[$imgName]['name'], '.'));
+
+            if ($imgsize['mime'] == 'image/jpeg') {
+                $img_src = imagecreatefromjpeg($img_tmp);
+            } elseif ($imgsize['mime'] == 'image/png') {
+                $img_src = imagecreatefrompng($img_tmp);
+            } else if ($imgsize['mime'] == 'image/gif') {
+                $img_src = imagecreatefromgif($img_tmp);
+            }
+            $new_width = 400;
+            $new_height = 380;
+            $image_finale = imagecreatetruecolor($new_width, $new_height);
+
+
+            imagecopyresampled($image_finale, $img_src, 0, 0, 0, 0, $new_width, $new_height, $imgsize[0], $imgsize[1]);
+
+
+            $t = microtime(true);
+            $micro = sprintf("%06d", ($t - floor($t)) * 1000000);
+            $now = date('dmYHis' . $micro, $t);
+            $imgName = $imgFolder . $now . '.png';
+            imagejpeg($image_finale, $imgName);
+            return $imgName;
         }
     }
 }

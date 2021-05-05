@@ -72,7 +72,7 @@ class CategoriaTarifa
 
         foreach ($data as $key => $values) {
             $tipos = $tipo->getTiposByCategoria($values->id);
-            
+
             $values->tipos = $tipos;
         }
 
@@ -166,9 +166,10 @@ class CategoriaTarifa
         }
     }
 
-    public function getCategoriasByTipo($id){
+    public function getCategoriasByTipo($id)
+    {
         $id = $this->conn->quote($id);
-        $sql = $this->conn->query("SELECT c.id, c.nombre, c_t.activo FROM tarifas_categorias c JOIN categorias_tipo c_t ON c.id = c_t.id_categoria WHERE c_t.id_tipo = ".$id);
+        $sql = $this->conn->query("SELECT c.id, c.nombre, c_t.activo FROM tarifas_categorias c JOIN categorias_tipo c_t ON c.id = c_t.id_categoria WHERE c_t.id_tipo = " . $id);
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;
@@ -176,20 +177,27 @@ class CategoriaTarifa
 
     public function añadirTipos($data)
     {
-        if(is_array($data)){
+        if (is_array($data)) {
             $id_categoria = $data['id'];
             unset($data["id"]);
             foreach ($data as $key) {
-                $this->conn->query("Insert into categorias_tipo (id_categoria, id_tipo, activo) values (" . $id_categoria . "," . $key . ", true)");
+                $exist = $this->conn->query("SELECT * FROM categorias_tipo WHERE id_categoria =" . $id_categoria . " AND id_tipo =" . $key);
+                $exist = $exist->fetch();
+                if (!$exist) {
+                    $this->conn->query("INSERT INTO categorias_tipo (id_categoria, id_tipo, activo) values (" . $id_categoria . "," . $key . ", true)");
+                }
             }
-            
-        }else{
+        } else {
             $id_categoria = $data->id;
             foreach ($data->tipos as $key) {
-                $this->conn->query("Insert into categorias_tipo (id_categoria, id_tipo, activo) values (" . $id_categoria . "," . $key . ", true)");
+                $exist = $this->conn->query("SELECT * FROM categorias_tipo WHERE id_categoria =" . $id_categoria . " AND id_tipo =" . $key);
+                $exist = $exist->fetch();
+                if (!$exist) {
+                    $this->conn->query("INSERT INTO categorias_tipo (id_categoria, id_tipo, activo) values (" . $id_categoria . "," . $key . ", true)");
+                }
             }
         }
-        
+
         return true;
     }
 
