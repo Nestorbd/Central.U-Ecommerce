@@ -9,6 +9,7 @@ import { PruebasFormPageRoutingModule } from './pruebas-form-routing.module';
 
 import { PruebasFormPage } from './pruebas-form.page';
 import { MaterialModule } from '../material.module';
+import { MatCarouselModule } from 'ng-mat-carousel';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { MaterialModule } from '../material.module';
     MaterialModule,
     NgxSelectoModule,
     NgxMoveableModule,
+    MatCarouselModule.forRoot(),
     PruebasFormPageRoutingModule
   ],
   declarations: [PruebasFormPage]

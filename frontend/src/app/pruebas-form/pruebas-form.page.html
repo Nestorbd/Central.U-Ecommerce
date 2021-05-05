@@ -6,84 +6,261 @@
 </ion-header>
 
 <ion-content>
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Blusa, Pantalón..." #input>
-  </mat-form-field>
-  <table mat-table
-  [dataSource]="aTalla" multiTemplateDataRows
-  class="mat-elevation-z8">
+ 
+  <mat-horizontal-stepper  #stepper  id="centrarForm" (selectionChange)="onStepChange($event)">
+    <mat-step  >
+      
+      <form  [formGroup]="dynamicForm"(ngSubmit)="onFormSubmit()">
+    
+        <div class="card m-3">
+          <ng-template matStepLabel>Nuevo patrón</ng-template>
+          <div >
+          <div class="card-body">
+            <p  *ngIf="contador == 0" id="p">Pulse el botón si usted desea añadir un nuevo patron al pedido</p>
+            <p  *ngIf="contador > 0 && contador <  8" id="p">Pulse el botón si usted desea añadir más de un patrón al pedido</p>
+            <p  *ngIf="contador == 8" id="p">Ha llegado al limite de prendas por pedido, si desea añadir más patrones, cree un nuevo pedido</p>
+              <div class="form-row">
+                  <div class="form-group">
+                    <br/><br/>
+                      <button *ngIf="contador < 8" id="botones" mat-button type="button" (click)="onChangeTickets($event)">Agregar nuevo patrón</button>
+                      
+                  </div>
+              </div>
+          </div>
+        </div>
 
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td  *matCellDef="let form"  mat-cell > {{form.nombre}} </td>
-  </ng-container>
-  <ng-container matColumnDef="codigo_barra">
-    <th mat-header-cell *matHeaderCellDef> Codigo de barras </th>
-    <td  *matCellDef="let form"  mat-cell > {{form.codigo_barra}} </td>
-  </ng-container>
+        
+       
+        <div *ngFor="let prendas of t.controls; let i = index" class="list-group list-group-flush">
+         
+          <mat-step>
+            <ng-template matStepLabel>Patrón nº {{i+1}}</ng-template>
+          <div class="list-group-item">
+              <div [formGroup]="prendas" class="form-row">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="6" >
+                
+                    
+                     
+                      <div >
+                        <mat-carousel
+                        timings="250ms ease-in"
+                        [autoplay]="true"
+                        interval="5000"
+                        color="accent"
+                        maxWidth="500px"
+                        proportion="100"
+                        slides="5"
+                        [loop]="true"
+                        [hideArrows]="false"
+                        [hideIndicators]="false"
+                        [useKeyboard]="true"
+                        [useMouseWheel]="false"
+                        orientation="ltr"
+                      >
+                        <mat-carousel-slide
+                          #matCarouselSlide
+                          *ngFor="let a of articulo; let i = index"
+                          [image]="a.imagen"
+                          overlayColor="#00000040"
+                          [hideOverlay]="false" 
+                        >
+                       
+                      <button mat-mini-fab color="accent" (click)="getArticuloId(a.id, a.imagen)"><mat-icon>check</mat-icon></button></mat-carousel-slide>
+                      </mat-carousel>
+                      <mat-form-field  appearance="fill">
+                        <mat-label>Talla</mat-label>
+                        <mat-select formControlName="id_talla" multiple>
+                          <mat-option *ngFor="let t of aTalla" value="{{t.id}}">{{t.nombre}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field  appearance="fill">
+                        <mat-label>Color</mat-label>
+                        <mat-select formControlName="id_color" multiple>
+                          <mat-option *ngFor="let c of aColor" value="{{c.id}}">{{c.nombre}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field >
+                        <mat-label>Cantidad</mat-label>
+                        <input type="number" matInput  class="form-control" formControlName="cantidad" setValue="John">
+                      </mat-form-field>
+                      <mat-form-field >
+                        <mat-label>Observaciones</mat-label>
+                        <input type="text" matInput  class="form-control" formControlName="observaciones" setValue="John">
+                      </mat-form-field>
+                    </div>
+                   
+                  </ion-col>
+                  <br/>
+                  </ion-row>
+                  </ion-grid>
+                  <div>
+                    <button mat-button matStepperNext *ngIf="contador > 0">Siguiente</button>
+                  </div>
+              </div>
+
+            </div>
+            <button *ngIf="contador < 8" id="botones" mat-button type="button" (click)="onChangeTarifa($event)">Agregar nueva tarifa</button>
+            <div class="list-group list-group-flush">
+             {{i}}
+            </div>
+            
+            <button mat-button (click)="tTrabajo();">Añadir Tipo de trabajo</button>
+
+            <div class="list-group-item"  >
+             
+            </div>
+            <div [formGroup]="pedidoForm" class="form-row">
+
+              <mat-form-field >
+                <mat-label>Firmado</mat-label>
+                <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="esta_firmado" required>
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Parte de trabajo</mat-label>
+                <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="parte_trabajo" required>
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label  >Fecha de terminacion</mat-label>
+                <input type="text" matInput placeholder="12345682F" class="form-control" formControlName="fecha_terminacion_trabajo" required>
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label >validado</mat-label>
+                <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="validado" required>
+              </mat-form-field>
+             
+            </div>
+         
 
 
-  <ng-container matColumnDef="stock">
-    <th mat-header-cell *matHeaderCellDef> Stock </th>
-    <td  *matCellDef="let form"  mat-cell > {{form.stock}} </td>
-  </ng-container>
+
+                <div class="list-group-item">
+
+                  <section class="example-section">
+                    <label class="example-margin">Tipo de cliente:</label>
+                    <mat-radio-group >
+                      <mat-radio-button class="example-margin" (change)="isIndividual = true" value="isIndividual = true" >Individual</mat-radio-button>
+                      <mat-radio-button class="example-margin"  (change)="isIndividual = false" value="isIndividual = false">Empresa</mat-radio-button>
+                      <mat-radio-button class="example-margin"  (change)="clienteExistente()" value="isIndividual = false">Cliente existente</mat-radio-button>
+                    </mat-radio-group>
+                  </section>
+
+                  <div [formGroup]="clienteForm" class="form-row">
+
+                    <mat-form-field >
+                      <mat-label>Nombre</mat-label>
+                      <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="nombre" required>
+                    </mat-form-field>
+                    <mat-form-field >
+                      <mat-label>Telefono</mat-label>
+                      <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="telefono" required>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="!isIndividual">
+                      <mat-label  >CIF</mat-label>
+                      <input type="text" matInput placeholder="12345682F" class="form-control" formControlName="cif" required>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="isIndividual">
+                      <mat-label >Apellidos</mat-label>
+                      <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="apellidos" required>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="isIndividual">
+                      <mat-label >NIF</mat-label>
+                      <input type="text" matInput placeholder="54845769Y" class="form-control" formControlName="nif" required>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="isIndividual" >
+                      <mat-label >Email</mat-label>
+                      <input type="text" matInput placeholder="example@example.com" class="form-control" formControlName="email" required>
+                    </mat-form-field>
+                  </div>
+                </div>
 
 
-  <ng-container matColumnDef="activo">
-    <th mat-header-cell *matHeaderCellDef> Activo </th>
-    <td mat-cell *matCellDef="let form" >
-      <p *ngIf="form.activo == 1">Si</p>
-      <p *ngIf="form.activo == 0">No</p>
-    </td>
-  </ng-container>
+                <div class="list-group-item">
+                  <div [formGroup]="direccionForm" class="form-row">
+                    <mat-form-field >
+                      <mat-label>Calle</mat-label>
+                      <input type="text" matInput placeholder="Calle Perico" class="form-control" formControlName="calle" required>
+                    </mat-form-field>
+                    <mat-form-field >
+                      <mat-label>Nº</mat-label>
+                      <input type="text" matInput placeholder="35" class="form-control" formControlName="numero" required>
+                    </mat-form-field>
+                    <mat-form-field >
+                      <mat-label>Municipio</mat-label>
+                      <input type="text" matInput placeholder="Telde" class="form-control" formControlName="municipio" required>
+                    </mat-form-field>
+                    <mat-form-field >
+                      <mat-label>Provincia</mat-label>
+                      <input type="text" matInput placeholder="Las Palmas" class="form-control" formControlName="provincia" required>
+                    </mat-form-field>
+                    <mat-form-field >
+                      <mat-label>Codigo Postal</mat-label>
+                      <input type="text" matInput placeholder="35001" class="form-control" formControlName="codigo_postal" required>
+                    </mat-form-field>
+                   
+                  </div>
+                </div>
+
+
+                <form [formGroup]="logoForm" (ngSubmit)="onClick()" enctype="multipart/form-data">
+                  <ion-item>
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-input formControlName="nombre" type="text" required></ion-input>
+                  </ion-item>
+                  <ion-item>
+                 <button mat-button> <input type="file" formControlName="imagen" (change)="selectedFile($event)"></button>
+                  </ion-item>
+                 
+                  <ion-row>
+                    <ion-col>
+                      <ion-button type="submit" color="primary" shape="full" expand="block">Añadir logo</ion-button>
+                    </ion-col>
+                  </ion-row>
+                </form>
+
+                <div>
+                  <button mat-button (click)="addLogo()"> Añadir logos</button>
+                </div>
+
+
+                <div class="example-boundary">
+                  <div >
+                    <img class="example-box" cdkDragBoundary=".example-boundary" cdkDrag *ngFor="let l of logosEnPantalla" src="{{l.imagen_png}}"/>
+                  </div>
+                </div>
+
+
+                <!-- <div >
+                  <img *ngFor="let l of logosEnPantalla" src="{{l.imagen_png}}"/>
+                </div> -->
+         
+
+    
+      
+       
+    <br/> <br/>
+        </mat-step>
+      </div>
+    </div>
+ 
+    <mat-step *ngIf="contador > 0">
+      <ng-template matStepLabel>Finalizar pedido</ng-template>
+
+      <div>
+        <button mat-button (click)="onSubmit()"shape="full" expand="block">Finalizar</button>
+      </div>
+    </mat-step>
+  
+        
+      </form>
+     
+    </mat-step>
+   
+  </mat-horizontal-stepper>
+
+
+
 
   
-
-
- 
-
-  <ng-container matColumnDef="tallas">
-    <th mat-header-cell *matHeaderCellDef> Tallas</th>
-    <td mat-cell *matCellDef="let form">
-      <span *ngFor="let talla of form.tallas">{{talla.nombre}} &nbsp;&nbsp;</span>
-    </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="colores">
-    <th mat-header-cell *matHeaderCellDef> Colores</th>
-    <td mat-cell *matCellDef="let form">
-      <span *ngFor="let color of form.colores">{{color.nombre}} &nbsp;&nbsp;</span>
-    </td>
-  </ng-container>
-
-
-<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-<ng-container matColumnDef="expandedDetail">
-<td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
- <div class="example-element-detail"
-      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-   <div class="example-element-diagram">
-    <img src="{{element.imagen}}"/>
-   </div>
-   
- </div>
-</td>
-</ng-container>
-
-
-<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-<tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
- class="example-element-row"
- [class.example-expanded-row]="expandedElement === element"
- (click)="expandedElement = expandedElement === element ? null : element">
-</tr>
-<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-
-</table>
-<mat-paginator [pageIndex]=0 [length]="elements"
-[pageSize]="5"
-[pageSizeOptions]="[5, 10, 25]" showFirstLastButtons  > 
-</mat-paginator>
 </ion-content>
