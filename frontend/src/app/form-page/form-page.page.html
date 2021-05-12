@@ -6,210 +6,267 @@
 </ion-header>
 
 <ion-content>
- 
-  <mat-horizontal-stepper  #stepper  id="centrarForm">
-    <mat-step >
-      
-      <form  [formGroup]="dynamicForm"(ngSubmit)="onFormSubmit()">
-    
-        <div class="card m-3">
-          <ng-template matStepLabel>Nuevo patrón</ng-template>
-          <div >
-          <div class="card-body">
-            <p  *ngIf="contador == 0" id="p">Pulse el botón si usted desea añadir un nuevo patron al pedido</p>
-            <p  *ngIf="contador > 0 && contador <  8" id="p">Pulse el botón si usted desea añadir más de un patrón al pedido</p>
-            <p  *ngIf="contador == 8" id="p">Ha llegado al limite de prendas por pedido, si desea añadir más patrones, cree un nuevo pedido</p>
-              <div class="form-row">
-                  <div class="form-group">
-                    <br/><br/>
-                      <button *ngIf="contador < 8" id="botones" mat-button type="button" (click)="onChangeTickets($event)">Agregar nuevo patrón</button>
-                  </div>
-              </div>
-          </div>
-        </div>
-
-        
-       
-        <div *ngFor="let prendas of t.controls; let i = index" class="list-group list-group-flush">
-         
-          <mat-step>
-            <ng-template matStepLabel>Patrón nº {{i+1}}</ng-template>
-          <div class="list-group-item">
-              <div [formGroup]="prendas" class="form-row">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="6" *ngFor="let form of formArray">
-                    <div *ngIf="form.titulo === form.titulo">
-                      <br/>
-                      <br/>
-                      <p>{{form.apartado}}</p>
-                      <mat-divider style="background-color: black; width: 60%;"></mat-divider>
-                    </div>
-                    <mat-form-field >
-                      <mat-label>{{form.label}}</mat-label>
-                      <input type="{{form.type}}" (change)="porcentaje= porcentaje + 5" matInput placeholder="{{form.placeholder}}"   class="form-control" formControlName="{{form.formControlName}}" required>
-                    </mat-form-field>
-                  </ion-col>
-                  <br/>
-                  </ion-row>
-                  </ion-grid>
-                  <div>
-                    <button mat-button matStepperNext *ngIf="contador > 0">Siguiente</button>
-                  </div>
-              </div>
-
-                <div class="list-group-item">
-
-                  <section class="example-section">
-                    <label class="example-margin">Tipo de cliente:</label>
-                    <mat-radio-group >
-                      <mat-radio-button class="example-margin" (change)="isIndividual = true" value="isIndividual = true" >Individual</mat-radio-button>
-                      <mat-radio-button class="example-margin"  (change)="isIndividual = false" value="isIndividual = false">Empresa</mat-radio-button>
-                      <mat-radio-button class="example-margin"  (change)="clienteExistente()" value="isIndividual = false">Cliente existente</mat-radio-button>
-                    </mat-radio-group>
-                  </section>
-
-                  <div [formGroup]="clienteForm" class="form-row">
-
-                    <mat-form-field >
-                      <mat-label>Nombre</mat-label>
-                      <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="nombre" required>
-                    </mat-form-field>
-                    <mat-form-field >
-                      <mat-label>Telefono</mat-label>
-                      <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="telefono" required>
-                    </mat-form-field>
-                    <mat-form-field *ngIf="!isIndividual">
-                      <mat-label  >CIF</mat-label>
-                      <input type="text" matInput placeholder="12345682F" class="form-control" formControlName="cif" required>
-                    </mat-form-field>
-                    <mat-form-field *ngIf="isIndividual">
-                      <mat-label >Apellidos</mat-label>
-                      <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="apellidos" required>
-                    </mat-form-field>
-                    <mat-form-field *ngIf="isIndividual">
-                      <mat-label >NIF</mat-label>
-                      <input type="text" matInput placeholder="54845769Y" class="form-control" formControlName="nif" required>
-                    </mat-form-field>
-                    <mat-form-field *ngIf="isIndividual" >
-                      <mat-label >Email</mat-label>
-                      <input type="text" matInput placeholder="example@example.com" class="form-control" formControlName="email" required>
-                    </mat-form-field>
-                  </div>
-                </div>
 
 
-                <div class="list-group-item">
-                  <div [formGroup]="direccionForm" class="form-row">
-                    <mat-form-field >
-                      <mat-label>Calle</mat-label>
-                      <input type="text" matInput placeholder="Calle Perico" class="form-control" formControlName="calle" required>
-                    </mat-form-field>
-                    <mat-form-field >
-                      <mat-label>Nº</mat-label>
-                      <input type="text" matInput placeholder="35" class="form-control" formControlName="numero" required>
-                    </mat-form-field>
-                    <mat-form-field >
-                      <mat-label>Municipio</mat-label>
-                      <input type="text" matInput placeholder="Telde" class="form-control" formControlName="municipio" required>
-                    </mat-form-field>
-                    <mat-form-field >
-                      <mat-label>Provincia</mat-label>
-                      <input type="text" matInput placeholder="Las Palmas" class="form-control" formControlName="provincia" required>
-                    </mat-form-field>
-                    <mat-form-field >
-                      <mat-label>Codigo Postal</mat-label>
-                      <input type="text" matInput placeholder="35001" class="form-control" formControlName="codigo_postal" required>
-                    </mat-form-field>
-                   
-                  </div>
-                </div>
 
+  <form [formGroup]="dynamicForm" (ngSubmit)="onFormSubmit()">
 
-                <form [formGroup]="logoForm" (ngSubmit)="onClick()" enctype="multipart/form-data">
-                  <ion-item>
-                    <ion-label position="floating">Name</ion-label>
-                    <ion-input formControlName="nombre" type="text" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                 <button mat-button> <input type="file" formControlName="imagen" (change)="selectedFile($event)"></button>
-                  </ion-item>
-                 
-                  <ion-row>
-                    <ion-col>
-                      <ion-button type="submit" color="primary" shape="full" expand="block">Añadir logo</ion-button>
-                    </ion-col>
-                  </ion-row>
-                </form>
-
-                <div>
-                  <button mat-button (click)="addLogo()"> Añadir logos</button>
-                </div>
-
-
-                <div class="example-boundary">
-                  <div >
-                    <img class="example-box" cdkDragBoundary=".example-boundary" cdkDrag *ngFor="let l of logosEnPantalla" src="{{l.imagen_png}}"/>
-                  </div>
-                </div>
-
-
-                <!-- <div >
-                  <img *ngFor="let l of logosEnPantalla" src="{{l.imagen_png}}"/>
-                </div> -->
-          </div>
-
-    
-      
-        <div>
-        <mat-carousel
-        timings="250ms ease-in"
-        [autoplay]="true"
-        interval="5000"
-        color="accent"
-        maxWidth="500px"
-        proportion="100"
-        slides="5"
-        [loop]="true"
-        [hideArrows]="false"
-        [hideIndicators]="false"
-        [useKeyboard]="true"
-        [useMouseWheel]="true"
-        orientation="ltr"
-      >
-        <mat-carousel-slide
-          #matCarouselSlide
-          *ngFor="let a of articulo; let i = index"
-          [image]="a.imagen"
-          overlayColor="#00000040"
-          [hideOverlay]="false" 
-        >
-      <button mat-mini-fab color="accent" (click)="getArticuloId(a.id, a.imagen)"><mat-icon>check</mat-icon></button></mat-carousel-slide>
-      </mat-carousel>
-     
-    </div>
-    <br/> <br/>
-        </mat-step>
-      </div>
-    </div>
- 
-    <mat-step *ngIf="contador > 0">
-      <ng-template matStepLabel>Finalizar pedido</ng-template>
+    <div class="card m-3">
 
       <div>
-        <button mat-button (click)="onSubmit()"shape="full" expand="block">Finalizar</button>
+        <div class="card-body">
+          <p *ngIf="contador == 0" id="p">Pulse el botón si usted desea añadir un nuevo patron al pedido</p>
+          <p *ngIf="contador > 0 && contador <  8" id="p">Pulse el botón si usted desea añadir más de un patrón al
+            pedido</p>
+          <p *ngIf="contador == 8" id="p">Ha llegado al limite de prendas por pedido, si desea añadir más patrones, cree
+            un nuevo pedido</p>
+          <div class="form-row">
+            <div class="form-group">
+              <br /><br />
+             
+
+            </div>
+          </div>
+        </div>
       </div>
-    </mat-step>
-  
-        
+
+      <div class="form-row">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+
+
+
+              <div>
+                <mat-carousel timings="250ms ease-in" [autoplay]="true" interval="5000" color="accent" maxWidth="500px"
+                  proportion="100" slides="5" [loop]="true" [hideArrows]="false" [hideIndicators]="false"
+                  [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
+                  <mat-carousel-slide #matCarouselSlide *ngFor="let a of articulo; let i = index" [image]="a.imagen"
+                    overlayColor="#00000040" [hideOverlay]="false">
+
+                    <button mat-mini-fab color="accent" (click)="getArticuloId(a.id, a.imagen)">
+                      <mat-icon>check</mat-icon>
+                    </button>
+                  </mat-carousel-slide>
+                </mat-carousel>
+
+              </div>
+              <br /><br /><br /><br />
+              <div *ngFor="let articulo of t.controls; let i = index" class="list-group list-group-flush">
+
+                <div [formGroup]="articulo" class="form-row">
+                  <mat-form-field  appearance="fill">
+                    <mat-label>Talla</mat-label>
+                    <mat-select formControlName="id_talla" >
+                      <mat-option *ngFor="let t of aTalla" value="{{t.id}}">{{t.nombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field  appearance="fill">
+                    <mat-label>Color</mat-label>
+                    <mat-select formControlName="id_color">
+                      <mat-option *ngFor="let c of aColor" value="{{c.id}}">{{c.nombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field >
+                    <mat-label>Cantidad</mat-label>
+                    <input type="number" matInput  class="form-control" formControlName="cantidad" setValue="John">
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </ion-col>
+            <br />
+          </ion-row>
+        </ion-grid>
+        <button *ngIf="contador < 8" id="botones" mat-button type="button"
+        (click)="onChangeTickets($event)">Agregar nuevo patrón</button>
+      </div>
+
+
+      <div *ngFor="let tarifas of p.controls; let i = index" class="list-group list-group-flush">
+
+        <div [formGroup]="tarifas" class="form-row">
+          <mat-form-field  appearance="fill">
+            <mat-label>Talla</mat-label>
+            <mat-select formControlName="id_categoria" >
+              <mat-option *ngFor="let t of tCategoria" value="{{t.id}}">{{t.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field  appearance="fill">
+            <mat-label>Color</mat-label>
+            <mat-select formControlName="id_tipo">
+              <mat-option *ngFor="let c of tTipo" value="{{c.id}}">{{c.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field >
+            <mat-label>Cantidad</mat-label>
+            <input type="number" matInput  class="form-control" formControlName="id_tarifa" setValue="John">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <button *ngIf="contador < 8" id="botones" mat-button type="button" (click)="onChangeTarifa($event)">Agregar nueva
+        tarifa</button>
+      <div class="list-group list-group-flush">
+        {{i}}
+      </div>
+
+      <button mat-button (click)="tTrabajo();">Añadir Tipo de trabajo</button>
+
+      <div class="list-group-item">
+
+      </div>
+      <div [formGroup]="pedidoForm" class="form-row">
+
+        <mat-form-field>
+          <mat-label>Firmado</mat-label>
+          <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="esta_firmado"
+            required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Parte de trabajo</mat-label>
+          <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="parte_trabajo"
+            required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fecha de terminacion</mat-label>
+          <input type="text" matInput placeholder="12345682F" class="form-control"
+            formControlName="fecha_terminacion_trabajo" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>validado</mat-label>
+          <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="validado"
+            required>
+        </mat-form-field>
+
+      </div>
+
+
+
+
+      <div class="list-group-item">
+
+        <section class="example-section">
+          <label class="example-margin">Tipo de cliente:</label>
+          <mat-radio-group>
+            <mat-radio-button class="example-margin" (change)="isIndividual = true" value="isIndividual = true">
+              Individual</mat-radio-button>
+            <mat-radio-button class="example-margin" (change)="isIndividual = false" value="isIndividual = false">
+              Empresa</mat-radio-button>
+            <mat-radio-button class="example-margin" (change)="clienteExistente()" value="isIndividual = false">Cliente
+              existente</mat-radio-button>
+          </mat-radio-group>
+        </section>
+
+        <div [formGroup]="clienteForm" class="form-row">
+
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="nombre" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Telefono</mat-label>
+            <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="telefono"
+              required>
+          </mat-form-field>
+          <mat-form-field *ngIf="!isIndividual">
+            <mat-label>CIF</mat-label>
+            <input type="text" matInput placeholder="12345682F" class="form-control" formControlName="cif" required>
+          </mat-form-field>
+          <mat-form-field *ngIf="isIndividual">
+            <mat-label>Apellidos</mat-label>
+            <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="apellidos"
+              required>
+          </mat-form-field>
+          <mat-form-field *ngIf="isIndividual">
+            <mat-label>NIF</mat-label>
+            <input type="text" matInput placeholder="54845769Y" class="form-control" formControlName="nif" required>
+          </mat-form-field>
+          <mat-form-field *ngIf="isIndividual">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput placeholder="example@example.com" class="form-control" formControlName="email"
+              required>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="list-group-item">
+        <div [formGroup]="direccionForm" class="form-row">
+          <mat-form-field>
+            <mat-label>Calle</mat-label>
+            <input type="text" matInput placeholder="Calle Perico" class="form-control" formControlName="calle"
+              required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nº</mat-label>
+            <input type="text" matInput placeholder="35" class="form-control" formControlName="numero" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Municipio</mat-label>
+            <input type="text" matInput placeholder="Telde" class="form-control" formControlName="municipio" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Provincia</mat-label>
+            <input type="text" matInput placeholder="Las Palmas" class="form-control" formControlName="provincia"
+              required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Codigo Postal</mat-label>
+            <input type="text" matInput placeholder="35001" class="form-control" formControlName="codigo_postal"
+              required>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+
+      <form [formGroup]="logoForm" (ngSubmit)="onClick()" enctype="multipart/form-data">
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="nombre" type="text" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <button mat-button> <input type="file" formControlName="imagen" (change)="selectedFile($event)"></button>
+        </ion-item>
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="primary" shape="full" expand="block">Añadir logo</ion-button>
+          </ion-col>
+        </ion-row>
       </form>
-     
-    </mat-step>
-   
-  </mat-horizontal-stepper>
+
+      <div>
+        <button mat-button (click)="addLogo()"> Añadir logos</button>
+      </div>
+
+
+      <div class="example-boundary">
+        <div>
+          <img class="example-box" cdkDragBoundary=".example-boundary" cdkDrag *ngFor="let l of logosEnPantalla"
+            src="{{l.imagen_png}}" />
+        </div>
+      </div>
+
+
+
+    </div>
 
 
 
 
-  
+    <div>
+      <button mat-button (click)="onSubmit()" shape="full" expand="block">Finalizar</button>
+    </div>
+
+
+  </form>
+
+
+
+
+
+
+
 </ion-content>

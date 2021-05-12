@@ -58,6 +58,7 @@ export class AddTarifasPage implements OnInit {
         id_tipo: this.tarifaForm.value.id_tipo
 
       }
+      console.log(categoria)
      this.tarifaSrv.addCategoria(categoria)
       this.router.navigateByUrl("ver-tipo")
     }
