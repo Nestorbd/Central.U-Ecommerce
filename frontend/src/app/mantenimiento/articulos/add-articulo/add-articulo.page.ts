@@ -92,12 +92,14 @@ export class AddArticuloPage implements OnInit {
       this.formData.append('id_categoria', this.articuloForm.value.categoria);
       let i = 0
       this.articuloForm.value.color.forEach(element => {
-        
+      
         this.formData.append('colores['+ i + ']', element);
         i++
       });
       let k = 0
       this.articuloForm.value.talla.forEach(element => {
+        console.log(element)
+        console.log(k)
         this.formData.append('tallas['+ k + ']', element);
         k++
       });
