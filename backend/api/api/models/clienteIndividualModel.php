@@ -5,72 +5,11 @@ require_once 'logotipoModel.php';
 
 class Individual
 {
-    private $id;
-    private $nombre;
-    private $apellidos;
-    private $email;
-    private $NIF;
-
     private $conn;
 
     public function __construct()
     {
-        $params = func_get_args();
-        $num_params = func_num_args();
-        $funcion_constructor = '__construct' . $num_params;
-        if (method_exists($this, $funcion_constructor)) {
-            call_user_func_array(array($this, $funcion_constructor), $params);
-        }
-    }
-
-    public function __construct0()
-    {
         $this->conn = Connection::conexion();
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-
-    public function getApellidos()
-    {
-        return $this->apellidos;
-    }
-    public function setApellidos($apellidos)
-    {
-        $this->apellidos = $apellidos;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function getNIF()
-    {
-        return $this->NIF;
-    }
-    public function setNIF($NIF)
-    {
-        $this->NIF = $NIF;
     }
 
     public function getIndividual()
@@ -117,16 +56,15 @@ class Individual
         $returnColum = array();
 
         foreach ($data as $key => $val) {
-            $returnColum[$key] = $key;
-            $return[$key] = $val;
+            if(!empty($val)){
+                $returnColum[$key] = $key;
+                $return[$key] = $val;
+            }
         }
         if ($returnColum["es_empresa"]) {
             unset($returnColum["es_empresa"]);
             unset($return["es_empresa"]);
         }
-
-        unset($return["id_individual"]);
-        unset($returnColum["id_individual"]);
 
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);

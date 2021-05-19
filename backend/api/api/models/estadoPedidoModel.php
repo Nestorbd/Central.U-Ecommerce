@@ -4,49 +4,11 @@ require_once 'connection.php';
 
 class Estado
 {
-    private $id;
-    private $nombre;
-
     public $conn;
 
     public function __construct()
     {
-        $params = func_get_args();
-        $num_params = func_num_args();
-        $funcion_constructor = '__construct' . $num_params;
-        if (method_exists($this, $funcion_constructor)) {
-            call_user_func_array(array($this, $funcion_constructor), $params);
-        }
-    }
-
-    public function __construct0()
-    {
         $this->conn = Connection::conexion();
-    }
-
-    public function __construct1($id, $nombre, $activo)
-    {
-        $this->conn = Connection::conexion();
-        $this->id = $id;
-        $this->$nombre = $nombre;
-        $this->activo = $activo;
-    }
-    public function getId()
-    {
-        return $this->id;
-    }
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
     }
 
     public function getEstados()
@@ -73,13 +35,11 @@ class Estado
         $returnColum = array();
 
         foreach ($data as $key => $val) {
-            $returnColum[$key] = $key;
-            $return[$key] = $val;
+            if(!empty($val)){
+                $returnColum[$key] = $key;
+                $return[$key] = $val;
+            }
         }
-
-        unset($return["id"]);
-        unset($returnColum["id"]);
-
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);
 

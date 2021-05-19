@@ -7,6 +7,12 @@
             header('Access-Control-Max-Age: 86400');    // cache for 1 day
        
         }
+
+        if(isset($_SERVER['HTTP_POSTMAN_TOKEN'])){
+            header('Content-Type: application/json');
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Headers:Access-Control-Allow-Headers, Content-Type, Acess-Control-Allow-Methods, Authorization, X-Requested-With');
+        }
         
         // Access-Control headers are received during OPTIONS requests
         if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {

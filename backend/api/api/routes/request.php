@@ -92,8 +92,8 @@ class Request
                         $this->metodo = "getTarifasByCategoriaAndTipo";
                         $isCorrectMetod = true;
                     }
-                    if ($this->controlador == "boceto" && $this->metodo == "pedido") {
-                        $this->metodo = "getBocetosByPedido";
+                    if ($this->controlador == "patron" && $this->metodo == "pedido") {
+                        $this->metodo = "getPatronesByPedido";
                         $isCorrectMetod = true;
                     }
                 }
@@ -125,15 +125,15 @@ class Request
                     $this->metodo = "añadirLogotipos";
                     $isCorrectMetod = true;
                 }
-                if ($this->controlador == "pedido" && $this->metodo == "agregarTarifas") {
-                    $this->metodo = "añadirTarifas";
-                    $isCorrectMetod = true;
-                }
                 if ($this->controlador == "pedido" && $this->metodo == "agregarUsuario") {
                     $this->metodo = "añadirUsuario";
                     $isCorrectMetod = true;
                 }
-                if ($this->controlador == "pedido" && $this->metodo == "agregarArticulos") {
+                if ($this->controlador == "patron" && $this->metodo == "agregarTarifas") {
+                    $this->metodo = "añadirTarifas";
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "patron" && $this->metodo == "agregarArticulos") {
                     $this->metodo = "añadirArticulos";
                     $isCorrectMetod = true;
                 }
@@ -172,6 +172,14 @@ class Request
             if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
                 if ($this->metodo == "eliminar") {
                     $this->metodo = "delete";
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "patron" && $this->metodo == "removerTarifas") {
+                    $this->metodo = "quitarTarifas";
+                    $isCorrectMetod = true;
+                }
+                if ($this->controlador == "patron" && $this->metodo == "removerArticulos") {
+                    $this->metodo = "quitarArticulos";
                     $isCorrectMetod = true;
                 }
             }

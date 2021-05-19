@@ -6,78 +6,10 @@ require_once 'clienteIndividualModel.php';
 
 class Logotipos 
 {
-    private $id;
-    private $nombre;
-    private $imagen_png;
-    private $imagen_svg;
-    private $id_individual;
-    private $id_empresa;
-
     public $conn;
 
-    public function __construct()
-	{
-		$params = func_get_args();
-		$num_params = func_num_args();
-		$funcion_constructor ='__construct'.$num_params;
-		if (method_exists($this,$funcion_constructor)) {
-			call_user_func_array(array($this,$funcion_constructor),$params);
-		}
-	}
-
-    public function __construct0(){
+    public function __construct(){
         $this->conn = Connection::conexion();
-    }
-
-    public function __construct1($id, $nombre, $imagen_png, $imagen_svg, $id_empresa,$id_individual){
-        $this->conn = Connection::conexion();
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->imagen_png = $imagen_png;
-        $this->imagen_svg = $imagen_svg;
-        $this->id_individual = $id_individual;
-        $this->id_empresa = $id_empresa;
-    }
-    public function getId(){
-        return $this->id;
-    }
-    public function setId($id){
-        $this->id = $id;
-    }
-
-    public function getNombre(){
-        return $this->nombre;
-    }
-    public function setNombre($nombre){
-        $this->nombre = $nombre;
-    }
-
-    public function getImagenPNG(){
-        return $this->imagen_png;
-    }
-    public function setImagenPNG($imagen_png){
-        $this->imagen_png = $imagen_png;
-    }
-
-    public function getImagenSVG(){
-        return $this->imagen_svg;
-    }
-    public function setImagenSVG($imagen_svg){
-        $this->imagen_svg = $imagen_svg;
-    }
-
-    public function getIdEmpresa(){
-        return $this->id_empresa;
-    }
-    public function setIdEmpresa($id_empresa){
-        $this->id_empresa = $id_empresa;
-    }
-
-    public function getIdIndividual(){
-        return $this->id_individual;
-    }
-    public function setIdIndividual($id_individual){
-        $this->id_individual = $id_individual;
     }
 
     public function getLogotipos()
@@ -138,8 +70,10 @@ class Logotipos
         $returnColum = array();
 
         foreach ($data as $key => $val) {
-            $returnColum[$key] = $key;
-            $return[$key] = $val;
+            if(!empty($val)){
+                $returnColum[$key] = $key;
+                $return[$key] = $val;
+            }
         }
         if ($img){
             $img = str_replace("C:".DS."xampp".DS."htdocs".DS,"http://localhost/", $img);
@@ -147,8 +81,6 @@ class Logotipos
             $return["imagen_png"] = $img;
             $returnColum["imagen_png"] = "imagen_png";
         }
-        unset($return["id"]);
-        unset($returnColum["id"]);
         
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);

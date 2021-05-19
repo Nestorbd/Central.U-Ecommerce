@@ -7,92 +7,11 @@ require_once 'categoriaArticuloModel.php';
 
 class Articulo
 {
-    private $id;
-    private $nombre;
-    private $codigo_barra;
-    private $stock;
-    private $activo;
-    private $id_categoria;
-
     public $conn;
 
     public function __construct()
     {
-        $params = func_get_args();
-        $num_params = func_num_args();
-        $funcion_constructor = '__construct' . $num_params;
-        if (method_exists($this, $funcion_constructor)) {
-            call_user_func_array(array($this, $funcion_constructor), $params);
-        }
-    }
-
-    public function __construct0()
-    {
         $this->conn = Connection::conexion();
-    }
-
-    public function __construct1($id, $nombre, $codigo_barra, $stock, $activo, $id_categoria)
-    {
-        $this->conn = Connection::conexion();
-        $this->id = $id;
-        $this->$nombre = $nombre;
-        $this->codigo_barra = $codigo_barra;
-        $this->stock = $stock;
-        $this->activo = $activo;
-        $this->id_categoria = $id_categoria;
-    }
-    public function getId()
-    {
-        return $this->id;
-    }
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-
-    public function getCodigoBarra()
-    {
-        return $this->codigo_barra;
-    }
-    public function setCodigoBarra($codigo_barra)
-    {
-        $this->codigo_barra = $codigo_barra;
-    }
-
-    public function getStock()
-    {
-        return $this->stock;
-    }
-    public function setStock($stock)
-    {
-        $this->stock = $stock;
-    }
-
-    public function getActivo()
-    {
-        return $this->activo;
-    }
-    public function setActivo($activo)
-    {
-        $this->activo = $activo;
-    }
-
-    public function getIdCategoria()
-    {
-        return $this->id_categoria;
-    }
-    public function setIdCategoria($id_categoria)
-    {
-        $this->id_categoria = $id_categoria;
     }
 
     public function getArticulos()
@@ -111,7 +30,7 @@ class Articulo
                 $values->categoria = $categoria->getCategoriaById($values->id_categoria);
                 $values->tallas = $talla->getTallasByArticulo($values->id);
                 $values->colores = $color->getColoresByArticulo($values->id);
-                
+
 
                 unset($values->id_categoria);
             }
@@ -148,8 +67,10 @@ class Articulo
         $returnColum = array();
 
         foreach ($data as $key => $val) {
-            $returnColum[$key] = $key;
-            $return[$key] = $val;
+            if (!empty($val)) {
+                $returnColum[$key] = $key;
+                $return[$key] = $val;
+            }
         }
 
         if ($img) {
@@ -169,9 +90,6 @@ class Articulo
         unset($returnColum["tallas"]);
         unset($return["colores"]);
         unset($returnColum["colores"]);
-
-        unset($return["id"]);
-        unset($returnColum["id"]);
 
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);
@@ -299,7 +217,7 @@ class Articulo
             $id_articulo = $data['id'];
             unset($data["id"]);
             foreach ($data as $key) {
-                $exist = $this->conn->query("SELECT * FROM talla_articulo WHERE id_articulo =" . $id_articulo . " AND id_color =" . $key);
+                $exist = $this->conn->query("SELECT * FROM color_articulo WHERE id_articulo =" . $id_articulo . " AND id_color =" . $key);
                 $exist = $exist->fetch();
                 if (!$exist) {
                     $this->conn->query("INSERT INTO color_articulo (id_articulo, id_color, activo) values (" . $id_articulo . "," . $key . ", true)");
@@ -308,7 +226,7 @@ class Articulo
         } else {
             $id_articulo = $data->id;
             foreach ($data->colores as $key) {
-                $exist = $this->conn->query("SELECT * FROM talla_articulo WHERE id_articulo =" . $id_articulo . " AND id_color =" . $key);
+                $exist = $this->conn->query("SELECT * FROM color_articulo WHERE id_articulo =" . $id_articulo . " AND id_color =" . $key);
                 $exist = $exist->fetch();
                 if (!$exist) {
                     $this->conn->query("INSERT INTO  color_articulo (id_articulo, id_color, activo) values (" . $id_articulo . "," . $key . ", true)");
@@ -351,15 +269,20 @@ class Articulo
         return $sql;
     }
 
-    public function getArticulosByPedido($id_pedido)
+    public function getArticulosByPatron($id_patron)
     {
-        $id_pedido = $this->conn->quote($id_pedido);
-        $sql = $this->conn->query("SELECT a.nombre AS 'articulo', c.nombre AS 'color' , t.nombre AS 'talla' , a_p.cantidad 
-        From articulos_pedidos a_p 
-        JOIN articulos a ON a.id = a_p.id_articulo 
-        JOIN color c ON c.id = a_p.id_color 
-        JOIN talla t ON t.id = a_p.id_talla
-        WHERE a_p.id_pedidos = " . $id_pedido);
+
+        $sql = $this->conn->query("SELECT  p_a.id_Articulo,
+         a.nombre, a.codigo_barra, a.imagen, a.id_categoria,
+         p_a.id_color, 
+         p_a.id_talla,  
+         p_a.cantidad
+        FROM patron_articulo p_a 
+        JOIN articulos a ON a.id = p_a.id_articulo
+        JOIN color c ON c.id = p_a.id_color
+        JOIN talla t ON t.id = p_a.id_talla
+        WHERE id_patron = '.$id_patron.'");
+
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;

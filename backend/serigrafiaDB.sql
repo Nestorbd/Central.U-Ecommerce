@@ -88,7 +88,6 @@ create table pedidos (
     esta_firmado BOOLEAN,
     parte_trabajo varchar(20),
     fecha_terminacion_trabajo date,
-    observaciones varchar(500),
     validado boolean,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
     fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -139,16 +138,7 @@ create table logotipos_pedido (
     on delete cascade
 );
 
-drop table if EXISTS bocetos;
-create table bocetos (
-    id int primary key auto_increment,
-    imagen blob not null,
-    id_pedidos int,
 
-    foreign key (id_pedidos) REFERENCES pedidos(id)
-    on update cascade
-    on delete cascade
-);
 
 drop table if EXISTS articulo_categoria;
 create table articulo_categoria (
@@ -216,29 +206,6 @@ create table color_articulo (
     on delete cascade
 );
 
-drop table if EXISTS articulos_pedidos;
-create table articulos_pedidos (
-    id_articulo int not null,
-    id_pedidos int not null,
-    id_talla int,
-    id_color int,
-    cantidad int not null,
-
-    primary key (id_articulo, id_pedidos),
-    foreign key (id_articulo) REFERENCES articulos(id)
-    on update cascade
-    on delete cascade,
-    foreign key (id_pedidos) REFERENCES pedidos(id)
-    on update cascade
-    on delete cascade,
-    foreign key (id_talla) REFERENCES talla(id)
-    on update cascade
-    on delete cascade,
-    foreign key (id_color) REFERENCES color(id)
-    on update cascade
-    on delete cascade
-);
-
 drop table if EXISTS tarifas_categorias;
 create table tarifas_categorias (
     id int primary key auto_increment,
@@ -287,20 +254,6 @@ create table tarifas (
     on delete cascade
 );
 
-drop table if EXISTS pedidos_tarifas;
-create table pedidos_tarifas (
-    id_tarifa int not null,
-    id_pedido int not null,
-
-    primary key (id_tarifa,id_pedido),
-    foreign key (id_tarifa) REFERENCES tarifas(id)
-    on update cascade
-    on delete cascade,
-    foreign key (id_pedido) REFERENCES pedidos(id)
-    on update cascade
-    on delete cascade
-);
-
 drop table if EXISTS update_precio;
 create table update_precio (
     id int primary key auto_increment,
@@ -312,6 +265,57 @@ create table update_precio (
     on update cascade
     on delete cascade
 );
+
+drop table if EXISTS patron;
+create table patron (
+    id int primary key auto_increment,
+    imagen blob,
+    observaciones varchar(400),
+    id_pedido int,
+
+    foreign key (id_pedido) REFERENCES pedidos(id)
+    On update cascade
+    On delete cascade
+);
+
+drop database if EXISTS patron_articulo;
+create table patron_articulo (
+    id_patron int not null,
+    id_articulo int not null,
+    id_color int not null,
+    id_talla int not null,
+    cantidad int,
+
+    primary key (id_patron, id_articulo, id_color, id_talla),
+    foreign key (id_patron) references patron(id)
+    On update cascade
+    On delete cascade,
+    foreign key (id_articulo) references articulos(id)
+    On update cascade
+    On delete cascade,
+    foreign key (id_color) references color(id)
+    On update cascade
+    On delete cascade,
+    foreign key (id_talla) references talla(id)
+    On update cascade
+    On delete cascade
+);
+
+drop table if EXISTS patron_tarifa;
+create table patron_tarifa (
+    id_patron int not null,
+    id_tarifa int not null,
+
+    primary key (id_patron, id_tarifa),
+    foreign key (id_patron) references patron(id)
+    On update cascade
+    On delete cascade,
+    foreign key (id_tarifa) references tarifas(id)
+    On update cascade
+    On delete cascade
+);
+
+
 
 drop table if EXISTS formulario;
 create table formulario (
@@ -388,6 +392,7 @@ BEGIN
     Update categorias_tipo set activo = new.activo where id_tipo = old.id;
 end |
 DELIMITER ;
+
 
 insert into cliente_individual  VALUES (null,"nestor","batista","626202874","nestor@CU.es","54682321");
 insert into cliente_empresa  VALUES (null,"Central Uniformes", "626202874","777777");

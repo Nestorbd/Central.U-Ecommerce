@@ -2557,6 +2557,11 @@
 											"key": "id_pedidos",
 											"value": "1",
 											"type": "text"
+										},
+										{
+											"key": "id_articulo",
+											"value": "1",
+											"type": "text"
 										}
 									]
 								},
@@ -2666,7 +2671,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"esta_firmado\":\"false\",\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-05\",\r\n    \"observaciones\": \"hay que diseñar un logo\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_individual\":1,\r\n    \"id_empresa\":null,\r\n    \"id_usuario\": 1,\r\n    \"logotipos\":[1,2,3],\r\n    \"tarifas\":[1,2,3],\r\n    \"articulos\":[{\r\n        \"id_articulo\":1,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":50\r\n    },\r\n    {\r\n         \"id_articulo\":2,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":150\r\n    }]\r\n}",
+							"raw": "{\r\n    \"esta_firmado\":\"false\",\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-05\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_individual\":1,\r\n    \"id_empresa\":null,\r\n    \"id_usuario\": 1,\r\n    \"logotipos\":[1,2,3],\r\n    \"tarifas\":[1,2,3],\r\n    \"articulos\":[{\r\n        \"id_articulo\":1,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":50,\r\n        \"observaciones\": \"hay que diseñar un logo\"\r\n    },\r\n    {\r\n         \"id_articulo\":2,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":150,\r\n        \"observaciones\":\"\"\r\n    }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
