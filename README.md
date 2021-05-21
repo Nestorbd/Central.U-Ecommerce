@@ -31,79 +31,74 @@ Primero, tenemos que instalar el [XAMPP](https://www.apachefriends.org/es/index.
 
 Si abrimos el enlace nos abrirá esta pagína:
 
-![xampp index.html]()
+![xampp descargar](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp_index.png)
 
-Seleccionamos descargar:
+Seleccionamos descargar y nos aparecerá la siguiente página:
 
-![xampp descargar]()
-
-Ahora, en la siguiente ventana, seleccionamos que version queremos instalar:
-
-![seleccionar version]()
+![seleccionar version](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp-version.png)
 
 En este proyecto lo hemos trabajado con la version 8.0.3 en Windows, pero se puede ejecutar en cualquiera de estas versiones, solo hay que habilitar las opciones adecuadas para su uso.
 
 Le damos click a descargar la version que queramos usar de XAMPP y se nos descargara un instalador:
 
-![descargar version]()
+![descargar version](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp-version-descargar.png)
 
-![descargando]()
 
 Cuando termine de descargar ejecutamos el instalador y nos tendrá que aparecer una ventana como esta:
 
-![ventana XAMPP warning]()
+![ventana XAMPP warning](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp_warning.png)
 
 Le damos a OK y nos llevara a la siguiente ventana en donde configuraremos la instalación del XAMPP:
 
-![ventana XAMPP instalación welcome]()
+![ventana XAMPP instalación welcome](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp_wellcome.png)
 
 Le damos a siguiente y nos aparecerá una pantalla en donde podemos elegir lo que se va a instalar,
 seleccionamos los siguientes:
 
-![ventana XAMPP selección]()
+![ventana XAMPP selección](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp_seleccion.png)
 
 Le damos a siguiente y ahora podremos elegir en que carpeta queremos que se instale, en mi caso la dejare en la por defecto:
 
-![ventana XAMP elegir lugar de instalación]()
+![ventana XAMP elegir lugar de instalación](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp_instalacion.png)
 
 Después de elegir el lugar de instalación le damos a siguiente y nos pedirá que elijamos un idioma para el panel de control, en mi caso voy a elegir ingles: 
 
-![ventana XAMPP elegir idioma]()
+![ventana XAMPP elegir idioma](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp_idioma.png)
 
 A continuación nos dirá que si queremos aprender más sobre Bitnami para XAMPP, en mi caso lo desmarco: 
 
-![Bitnami For XAMPP]()
+![Bitnami For XAMPP](Documentacion/install_XAMP/XAMPP%20INSTALL/Bitnami%20For%20XAMPP.png)
 
 Después de esto nos dirá que si estamos preparados para la instalación, cuando estés preparado le damos a siguiente y comenzara a instalarse el XAMPP: 
 
-![XAMPP ready to install]()
+![XAMPP ready to install](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp_ready.png)
 
-![XAMPP installing]()
+![XAMPP installing](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp-installing.png)
 
 En medio de la instalación nos saldrá una ventana emergente del firewall para darle permiso a el servidor de apache, se lo damos:
 
-![Apache allow access]()
+![Apache allow access](Documentacion/install_XAMP/XAMPP%20INSTALL/apache_allow_access.png)
 
 Una vez finalizada la instalación nos saldrá una ventana donde podemos elegir si queremos abrir el panel de control del XAMPP, lo seleccionamos y le damos a finalizar:
 
-![XAMPP open control panel]()
+![XAMPP open control panel](Documentacion/install_XAMP/XAMPP%20INSTALL/xampp%20finish.png)
 
 ### Configurar XAMPP
 
 Vamos a configurar el servidor de apache para poder usarlo con nuestra aplicación. 
 Para hacerlo, primero, vamos a abrir el panel de control de XAMPP, una vez abierto le damos al botón de config que esta en la fila de Apache:
 
-![XAMPP configurar apache]()
+![XAMPP configurar apache](Documentacion/install_XAMP/XAMPP%20CONFIG/apache%20config.png)
 
 Nos aparecerá varios archivos, primero vamos a ir al archivo de PHP (php.ini):
 
-![php.ini]()
+![php.ini](Documentacion/install_XAMP/XAMPP%20CONFIG/php.ini.png)
 
 Abrimos el documento y buscamos (ctrl+b) "gd", le damos a buscar y nos aparecerá que la extension esta comentada, la descomentamos:
 
-![buscar gd]()
+![buscar gd](Documentacion/install_XAMP/XAMPP%20CONFIG/buscar%20gd.png)
 
-![descomentar gd]()
+![descomentar gd](Documentacion/install_XAMP/XAMPP%20CONFIG/descomentasr%20gd.png)
 
 Ahora guardamos el documento (ctrl+g).
 
@@ -111,11 +106,9 @@ Si aun asi da problemas dejare mis configuraciones al final para que podáis com
 
 Cerramos el documento y ahora abrimos el httpd.conf:
 
-![httpd.conf]()
+![httpd.conf](Documentacion/install_XAMP/XAMPP%20CONFIG/httpd.conf.png)
 
-Aquí solo tenemos que verificar si en el directorio donde esta alojado el XAMPP esta activo el AllowOverride, si esta en none lo cambiamos por All:
-
-![AllowOverride All]()
+Aquí solo tenemos que verificar si en el directorio donde esta alojado el XAMPP esta activo el AllowOverride, si esta en none lo cambiamos por All.
 
 Y esto seria todo, si hay algún fallo más intentar mirar si el modulo rewrite esta activo.
 
@@ -123,8 +116,8 @@ Una vez terminado las configuraciones ya le podemos dar a start al servidor apac
 
 **Mis configuraciones**
 
-* [php.ini]()
-* [httpd.conf]()
+* [php.ini](Documentacion/install_XAMP/php.ini)
+* [httpd.conf](Documentacion/install_XAMP/httpd.conf)
 
 ### Instalar Backend
 
@@ -208,13 +201,13 @@ Dentro de la carpeta [routes](backend/api/api/routes) nos encontramos con los ar
 
 En el primero nos encontraremos que esta dividido por los métodos GET, POST, PUT y DELETE, esto es para controlar mejor las rutas y no confundirse a la hora de mandar o recibir datos.
 
-Si seguimos la arquitectura de metodos del controlador las rutas basicas para un CRUD se hacen automaticamente, si quieres añadir un metodo nuevo puedes fijarte en los que ya estan puestos y adaptarlo al tuyo. La manera en la que esta definido es la siguiente:
+Si seguimos la arquitectura de métodos del controlador las rutas básicas para un CRUD se hacen automáticamente, si quieres añadir un método nuevo puedes fijarte en los que ya están puestos y adaptarlo al tuyo. La manera en la que esta definido es la siguiente:
 
 controlador = "nombreTabla" + "Controller;
-metodo = "nombreMetodo";
+método = "nombremétodo";
 Argumento = ID;
 
-Imaginate que quieres ejecutar el metodo insert del controlador de pedido, pues lo que tenemos que poner en la ruta para ejecutar este metodo es el siguiente:
+Imaginate que quieres ejecutar el método insert del controlador de pedido, pues lo que tenemos que poner en la ruta para ejecutar este método es el siguiente:
 
 http://localhost/api/pedido/insertar
 
@@ -223,7 +216,7 @@ Cuando le envíes esto al backend con el método POST el ira primero a request.p
 pedido = pedidoController.php
 insertar = insert
 
-Esto se lo mandara a el archivo routes y el ejecutara el fichero pedidoController.php el metodo insert y dentro de ahí recogerá los datos que le enviemos.
+Esto se lo mandara a el archivo routes y el ejecutara el fichero pedidoController.php el método insert y dentro de ahí recogerá los datos que le enviemos.
 
 ### Controlador
 
@@ -253,13 +246,13 @@ Los métodos principales para que un controlador funcione son:
 
 * insert()
   
-  Este metodo recibe los parámetros almacenados en el input y los envía a una función que se encarga de insertar un nuevo campo con los datos enviados.
+  Este método recibe los parámetros almacenados en el input y los envía a una función que se encarga de insertar un nuevo campo con los datos enviados.
 
   Ha este método no es necesario especificarle ninguna id al igual que con getAll().
 
 * update($id)
 
-  Este metodo es parecido al insert, solo que en este también hace falta especificarle el id del campo que se quiera actualizar y pasar los datos por el input.
+  Este método es parecido al insert, solo que en este también hace falta especificarle el id del campo que se quiera actualizar y pasar los datos por el input.
 
   Ej: http://localhost/api/pedido/actualizar/15
 
@@ -292,13 +285,13 @@ En cada modelo vamos a encontrar los siguientes métodos básicos:
 
 * __construct()
   
-  En este caso este metodo almacena la conexión en una variable para poder enviar y recibir información de la base de datos.
+  En este caso este método almacena la conexión en una variable para poder enviar y recibir información de la base de datos.
 
   Los métodos explicados a continuación tomaremos como referencia el modelo de pedido, asi que para otro método solo habrá que sustituir la palabra pedido por la del modelo correspondiente.
 
 * getPedidos()
 
-  En este metodo llamamos a todos los datos de una tabla y se lo devolvemos a el controlador. 
+  En este método llamamos a todos los datos de una tabla y se lo devolvemos a el controlador. 
 
   También, nos encontraremos a menudo que por cada campo de la tabla se llaman a otros métodos que se encargan de buscar otros datos relacionados con dicho campo.
 
@@ -310,7 +303,7 @@ En cada modelo vamos a encontrar los siguientes métodos básicos:
 
   A este método se le pasan los datos necesarios para crear un nuevo pedido y una vez creado devuelve la id de este pedido nuevo al controlador que se encargara de llamar a otro método para mostrarlo.
 
-  También nos encontraremos con una variante de este metodo que seria createPedido($data,$img) en el que aparte de los datos le pasamos la ruta de la imagen en donde esta guardada, es importante saber que la ruta almacenada en la bse de datos no es la ruta física sino la relativa como la que usamos para conectar con el backend. Para ello, dentro del método de este metodo se define esa ruta relativa:
+  También nos encontraremos con una variante de este método que seria createPedido($data,$img) en el que aparte de los datos le pasamos la ruta de la imagen en donde esta guardada, es importante saber que la ruta almacenada en la bse de datos no es la ruta física sino la relativa como la que usamos para conectar con el backend. Para ello, dentro del método de este método se define esa ruta relativa:
 
   ```
     $img = str_replace("C:" . DS . "xampp" . DS . "htdocs" . DS, "http://localhost/", $img);
@@ -327,7 +320,7 @@ En cada modelo vamos a encontrar los siguientes métodos básicos:
 
 * deletePedido($id)
 
-  A este metodo se le pasa también una id com parámetro y se encarga de eliminar el campo con esa id. Como el updatePedido este le devolverá un true o false dependiendo de si se ha podido eliminar el campo.
+  A este método se le pasa también una id com parámetro y se encarga de eliminar el campo con esa id. Como el updatePedido este le devolverá un true o false dependiendo de si se ha podido eliminar el campo.
 
 También nos podemos encontrar otros métodos distintos a los anteriores pero su funcionamiento es bastante similar, la diferencia son las tablas a las que se conectan y los datos que necesitan.
  
