@@ -6,7 +6,6 @@ La aplicación es para el uso interino de la empresa, que consiste en una pagina
 
 # Indice
 - [Central.U-Ecommerce](#centralu-ecommerce)
-- [Indice](#indice)
 - [Manual de instalación](#manual-de-instalación)
   - [Backend](#backend)
     - [Instalar XAMPP](#instalar-xampp)
