@@ -96,20 +96,6 @@ public function update($id){
         }
     }
 
-    public function getTarifasByPedido($id)
-    {
-        if (is_array($id)) {
-            $id = implode('', $id);
-        }
-        $data_get = $this->tarifa->getTarifasByPedido($id);
-
-        if (!$data_get) {
-            exit(json_encode(array('status'=>'error')));
-        } else {
-            exit(json_encode($data_get));
-        }
-    }
-
     public function getTarifasByCategoriaAndTipo()
     {
         $data = json_decode(file_get_contents("php://input"));

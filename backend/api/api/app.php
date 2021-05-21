@@ -8,7 +8,7 @@ $_GET['url'] = $ruta;
 require_once '../config/headers.php';
 require_once "models/connection.php";
 require_once "routes/request.php";
-require_once "routes/Routes.php" ;
+require_once "routes/routes.php" ;
 
 new Connection;
 

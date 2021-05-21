@@ -178,20 +178,6 @@ class ArticuloController
             exit(json_encode(array('status' => 'error')));
         }
     }
-
-    public function getArticulosByPedido($id)
-    {
-        if (is_array($id)) {
-            $id = implode('', $id);
-        }
-        $data_get = $this->articulo->getArticulosByPedido($id);
-
-        if (!$data_get) {
-            exit(json_encode("este pedido no tiene asignada ningun articulo"));
-        } else {
-            exit(json_encode($data_get));
-        }
-    }
 }
 
 function uploadImage($imgName)
