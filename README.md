@@ -5,7 +5,6 @@ Este proyecto esta dirigido a la empresa Central Uniformes SL.
 La aplicación es para el uso interino de la empresa, que consiste en una pagina web en la que se podrá generar un pedido para un cliente y en este pedido se podrá insertar los logotipos del cliente y ubicarlos en un patrón de un articulo. Luego, este pedido tiene que ser validado por el departamento que se encarga del trabajo y también debe asignar una fecha de terminación de trabajo. Finalmente, el cliente tiene que firmar el documento para que su pedido se lleve a cabo.
 
 # Indice
-- [Central.U-Ecommerce](#centralu-ecommerce)
 - [Manual de instalación](#manual-de-instalación)
   - [Backend](#backend)
     - [Instalar XAMPP](#instalar-xampp)
