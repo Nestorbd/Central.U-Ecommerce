@@ -5,86 +5,10 @@ require_once 'clienteIndividualModel.php';
 
 class Direccion
 {
-    private $id;
-    private $calle;
-    private $numero;
-    private $municipio;
-    private $provincia;
-    private $codigo_postal;
-    private $id_individual;
-    private $id_empresa;
-
-
     private $conn;
 
-    public function __construct()
-	{
-		$params = func_get_args();
-		$num_params = func_num_args();
-		$funcion_constructor ='__construct'.$num_params;
-		if (method_exists($this,$funcion_constructor)) {
-			call_user_func_array(array($this,$funcion_constructor),$params);
-		}
-	}
-
-    public function __construct0(){
+    public function __construct(){
         $this->conn = Connection::conexion();
-    }
-
-    public function getId(){
-        return $this->id;
-    }
-    public function setId($id){
-        $this->id = $id;
-    }
-
-    public function getCalle(){
-        return $this->calle;
-    }
-    public function setCalle($calle){
-        $this->calle = $calle;
-    }
-
-    public function getNumero(){
-        return $this->numero;
-    }
-    public function setNumero($numero){
-        $this->numero = $numero;
-    }
-
-    public function getMunicipio(){
-        return $this->municipio;
-    }
-    public function setMunicipio($municipio){
-        $this->municipio = $municipio;
-    }
-
-    public function getProvincia(){
-        return $this->provincia;
-    }
-    public function setProvincia($provincia){
-        $this->provincia = $provincia;
-    }
-
-    public function getCodigoPostal(){
-        return $this->codigo_postal;
-    }
-    public function setCodigoPostal($codigo_postal){
-        $this->codigo_postal = $codigo_postal;
-    }
-
-    public function getIdIndividual(){
-        return $this->id_individual;
-    }
-    public function setIdIndividual($id_individual){
-        $this->id_individual = $id_individual;
-    }
-
-    public function getIdEmpresa(){
-        return $this->id_empresa;
-    }
-    public function setIdEmpresa($id_empresa){
-        $this->id_empresa = $id_empresa;
     }
 
     public function getDireccion()
@@ -118,7 +42,7 @@ class Direccion
     {
         $id =  $this->conn->quote($id);
         $sql = $this->conn->query("SELECT * FROM cliente_direccion WHERE id=". $id);
-        $data = $sql->fetchAll(PDO::FETCH_OBJ);
+        $data = $sql->fetch(PDO::FETCH_OBJ);
 
         if($data){
             if($data->id_empresa != null){
@@ -161,21 +85,18 @@ class Direccion
         $returnColum = array();
 
         foreach ($data as $key => $val) {
-            $returnColum[$key] = $key; 
-            $return[$key] = $val;
+            if(!empty($val)){
+                $returnColum[$key] = $key; 
+                $return[$key] = $val;
+            }
         }
-
-        unset($return["id"]);
-        unset($returnColum["id"]);
-
-        
-        if(empty($return["id_individual"])){
-            unset($return["id_individual"]);
-            unset($returnColum["id_individual"]);
-        }else{
-            unset($return["id_empresa"]);
-            unset($returnColum["id_empresa"]);
-        }
+        // if(empty($return["id_individual"])){
+        //     unset($return["id_individual"]);
+        //     unset($returnColum["id_individual"]);
+        // }else{
+        //     unset($return["id_empresa"]);
+        //     unset($returnColum["id_empresa"]);
+        // }
         
         $insData= implode("','",$return);
         $insDataColumn = implode(",",$returnColum);

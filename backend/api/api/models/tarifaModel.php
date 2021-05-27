@@ -5,116 +5,12 @@ require_once 'tipoTarifaModel.php';
 
 class Tarifa
 {
-    private $id;
-    private $nombre;
-    private $precio;
-    private $fecha_creacion;
-    private $fecha_actualizacion;
-    private $activo;
-    private $id_categoria;
-    private $id_tipo;
-
     public $conn;
 
     public function __construct()
     {
-        $params = func_get_args();
-        $num_params = func_num_args();
-        $funcion_constructor = '__construct' . $num_params;
-        if (method_exists($this, $funcion_constructor)) {
-            call_user_func_array(array($this, $funcion_constructor), $params);
-        }
-    }
-
-    public function __construct0()
-    {
         $this->conn = Connection::conexion();
     }
-
-    public function __construct1($id, $nombre, $precio, $fecha_crecion, $fecha_actualizacion, $activo, $id_categoria, $id_tipo)
-    {
-        $this->conn = Connection::conexion();
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->precio = $precio;
-        $this->fecha_crecion = $fecha_crecion;
-        $this->fecha_actualizacion = $fecha_actualizacion;
-        $this->activo = $activo;
-        $this->id_categoria = $id_categoria;
-        $this->id_tipo = $id_tipo;
-    }
-    public function getId()
-    {
-        return $this->id;
-    }
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-
-    public function getPrecio()
-    {
-        return $this->precio;
-    }
-    public function setPrecio($precio)
-    {
-        $this->precio = $precio;
-    }
-
-    public function getFechaCreacion()
-    {
-        return $this->fecha_creacion;
-    }
-    public function setFechaCreacion($fecha_creacion)
-    {
-        $this->fecha_creacion = $fecha_creacion;
-    }
-
-    public function getFechaActualizacion()
-    {
-        return $this->fecha_actualizacion;
-    }
-    public function setFechaActualizacion($fecha_actualizacion)
-    {
-        $this->fecha_actualizacion = $fecha_actualizacion;
-    }
-
-    public function getactivo()
-    {
-        return $this->activo;
-    }
-    public function setactivo($activo)
-    {
-        $this->activo = $activo;
-    }
-
-    public function getIdCategoria()
-    {
-        return $this->id_categoria;
-    }
-    public function setIdCategoria($id_categoria)
-    {
-        $this->id_categoria = $id_categoria;
-    }
-
-    public function getIdTipo()
-    {
-        return $this->id_tipo;
-    }
-    public function setIdTipo($id_tipo)
-    {
-        $this->id_tipo = $id_tipo;
-    }
-
 
     public function getTarifa()
     {
@@ -167,14 +63,13 @@ class Tarifa
         $returnColum = array();
 
         foreach ($data as $key => $val) {
-            $returnColum[$key] = $key;
-            $return[$key] = $val;
+            if(!empty($val)){
+                $returnColum[$key] = $key;
+                $return[$key] = $val;
+            }
         }
         $return["activo"] = 1;
         $returnColum["activo"] = "activo";
-
-        unset($return["id"]);
-        unset($returnColum["id"]);
 
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);
@@ -241,9 +136,9 @@ class Tarifa
         return $data;
     }
 
-    public function getTarifasByPedido($id_pedido){
-        $id_pedido = $this->conn->quote($id_pedido);
-        $sql = $this->conn->query("SELECT t.* FROM tarifas t JOIN pedidos_tarifas p_t ON t.id = p_t.id_tarifa WHERE p_t.id_pedido = ".$id_pedido);
+    public function getTarifasByPatron($id_patron){
+        $id_patron = $this->conn->quote($id_patron);
+        $sql = $this->conn->query("SELECT t.* FROM tarifas t JOIN patron_tarifa p_t ON t.id = p_t.id_tarifa WHERE p_t.id_patron = ".$id_patron);
         $data = $sql->fetchAll(PDO::FETCH_OBJ);
 
         return $data;

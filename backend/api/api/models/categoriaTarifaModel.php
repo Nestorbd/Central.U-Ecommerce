@@ -5,60 +5,11 @@ require_once 'tipoTarifaModel.php';
 
 class CategoriaTarifa
 {
-    private $id;
-    private $nombre;
-    private $activo;
-
-
     public $conn;
 
     public function __construct()
     {
-        $params = func_get_args();
-        $num_params = func_num_args();
-        $funcion_constructor = '__construct' . $num_params;
-        if (method_exists($this, $funcion_constructor)) {
-            call_user_func_array(array($this, $funcion_constructor), $params);
-        }
-    }
-
-    public function __construct0()
-    {
         $this->conn = Connection::conexion();
-    }
-
-    public function __construct1($id, $nombre, $activo)
-    {
-        $this->conn = Connection::conexion();
-        $this->id = $id;
-        $this->$nombre = $nombre;
-        $this->activo = $activo;
-    }
-    public function getId()
-    {
-        return $this->id;
-    }
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-
-    public function getActivo()
-    {
-        return $this->activo;
-    }
-    public function setActivo($activo)
-    {
-        $this->activo = $activo;
     }
 
     public function getCategorias()
@@ -99,8 +50,10 @@ class CategoriaTarifa
         $returnColum = array();
 
         foreach ($data as $key => $val) {
-            $returnColum[$key] = $key;
-            $return[$key] = $val;
+            if(!empty($val)){
+                $returnColum[$key] = $key;
+                $return[$key] = $val;
+            }
         }
         $return["activo"] = 1;
         $returnColum["activo"] = "activo";
@@ -108,9 +61,6 @@ class CategoriaTarifa
         $tipos = $return["tipos"];
         unset($return["tipos"]);
         unset($returnColum["tipos"]);
-
-        unset($return["id"]);
-        unset($returnColum["id"]);
 
         $insData = implode("','", $return);
         $insDataColumn = implode(",", $returnColum);

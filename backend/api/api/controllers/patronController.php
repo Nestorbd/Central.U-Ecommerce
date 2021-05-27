@@ -1,21 +1,20 @@
 <?php
-require_once 'models/articuloModel.php';
+require_once 'models/patronModel.php';
 
 
-class ArticuloController
+class PatronController
 {
 
-    private $articulo;
+    private $patron;
 
     public function __construct()
     {
-        $this->articulo = new Articulo();
+        $this->patron = new Patron();
     }
 
     public function getAll()
     {
-
-        $data = $this->articulo->getArticulos();
+        $data = $this->patron->getPatrones();
 
         exit(json_encode($data));
     }
@@ -25,9 +24,9 @@ class ArticuloController
         if (is_array($id)) {
             $id = implode('', $id);
         }
-        $data = $this->articulo->getArticuloById($id);
+        $data = $this->patron->getPatronById($id);
         if ($data == null) {
-            $data = "No hay ningun articulo con id=" . $id;
+            $data = "No hay ningun patron con id=" . $id;
             exit(json_encode($data));
         } else {
             $data_r[0] = $data;
@@ -41,7 +40,7 @@ class ArticuloController
             $img = uploadImage('imagen');
             $jsonString = json_encode($_POST);
             $decodedArray = json_decode($jsonString);
-            $dataCreate = $this->articulo->createArticulo($decodedArray, $img);
+            $dataCreate = $this->patron->createPatron($decodedArray, $img);
 
             if ($dataCreate) {
                 $this->getOne($dataCreate);
@@ -58,7 +57,7 @@ class ArticuloController
         }
         $data = json_decode(file_get_contents("php://input"));
 
-        $dataUpdate = $this->articulo->updateArticulo($id, $data);
+        $dataUpdate = $this->patron->updatePatron($id, $data);
         if ($dataUpdate) {
             $this->getOne($id);
         } else {
@@ -71,113 +70,59 @@ class ArticuloController
         if (is_array($id)) {
             $id = implode('', $id);
         }
-        $data = $this->articulo->deleteArticulo($id);
+        $data = $this->patron->deletePatron($id);
 
         if (!$data) {
-            exit(json_encode("No hay ningun logotipo"));
+            exit(json_encode("No hay ningun patron"));
         } else {
             exit(json_encode(array('status' => 'success')));
         }
     }
 
-    public function getArticulosByTalla($id)
-    {
-        if (is_array($id)) {
-            $id = implode('', $id);
-        }
-        $data_get = $this->articulo->getArticulosByTalla($id);
-
-        if (!$data_get) {
-            exit(json_encode("este articulo no tiene asignada ninguna talla"));
-        } else {
-            exit(json_encode($data_get));
-        }
-    }
-
-    public function getArticulosByColor($id)
-    {
-        if (is_array($id)) {
-            $id = implode('', $id);
-        }
-        $data_get = $this->articulo->getArticulosByColor($id);
-
-        if (!$data_get) {
-            exit(json_encode("este articulo no tiene asignada ningun color"));
-        } else {
-            exit(json_encode($data_get));
-        }
-    }
-
-    public function añadirTallas()
-    {
+    public function añadirArticulos(){
         $data = json_decode(file_get_contents("php://input"));
-        $añadir = $this->articulo->añadirTallas($data);
+        $añadir = $this->patron->añadirArticulos($data);
 
         if ($añadir) {
-            $this->getOne($data->id);
+            $this->getOne($data->id_patron);
         } else {
             exit(json_encode(array('status' => 'error')));
         }
     }
-    public function añadirColores()
-    {
+
+    public function añadirTarifas(){
         $data = json_decode(file_get_contents("php://input"));
-        $añadir = $this->articulo->añadirColores($data);
+        $añadir = $this->patron->añadirTarifas($data);
 
         if ($añadir) {
-            $this->getOne($data->id);
+            $this->getOne($data->id_patron);
         } else {
             exit(json_encode(array('status' => 'error')));
         }
     }
 
-    public function desactivarTalla()
-    {
+    public function quitarArticulos(){
         $data = json_decode(file_get_contents("php://input"));
-        $desactivado = $this->articulo->desactivarTalla($data);
+        $añadir = $this->patron->quitarArticulos($data);
 
-        if ($desactivado) {
+        if ($añadir) {
             exit(json_encode(array('status' => 'success')));
         } else {
             exit(json_encode(array('status' => 'error')));
         }
     }
 
-    public function desactivarColor()
-    {
+    public function quitarTarifas(){
         $data = json_decode(file_get_contents("php://input"));
-        $desactivado = $this->articulo->desactivarColor($data);
+        $añadir = $this->patron->quitarTarifas($data);
 
-        if ($desactivado) {
+        if ($añadir) {
             exit(json_encode(array('status' => 'success')));
         } else {
             exit(json_encode(array('status' => 'error')));
         }
     }
 
-    public function activarTalla()
-    {
-        $data = json_decode(file_get_contents("php://input"));
-        $desactivado = $this->articulo->activarTalla($data);
-
-        if ($desactivado) {
-            exit(json_encode(array('status' => 'success')));
-        } else {
-            exit(json_encode(array('status' => 'error')));
-        }
-    }
-
-    public function activarColor()
-    {
-        $data = json_decode(file_get_contents("php://input"));
-        $desactivado = $this->articulo->activarColor($data);
-
-        if ($desactivado) {
-            exit(json_encode(array('status' => 'success')));
-        } else {
-            exit(json_encode(array('status' => 'error')));
-        }
-    }
 }
 
 function uploadImage($imgName)
@@ -185,7 +130,7 @@ function uploadImage($imgName)
 
     if (isset($_FILES[$imgName])) {
         $img_tmp = $_FILES[$imgName]['tmp_name'];
-        $imgFolder = ROOT . 'imagenes' . DS . 'articulos' . DS;
+        $imgFolder = ROOT . 'imagenes' . DS . 'patrones' . DS;
 
         if (!file_exists($imgFolder)) {
             mkdir($imgFolder, 0777, true);

@@ -87,31 +87,9 @@ class PedidoController
         }
     }
 
-    public function añadirTarifas(){
-        $data = json_decode(file_get_contents("php://input"));
-        $añadir = $this->pedido->añadirTarifas($data);
-
-        if ($añadir) {
-            $this->getOne($data->id);
-        } else {
-            exit(json_encode(array('status' => 'error')));
-        }
-    }
-
     public function añadirUsuario(){
         $data = json_decode(file_get_contents("php://input"));
         $añadir = $this->pedido->añadirUsuario($data);
-
-        if ($añadir) {
-            $this->getOne($data->id);
-        } else {
-            exit(json_encode(array('status' => 'error')));
-        }
-    }
-
-    public function añadirArticulos(){
-        $data = json_decode(file_get_contents("php://input"));
-        $añadir = $this->pedido->añadirArticulos($data);
 
         if ($añadir) {
             $this->getOne($data->id);
@@ -145,4 +123,5 @@ class PedidoController
             exit(json_encode(array('status' => 'error')));
         }
     }
+
 }

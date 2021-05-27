@@ -1076,7 +1076,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"amarillo\",\r\n    \"activo\":false\r\n}",
+									"raw": "{\r\n    \"nombre\":\"azul\",\r\n    \"activo\":false\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1991,7 +1991,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"tarifa3\",\r\n    \"precio\":6.5,\r\n    \"id_categoria\":1,\r\n    \"id_tipo\":1\r\n}",
+							"raw": "{\r\n    \"nombre\":\"tarifa1\",\r\n    \"precio\":4,\r\n    \"id_categoria\":1,\r\n    \"id_tipo\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2020,7 +2020,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"art2\"\r\n}",
+							"raw": "{\r\n    \"nombre\":\"tarifa3\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2028,7 +2028,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/tarifa/actualizar/2",
+							"raw": "http://localhost/api/tarifa/actualizar/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2037,7 +2037,7 @@
 								"api",
 								"tarifa",
 								"actualizar",
-								"2"
+								"3"
 							]
 						}
 					},
@@ -2498,7 +2498,7 @@
 					]
 				},
 				{
-					"name": "Boceto",
+					"name": "Patron",
 					"item": [
 						{
 							"name": "GET ALL",
@@ -2506,14 +2506,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/boceto",
+									"raw": "http://localhost/api/patron",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
-										"boceto"
+										"patron"
 									]
 								}
 							},
@@ -2525,14 +2525,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/boceto/ver/1",
+									"raw": "http://localhost/api/patron/ver/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
-										"boceto",
+										"patron",
 										"ver",
 										"1"
 									]
@@ -2551,24 +2551,75 @@
 										{
 											"key": "imagen",
 											"type": "file",
-											"src": "/C:/Users/maqui/Pictures/Product/2.png"
+											"src": "/C:/Users/maqui/Pictures/Product/1.png"
 										},
 										{
 											"key": "id_pedidos",
+											"value": "3",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "observaciones",
+											"value": "logo nuevo",
+											"type": "text"
+										},
+										{
+											"key": "id_articulo",
 											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "variantes[0][id_color]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "variantes[0][id_talla]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "variantes[0][cantidad]",
+											"value": "75",
+											"type": "text"
+										},
+										{
+											"key": "tarifas[0]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "tarifas[1]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "variantes[1][id_color]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "variantes[1][id_talla]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "variantes[1][cantidad]",
+											"value": "58",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://localhost/api/boceto/insertar",
+									"raw": "http://localhost/api/patron/insertar",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
-										"boceto",
+										"patron",
 										"insertar"
 									]
 								}
@@ -2581,14 +2632,14 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/boceto/eliminar/1",
+									"raw": "http://localhost/api/patron/eliminar/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
-										"boceto",
+										"patron",
 										"eliminar",
 										"1"
 									]
@@ -2597,21 +2648,167 @@
 							"response": []
 						},
 						{
-							"name": "GET BOCETOS BY PEDIDO",
+							"name": "UPDATE",
 							"request": {
-								"method": "GET",
+								"method": "PUT",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"observaciones\":\"act\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "http://localhost/api/boceto/pedido/1",
+									"raw": "http://localhost/api/patron/actualizar/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
-										"boceto",
+										"patron",
+										"actualizar",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET PATRONES BY PEDIDO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/patron/pedido/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"patron",
 										"pedido",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ADD ARTICULOS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_patron\":2,\r\n    \"id_articulo\":1,\r\n    \"variantes\":[\r\n        {\r\n        \"id_talla\":1,\r\n        \"id_color\":1,\r\n        \"cantidad\":78\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/patron/agregarArticulos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"patron",
+										"agregarArticulos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ADD TARIFAS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_patron\":2,\r\n    \"tarifas\":[1,2]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/patron/agregarTarifas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"patron",
+										"agregarTarifas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "REMOVE ARTICULOS",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n    {\r\n    \"id_patron\":2,\r\n    \"id_articulo\":1,\r\n    \"variantes\":[\r\n        {\r\n        \"id_talla\":1,\r\n        \"id_color\":1,\r\n        \"cantidad\":78\r\n        }\r\n    ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/patron/removerArticulos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"patron",
+										"removerArticulos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "REMOVE TARIFAS",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_patron\":2,\r\n    \"tarifas\":[1,2]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/patron/removerTarifas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"patron",
+										"removerTarifas"
 									]
 								}
 							},
@@ -2644,7 +2841,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/pedido/ver/1",
+							"raw": "http://localhost/api/pedido/ver/15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2653,7 +2850,7 @@
 								"api",
 								"pedido",
 								"ver",
-								"1"
+								"15"
 							]
 						}
 					},
@@ -2666,7 +2863,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"esta_firmado\":\"false\",\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-05\",\r\n    \"observaciones\": \"hay que diseñar un logo\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_individual\":1,\r\n    \"id_empresa\":null,\r\n    \"id_usuario\": 1,\r\n    \"logotipos\":[1,2,3],\r\n    \"tarifas\":[1,2,3],\r\n    \"articulos\":[{\r\n        \"id_articulo\":1,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":50\r\n    },\r\n    {\r\n         \"id_articulo\":2,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":150\r\n    }]\r\n}",
+							"raw": "{\r\n    \"esta_firmado\":\"false\",\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-16\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_individual\":1,\r\n    \"id_empresa\":null,\r\n    \"id_usuario\": 1,\r\n    \"logotipos\":[1,2,3],\r\n    \"patrones\":[\r\n        {\r\n            \"id_patron\": 6\r\n            },\r\n            {\r\n            \"id_patron\":7\r\n            }\r\n            ]\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2695,7 +2892,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"esta_firmado\":true,\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-05\",\r\n    \"observaciones\": \"hay que diseñar un logo\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_usuario\": 1\r\n}",
+							"raw": "{\r\n    \"esta_firmado\":true,\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-16\",\r\n    \"validado\": true,\r\n    \"id_estado\":1,\r\n    \"id_usuario\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2703,7 +2900,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/pedido/actualizar/8",
+							"raw": "http://localhost/api/pedido/actualizar/17",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2712,7 +2909,7 @@
 								"api",
 								"pedido",
 								"actualizar",
-								"8"
+								"17"
 							]
 						}
 					},
@@ -2724,7 +2921,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/pedido/eliminar/7",
+							"raw": "http://localhost/api/pedido/eliminar/14",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2733,7 +2930,7 @@
 								"api",
 								"pedido",
 								"eliminar",
-								"7"
+								"14"
 							]
 						}
 					},
@@ -2769,36 +2966,11 @@
 					"response": []
 				},
 				{
-					"name": "ADD TARIFAS",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"tarifas\":[1,2,3]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/pedido/agregarTarifas",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"pedido",
-								"agregarTarifas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "ADD USUARIOS",
+					"protocolProfileBehavior": {
+						"followOriginalHttpMethod": true,
+						"followAuthorizationHeader": true
+					},
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -2821,35 +2993,6 @@
 								"api",
 								"pedido",
 								"agregarUsuario"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ADD ARTICULOS",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"articulos\":[{\r\n         \"id_articulo\":1,\r\n        \"id_color\":1,\r\n        \"id_talla\":1,\r\n        \"cantidad\":50\r\n    }]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/pedido/agregarArticulos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"pedido",
-								"agregarArticulos"
 							]
 						}
 					},
