@@ -45,7 +45,7 @@ addArticulo(formdata: FormData){
 
 getData(): Observable<Articulo[]> {
 
-  return this.httpClient.get<Articulo[]>(this.apiUrl + "articulo")
+  return this.httpClient.get<Articulo[]>(this.apiUrl + "porDefecto")
   .pipe(
     
     tap(acategoria => console.log('Get a_categoria')),

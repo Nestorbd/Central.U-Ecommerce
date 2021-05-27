@@ -36,7 +36,7 @@ idEmpresa: number;
 
   // getDireccionByUserId(id:number, tf: boolean): Observable<Direccion[]> {
   
-  //   return this.httpClient.get<Direccion[]>("http://localhost/api/direccion/cliente/"+id+"?es_empresa="+tf)
+  //   return this.httpClient.get<Direccion[]>("http://http://192.168.0.90/serigrafia/backend/api/direccion/cliente/"+id+"?es_empresa="+tf)
   //   .pipe(
       
   //     tap(direccion => console.log('Get direccion')),

@@ -31,15 +31,33 @@ import { CTarifaService } from '../services/t-categoria.service';
 import { TTarifaService } from '../services/t-tipo.service';
 import { tTipo } from '../model/tTipo';
 import { tCategoria } from '../model/tCategoria';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-form-page',
   templateUrl: './form-page.page.html',
   styleUrls: ['./form-page.page.scss'],
+  animations: [
+    trigger("detailExpand", [
+      state(
+        "collapsed",
+        style({ height: "0px", minHeight: "0", display: "none" })
+      ),
+      state("expanded", style({ height: "*" })),
+      transition(
+        "expanded <=> collapsed",
+        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
+      )
+    ])
+  ],
 })
 
 export class FormPagePage implements OnInit {
+
+  isNew: boolean = true;
+  isPrenda: boolean = false;
+  isResumen: boolean = false;
   index: number;
   image: any
   logoForm: FormGroup;
@@ -75,12 +93,25 @@ export class FormPagePage implements OnInit {
   logosEnPantalla: Array<{ id: string, imagen_png: string }> = [];
 
 
+
+
+  patron;
+  elements: number = 0;
+  columnsToDisplay: string[] = ['nombre', 'tallas', 'colores', 'codigo_barra', 'stock', 'activo']
+  expandedElement: Pedido | null;
+
+
+  articulos: Array<{
+    id_articulo: number, variantes: Array<[]>, tarifas: Array<[]>
+  }> = [];
+
+
   pedido: Array<{
 
     id: number, esta_firmado: boolean, parte_trabajo: string,
     fecha_terminacion_trabajo: string,
     validado: boolean, id_estado: number, id_individual: number, id_empresa: number, id_usuario: number,
-    logotipos: Array<[]>, tarifas: Array<[]> , articulos: Array<[]>
+    logotipos: Array<[]>, tarifas: Array<[]>, id_articulo: number, articulos: Array<[]>
 
   }> = [];
 
@@ -149,12 +180,6 @@ export class FormPagePage implements OnInit {
 
     this.getForm();
     this.getArticulo();
-    let group = {};
-    // this.formArray.forEach(function (value) {
-
-    //   group[value.value] = new FormControl('', Validators.required);
-
-    // })
 
     this.dynamicForm = this.formBuilder.group({
       numeroPrendas: ['', Validators.required],
@@ -166,6 +191,16 @@ export class FormPagePage implements OnInit {
   }
 
 
+
+  getPatrones() {
+
+    this.patron = this.pedido
+
+  }
+  newPrenda() {
+    this.isNew = false
+    this.isPrenda = true;
+  }
   ionViewWillEnter() {
     this.logotipos;
   }
@@ -178,28 +213,40 @@ export class FormPagePage implements OnInit {
     })
 
   }
-  // convenience getters for easy access to form fields
+
   get f() { return this.dynamicForm.controls; }
   get t() { return this.f.articulo as FormArray; }
   get p() { return this.f.tarifas as FormArray; }
 
 
-  onChangeTarifa(){
-    this.contadorT++;
-    
+  onSubmitA() {
+    let json = {
+      "id_articulo": this.articuloSrv.getId(), "variantes": this.t.value, "tarifas": this.p.value
+    }
+    this.articulos.push(json)
 
-    if (this.contador <= 8) {
+
+    for (let i = this.t.length; i >= 0; i--) {
+      this.t.removeAt(i);
+    }
+    
+    for (let i = this.p.length; i >= 0; i--) {
+      this.p.removeAt(i);
+    }
+    console.log(this.articulos)
+  }
+
+  onChangeTarifa() {
+    this.contadorT++;
+
+
+    if (this.contadorT <= 8) {
       const numberOfTickets = this.contadorT || 0;
       let group = {}
-      // this.formArray.forEach(function (value) {
 
-      //   group[value.value] = new FormControl('', Validators.required);
-
-      // })
-   
       if (this.p.length < numberOfTickets) {
 
-        for (let i = this.t.length; i < numberOfTickets; i++) {
+        for (let i = this.p.length; i < numberOfTickets; i++) {
           this.p.push(this.formBuilder.group({
             id_categoria: ['', Validators.required],
             id_tipo: ['', Validators.required],
@@ -216,24 +263,17 @@ export class FormPagePage implements OnInit {
         }
       }
 
-    
+
     }
- 
-  
+
+
   }
   onChangeTickets() {
     this.contador++;
-    
+
 
     if (this.contador <= 8) {
       const numberOfTickets = this.contador || 0;
-      let group = {}
-      // this.formArray.forEach(function (value) {
-
-      //   group[value.value] = new FormControl('', Validators.required);
-
-      // })
-   
       if (this.t.length < numberOfTickets) {
 
         for (let i = this.t.length; i < numberOfTickets; i++) {
@@ -254,13 +294,13 @@ export class FormPagePage implements OnInit {
         }
       }
 
-    
+
     }
 
 
   }
 
-  async onSubmit() {
+  onSubmit() {
 
     console.log(this.t.value)
     let id_logos = []
@@ -283,28 +323,26 @@ export class FormPagePage implements OnInit {
       }
       console.log(clienteIndividual);
 
+      let json = {
+        "id": 1, "esta_firmado": this.pedidoForm.value.esta_firmado, "parte_trabajo": this.pedidoForm.value.parte_trabajo,
+        "fecha_terminacion_trabajo": this.pedidoForm.value.fecha_terminacion_trabajo,
+        "validado": this.pedidoForm.value.validado, "id_estado": 1, "id_individual": 1, "id_empresa": null, "id_usuario": 1,
+        "logotipos": id_logos, "tarifas": this.p.value, "id_articulo": 1, "articulos": this.t.value
+      }
+      this.pedido.push(json);
+      console.log(json)
+      console.log(this.pedido)
       this.clienteSrv.addIndividual(clienteIndividual).then(() => {
         console.log("hola")
         this.addDirecciónIndividual().then(() => {
           let id_individual = this.clienteSrv.getIndividualId();
-
-
-          let json = {
-            "id": 1, "esta_firmado": this.pedidoForm.value.esta_firmado, "parte_trabajo": this.pedidoForm.value.parte_trabajo,
-            "fecha_terminacion_trabajo": this.pedidoForm.value.fecha_terminacion_trabajo,
-            "validado": this.pedidoForm.value.validado, "id_estado": 1, "id_individual": id_individual, "id_empresa": null, "id_usuario": 1,
-            "logotipos": id_logos, "tarifas": this.p.value, "articulos": this.t.value
-          }
-          this.pedido.push(json);
-          console.log(json)
-          console.log(this.pedido)
+          this.getPatrones()
           this.logosEnPantalla.forEach(element => {
             console.log(element.id)
             this.logoService.updateLogoToSetIndividual(parseInt(element.id), id_individual)
           });
         });
       })
-
 
     } else {
       let clienteEmpresa = {
@@ -315,19 +353,31 @@ export class FormPagePage implements OnInit {
         cif: this.clienteForm.value.cif
       }
 
+      let json = {
+        "id": 1, "esta_firmado": this.pedidoForm.value.esta_firmado, "parte_trabajo": this.pedidoForm.value.parte_trabajo,
+        "fecha_terminacion_trabajo": this.pedidoForm.value.fecha_terminacion_trabajo,
+        "validado": this.pedidoForm.value.validado, "id_estado": 1, "id_individual": 1, "id_empresa": null, "id_usuario": 1,
+        "logotipos": id_logos, "tarifas": this.p.value, "id_articulo": this.articuloSrv.getId(), "articulos": this.t.value
+      }
+      this.pedido.push(json);
+      console.log(json)
+      console.log(this.pedido)
 
+      this.clienteSrv.addEmpresa(clienteEmpresa).then(() => {
+        this.addDirecciónEmpresa().then(() => {
+          let id_empresa = this.clienteSrv.getEmpresaId();
+          this.logosEnPantalla.forEach(element => {
+            console.log(element.id)
+            this.logoService.updateLogoToSetBusiness(parseInt(element.id), id_empresa)
+          });
 
-      // this.clienteSrv.addEmpresa(clienteEmpresa).then(()=>{
-      //   this.addDirecciónEmpresa().then(()=>{
-      //     let id_empresa = this.clienteSrv.getEmpresaId();
-      //     this.logosEnPantalla.forEach(element => {
-      //       console.log(element.id)
-      //       this.logoService.updateLogoToSetBusiness(parseInt(element.id), id_empresa)
-      //     });
+        });
+      })
 
-      //   });
-      // })
     }
+    this.isPrenda = false;
+    this.isResumen = true;
+    this.getPatrones()
   }
 
 
@@ -347,6 +397,7 @@ export class FormPagePage implements OnInit {
   }
 
   addLogo() {
+
     this.modalCtrl.create(
       {
         component: BocetoPage,
@@ -428,11 +479,12 @@ export class FormPagePage implements OnInit {
         const logo = { "id": id_aux, "imagen_png": imagen }
 
         this.logosEnPantalla.push(logo)
+        this.logoService.addLogos(this.logosEnPantalla);
         console.log(this.logosEnPantalla)
       })
     }
 
-
+    this.logoForm.reset();
 
   }
 
@@ -537,8 +589,24 @@ export class FormPagePage implements OnInit {
     this.isTTipo = true;
   }
 
-  tTrabajo(){
-    this.tTarifa++;
+
+
+  goToNewForm() {
+    this.contador = 0;
+    this.contadorT = 0;
+    console.log(this.t.length + " principio")
+   
+
+    this.isResumen = false;
+    this.isPrenda = true;
+    this.logoForm.reset();
+    this.t.reset();
+    this.dynamicForm.reset();
+    this.p.reset();
+    console.log(this.t.value)
   }
+
 }
+
+
 

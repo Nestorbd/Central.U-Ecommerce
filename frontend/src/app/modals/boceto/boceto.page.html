@@ -58,8 +58,7 @@
       
         <div class="example-boundary"class="elements selecto-area " id="selecto1">
           <img style="position: absolute; display: block;   pointer-events: none;" src="{{src}}"/>
-          <img #target style="position: absolute;"class="cube targets target"  src="http://localhost/crud_api/api/imagenes/07042021163936698374.png"  />
-          <img style="position: absolute;" class="cube targets"  src="../../assets/icon/prueba.svg"  />
+          <img style="position: absolute;" class="cube targets" *ngFor="let l of logosEnPantalla" src="{{l.imagen_png}}"  />
         </div>
         <div class="elements "></div>
     </div>

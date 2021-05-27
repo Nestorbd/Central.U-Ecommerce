@@ -4,6 +4,7 @@ import { NgxSelectoComponent } from "ngx-selecto";
 import type { OnRotate, OnPinch } from 'moveable';
 import { Frame } from 'scenejs';
 import { ArticuloService } from "src/app/services/articulo.service";
+import { LogotipoService } from "src/app/services/logotipo.service";
 @Component({
   selector: 'app-boceto',
   templateUrl: './boceto.page.html',
@@ -20,15 +21,17 @@ export class BocetoPage implements OnInit {
     translate: [0, 0],
     rotate: 0,
   };
-
+  logosEnPantalla: Array<{ id: string, imagen_png: string }> = [];
 
 
   constructor(
-    private articuloSrv: ArticuloService
+    private articuloSrv: ArticuloService,
+    private logoSrv: LogotipoService
   ) { }
 
   ngOnInit() {
     this.getSrc()
+    this.getLogos()
     const cubes = [];
 
     for (let i = 0; i < 30; ++i) {
@@ -43,6 +46,10 @@ export class BocetoPage implements OnInit {
     this.src
   }
   
+
+  getLogos(){
+   this.logosEnPantalla = this.logoSrv.getAllLogos()
+  }
   getBackgroundImageUrl(){
     console.log(this.src)
     return this.src

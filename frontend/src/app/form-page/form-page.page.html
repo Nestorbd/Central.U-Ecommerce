@@ -5,30 +5,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="isNew">
+  <h1>Añadir un nuevo patrón</h1>
+  <button mat-button (click)="newPrenda()">Añadir</button>
+</ion-content>
+<ion-content *ngIf="isPrenda">
 
+  <div>
+    <mat-carousel timings="250ms ease-in" [autoplay]="true" interval="5000" color="accent" maxWidth="500px"
+      proportion="100" slides="5" [loop]="true" [hideArrows]="false" [hideIndicators]="false"
+      [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
+      <mat-carousel-slide #matCarouselSlide *ngFor="let a of articulo; let i = index" [image]="a.imagen"
+        overlayColor="#00000040" [hideOverlay]="false">
 
+        <button mat-mini-fab color="accent" (click)="getArticuloId(a.id, a.imagen)">
+          <mat-icon>check</mat-icon>
+        </button>
+      </mat-carousel-slide>
+    </mat-carousel>
 
-  <form [formGroup]="dynamicForm" (ngSubmit)="onFormSubmit()">
+  </div>
+
+  <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
 
     <div class="card m-3">
 
-      <div>
-        <div class="card-body">
-          <p *ngIf="contador == 0" id="p">Pulse el botón si usted desea añadir un nuevo patron al pedido</p>
-          <p *ngIf="contador > 0 && contador <  8" id="p">Pulse el botón si usted desea añadir más de un patrón al
-            pedido</p>
-          <p *ngIf="contador == 8" id="p">Ha llegado al limite de prendas por pedido, si desea añadir más patrones, cree
-            un nuevo pedido</p>
-          <div class="form-row">
-            <div class="form-group">
-              <br /><br />
-             
-
-            </div>
-          </div>
-        </div>
-      </div>
+ 
 
       <div class="form-row">
         <ion-grid>
@@ -37,39 +39,20 @@
 
 
 
-              <div>
-                <mat-carousel timings="250ms ease-in" [autoplay]="true" interval="5000" color="accent" maxWidth="500px"
-                  proportion="100" slides="5" [loop]="true" [hideArrows]="false" [hideIndicators]="false"
-                  [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
-                  <mat-carousel-slide #matCarouselSlide *ngFor="let a of articulo; let i = index" [image]="a.imagen"
-                    overlayColor="#00000040" [hideOverlay]="false">
-
-                    <button mat-mini-fab color="accent" (click)="getArticuloId(a.id, a.imagen)">
-                      <mat-icon>check</mat-icon>
-                    </button>
-                  </mat-carousel-slide>
-                </mat-carousel>
-
-              </div>
+           
               <br /><br /><br /><br />
               <div *ngFor="let articulo of t.controls; let i = index" class="list-group list-group-flush">
 
                 <div [formGroup]="articulo" class="form-row">
-                  <mat-form-field  appearance="fill">
-                    <mat-label>Talla</mat-label>
-                    <mat-select formControlName="id_talla" >
-                      <mat-option *ngFor="let t of aTalla" value="{{t.id}}">{{t.nombre}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field  appearance="fill">
-                    <mat-label>Color</mat-label>
-                    <mat-select formControlName="id_color">
-                      <mat-option *ngFor="let c of aColor" value="{{c.id}}">{{c.nombre}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                
                   <mat-form-field >
                     <mat-label>Cantidad</mat-label>
                     <input type="number" matInput  class="form-control" formControlName="cantidad" setValue="John">
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Referencia de la prenda</mat-label>
+                    <input type="text" matInput placeholder="0.100.10">
                   </mat-form-field>
                 </div>
               </div>
@@ -79,7 +62,9 @@
           </ion-row>
         </ion-grid>
         <button *ngIf="contador < 8" id="botones" mat-button type="button"
-        (click)="onChangeTickets($event)">Agregar nuevo patrón</button>
+        (click)="onChangeTickets($event)">Agregar nueva variante del patrón</button>
+
+    
       </div>
 
 
@@ -87,20 +72,16 @@
 
         <div [formGroup]="tarifas" class="form-row">
           <mat-form-field  appearance="fill">
-            <mat-label>Talla</mat-label>
+            <mat-label>Tipo de trabajo</mat-label>
             <mat-select formControlName="id_categoria" >
               <mat-option *ngFor="let t of tCategoria" value="{{t.id}}">{{t.nombre}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field  appearance="fill">
-            <mat-label>Color</mat-label>
+            <mat-label>Tipologia</mat-label>
             <mat-select formControlName="id_tipo">
               <mat-option *ngFor="let c of tTipo" value="{{c.id}}">{{c.nombre}}</mat-option>
             </mat-select>
-          </mat-form-field>
-          <mat-form-field >
-            <mat-label>Cantidad</mat-label>
-            <input type="number" matInput  class="form-control" formControlName="id_tarifa" setValue="John">
           </mat-form-field>
         </div>
       </div>
@@ -111,114 +92,15 @@
         {{i}}
       </div>
 
-      <button mat-button (click)="tTrabajo();">Añadir Tipo de trabajo</button>
-
+    
       <div class="list-group-item">
 
       </div>
-      <div [formGroup]="pedidoForm" class="form-row">
-
-        <mat-form-field>
-          <mat-label>Firmado</mat-label>
-          <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="esta_firmado"
-            required>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Parte de trabajo</mat-label>
-          <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="parte_trabajo"
-            required>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Fecha de terminacion</mat-label>
-          <input type="text" matInput placeholder="12345682F" class="form-control"
-            formControlName="fecha_terminacion_trabajo" required>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>validado</mat-label>
-          <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="validado"
-            required>
-        </mat-form-field>
-
-      </div>
+      
 
 
 
 
-      <div class="list-group-item">
-
-        <section class="example-section">
-          <label class="example-margin">Tipo de cliente:</label>
-          <mat-radio-group>
-            <mat-radio-button class="example-margin" (change)="isIndividual = true" value="isIndividual = true">
-              Individual</mat-radio-button>
-            <mat-radio-button class="example-margin" (change)="isIndividual = false" value="isIndividual = false">
-              Empresa</mat-radio-button>
-            <mat-radio-button class="example-margin" (change)="clienteExistente()" value="isIndividual = false">Cliente
-              existente</mat-radio-button>
-          </mat-radio-group>
-        </section>
-
-        <div [formGroup]="clienteForm" class="form-row">
-
-          <mat-form-field>
-            <mat-label>Nombre</mat-label>
-            <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="nombre" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Telefono</mat-label>
-            <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="telefono"
-              required>
-          </mat-form-field>
-          <mat-form-field *ngIf="!isIndividual">
-            <mat-label>CIF</mat-label>
-            <input type="text" matInput placeholder="12345682F" class="form-control" formControlName="cif" required>
-          </mat-form-field>
-          <mat-form-field *ngIf="isIndividual">
-            <mat-label>Apellidos</mat-label>
-            <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="apellidos"
-              required>
-          </mat-form-field>
-          <mat-form-field *ngIf="isIndividual">
-            <mat-label>NIF</mat-label>
-            <input type="text" matInput placeholder="54845769Y" class="form-control" formControlName="nif" required>
-          </mat-form-field>
-          <mat-form-field *ngIf="isIndividual">
-            <mat-label>Email</mat-label>
-            <input type="text" matInput placeholder="example@example.com" class="form-control" formControlName="email"
-              required>
-          </mat-form-field>
-        </div>
-      </div>
-
-
-      <div class="list-group-item">
-        <div [formGroup]="direccionForm" class="form-row">
-          <mat-form-field>
-            <mat-label>Calle</mat-label>
-            <input type="text" matInput placeholder="Calle Perico" class="form-control" formControlName="calle"
-              required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Nº</mat-label>
-            <input type="text" matInput placeholder="35" class="form-control" formControlName="numero" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Municipio</mat-label>
-            <input type="text" matInput placeholder="Telde" class="form-control" formControlName="municipio" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Provincia</mat-label>
-            <input type="text" matInput placeholder="Las Palmas" class="form-control" formControlName="provincia"
-              required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Codigo Postal</mat-label>
-            <input type="text" matInput placeholder="35001" class="form-control" formControlName="codigo_postal"
-              required>
-          </mat-form-field>
-
-        </div>
-      </div>
 
 
       <form [formGroup]="logoForm" (ngSubmit)="onClick()" enctype="multipart/form-data">
@@ -237,10 +119,7 @@
         </ion-row>
       </form>
 
-      <div>
-        <button mat-button (click)="addLogo()"> Añadir logos</button>
-      </div>
-
+      
 
       <div class="example-boundary">
         <div>
@@ -257,16 +136,199 @@
 
 
     <div>
-      <button mat-button (click)="onSubmit()" shape="full" expand="block">Finalizar</button>
+      <button mat-button (click)="onSubmitA()" shape="full" expand="block">Finalizar</button>
     </div>
 
 
   </form>
+  <div>
+    <button mat-button (click)="addLogo()"> Añadir logos</button>
+  </div>
+
+</ion-content>
 
 
+<ion-content *ngIf="isResumen">
+
+  <table mat-table
+  [dataSource]="patron" multiTemplateDataRows
+  class="mat-elevation-z8">
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Pedido </th>
+    <td  *matCellDef="let form"  mat-cell > {{form.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="codigo_barra">
+    <th mat-header-cell *matHeaderCellDef> Cliente </th>
+    <td  *matCellDef="let form"  mat-cell > {{form.id_individual}} </td>
+  </ng-container>
 
 
+  <ng-container matColumnDef="stock">
+    <th mat-header-cell *matHeaderCellDef> Talla </th>
+    <td  *matCellDef="let form"  mat-cell > {{form.esta_firmado}} </td>
+  </ng-container>
 
 
+  <ng-container matColumnDef="activo">
+    <th mat-header-cell *matHeaderCellDef> Activo </th>
+    <td mat-cell *matCellDef="let form" >
+      <p *ngIf="form.activo == 1">Si</p>
+      <p *ngIf="form.activo == 0">No</p>
+    </td>
+  </ng-container>
 
+  
+
+
+ 
+
+  <ng-container matColumnDef="tallas">
+    <th mat-header-cell *matHeaderCellDef> Tallas</th>
+    <td mat-cell *matCellDef="let form">
+      <span *ngFor="let talla of form.tallas">{{talla.nombre}} &nbsp;&nbsp;</span>
+    </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="colores">
+    <th mat-header-cell *matHeaderCellDef> Colores</th>
+    <td mat-cell *matCellDef="let form">
+      <span *ngFor="let color of form.colores">{{color.nombre}} &nbsp;&nbsp;</span>
+    </td>
+  </ng-container>
+
+
+<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+<ng-container matColumnDef="expandedDetail">
+<td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+ <div class="example-element-detail"
+      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+   <div class="example-element-diagram">
+    <img src="{{element.imagen}}"/>
+   </div>
+   
+ </div>
+</td>
+</ng-container>
+
+
+<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+<tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+ class="example-element-row"
+ [class.example-expanded-row]="expandedElement === element"
+ (click)="expandedElement = expandedElement === element ? null : element">
+</tr>
+<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
+</table>
+<mat-paginator [pageIndex]=0 [length]="elements"
+[pageSize]="5"
+[pageSizeOptions]="[5, 10, 25]" showFirstLastButtons  > 
+</mat-paginator>
+
+
+<div class="list-group-item">
+
+  <section class="example-section">
+    <label class="example-margin">Tipo de cliente:</label>
+    <mat-radio-group>
+      <mat-radio-button class="example-margin" (change)="isIndividual = true" value="isIndividual = true">
+        Individual</mat-radio-button>
+      <mat-radio-button class="example-margin" (change)="isIndividual = false" value="isIndividual = false">
+        Empresa</mat-radio-button>
+      <mat-radio-button class="example-margin" (change)="clienteExistente()" value="isIndividual = false">Cliente
+        existente</mat-radio-button>
+    </mat-radio-group>
+  </section>
+
+  <div [formGroup]="clienteForm" class="form-row">
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="nombre" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Telefono</mat-label>
+      <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="telefono"
+        required>
+    </mat-form-field>
+    <mat-form-field *ngIf="!isIndividual">
+      <mat-label>CIF</mat-label>
+      <input type="text" matInput placeholder="12345682F" class="form-control" formControlName="cif" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="isIndividual">
+      <mat-label>Apellidos</mat-label>
+      <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="apellidos"
+        required>
+    </mat-form-field>
+    <mat-form-field *ngIf="isIndividual">
+      <mat-label>NIF</mat-label>
+      <input type="text" matInput placeholder="54845769Y" class="form-control" formControlName="nif" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="isIndividual">
+      <mat-label>Email</mat-label>
+      <input type="text" matInput placeholder="example@example.com" class="form-control" formControlName="email"
+        required>
+    </mat-form-field>
+  </div>
+</div>
+
+
+<div class="list-group-item">
+  <div [formGroup]="direccionForm" class="form-row">
+    <mat-form-field>
+      <mat-label>Calle</mat-label>
+      <input type="text" matInput placeholder="Calle Perico" class="form-control" formControlName="calle"
+        required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nº</mat-label>
+      <input type="text" matInput placeholder="35" class="form-control" formControlName="numero" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Municipio</mat-label>
+      <input type="text" matInput placeholder="Telde" class="form-control" formControlName="municipio" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Provincia</mat-label>
+      <input type="text" matInput placeholder="Las Palmas" class="form-control" formControlName="provincia"
+        required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Codigo Postal</mat-label>
+      <input type="text" matInput placeholder="35001" class="form-control" formControlName="codigo_postal"
+        required>
+    </mat-form-field>
+
+  </div>
+</div>
+
+<div [formGroup]="pedidoForm" class="form-row">
+
+  <mat-form-field>
+    <mat-label>Firmado</mat-label>
+    <input type="text" matInput placeholder="Alejandro" class="form-control" formControlName="esta_firmado"
+      required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Parte de trabajo</mat-label>
+    <input type="text" matInput placeholder="+34 777856952" class="form-control" formControlName="parte_trabajo"
+      required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Fecha de terminacion</mat-label>
+    <input type="date" matInput placeholder="12345682F" class="form-control"
+      formControlName="fecha_terminacion_trabajo" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>validado</mat-label>
+    <input type="text" matInput placeholder="Quintana Casillas" class="form-control" formControlName="validado"
+      required>
+  </mat-form-field>
+
+</div>
+
+<button mat-button color="primary" (click) = "onSubmit()">Finalizar pedido</button>
+<button mat-fab (click)="goToNewForm()"><mat-icon>add</mat-icon></button>
 </ion-content>

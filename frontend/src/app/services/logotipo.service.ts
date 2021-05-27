@@ -12,7 +12,7 @@ export class LogotipoService {
   apiUrl: string = "http://192.168.0.90/serigrafia/backend/api/";
   id: number;
   imagen: string;
-
+  logosEnPantalla: Array<{ id: string, imagen_png: string }> = [];
   currentId: number
   logotipos: Logotipo[]
   constructor(
@@ -145,5 +145,18 @@ return new Promise((resolve, reject) =>{
       return of(result as T);
     };
   }
+
+  addLogos(logos: any){
+    let logo = JSON.stringify(logos);
   
+    
+
+    this.logosEnPantalla = logos
+    console.log(JSON.stringify(this.logosEnPantalla) + "ª")
+    
+  }
+
+  getAllLogos(){
+    return this.logosEnPantalla
+  }
 }

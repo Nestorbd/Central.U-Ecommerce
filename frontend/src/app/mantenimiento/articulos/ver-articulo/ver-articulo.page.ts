@@ -32,18 +32,6 @@ import { MatPaginator } from "@angular/material/paginator";
   ],
 })
 
-@Component({
-  selector: 'app-ver-articulo',
-  templateUrl: './ver-articulo.page.html',
-  styleUrls: ['./ver-articulo.page.scss'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
-})
 export class VerArticuloPage implements OnInit {
 
 
