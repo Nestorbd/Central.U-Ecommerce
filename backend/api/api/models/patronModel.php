@@ -62,12 +62,12 @@ class Patron
             }
         }
 
-        $variantes = $return["variantes"];
-        $variantes["id_articulo"] = $return["id_articulo"];
+        $articulo["cantidad"] = $return["cantidad"];
+        $articulo["id_articulo"] = $return["id_articulo"];
         $tarifas = $return["tarifas"];
 
-        unset($return["variantes"]);
-        unset($returnColum["variantes"]);
+        unset($return["cantidad"]);
+        unset($returnColum["cantidad"]);
 
         unset($return["id_articulo"]);
         unset($returnColum["id_articulo"]);
@@ -76,7 +76,7 @@ class Patron
         unset($returnColum["tarifas"]);
 
         if ($img) {
-            $img = str_replace("C:" . DS . "xampp" . DS . "htdocs" . DS, "http://localhost/", $img);
+            $img = str_replace("/var/www/html/", "http://192.168.0.90/", $img);;
             $img = str_replace(DS, '/', $img);
             $return["imagen"] = $img;
             $returnColum["imagen"] = "imagen";
@@ -87,10 +87,10 @@ class Patron
         $this->conn->query("INSERT INTO patron (" . $insDataColumn . ") VALUES ('" . $insData . "')");
         $data = $this->conn->lastINSERTId();
 
-        $variantes["id_patron"] = $data;
+        $articulo["id_patron"] = $data;
         $tarifas["id_patron"] = $data;
 
-        $this->añadirArticulos($variantes);
+        $this->añadirArticulos($articulo);
         $this->añadirTarifas($tarifas);
 
         return $data;
@@ -141,27 +141,24 @@ class Patron
     {
         if (is_array($data)) {
             $id_patron = $data['id_patron'];
-            unset($data["id_patron"]);
             $id_articulo = $data['id_articulo'];
-            unset($data["id_articulo"]);
-            foreach ($data as $key => $val) {
-                $exist = $this->conn->query("SELECT * FROM patron_articulo WHERE id_patron =" . $id_patron . " AND id_articulo =" . $id_articulo . " AND id_talla =" . $val->id_talla . " AND id_color =" . $val->id_color);
+
+                $exist = $this->conn->query("SELECT * FROM patron_articulo WHERE id_patron =" . $id_patron . " AND id_articulo =" . $id_articulo);
                 $exist = $exist->fetch();
                 if (!$exist) {
-                    $sql = $this->conn->query("INSERT INTO patron_articulo (id_patron, id_articulo, id_talla, id_color, cantidad) VALUES (" . $id_patron . "," . $id_articulo . "," . $val->id_talla . "," . $val->id_color . "," . $val->cantidad . ")");
+                    $sql = $this->conn->query("INSERT INTO patron_articulo (id_patron, id_articulo, cantidad) VALUES (" . $id_patron . "," . $id_articulo . "," . $data["cantidad"] . ")");
                 }
-            }
             return true;
         } else {
             $id_patron = $data->id_patron;
             $id_articulo = $data->id_articulo;
-            foreach ($data->variantes as $key => $val) {
-                $exist = $this->conn->query("SELECT * FROM patron_articulo WHERE id_patron =" . $id_patron . " AND id_articulo =" . $id_articulo . " AND id_talla =" . $val->id_talla . " AND id_color =" . $val->id_color);
+
+                $exist = $this->conn->query("SELECT * FROM patron_articulo WHERE id_patron =" . $id_patron . " AND id_articulo =" . $id_articulo);
                 $exist = $exist->fetch();
                 if (!$exist) {
-                    $sql =  $this->conn->query("INSERT INTO patron_articulo (id_patron, id_articulo, id_talla, id_color, cantidad) VALUES (" . $id_patron . "," . $id_articulo . "," . $val->id_talla . "," . $val->id_color . "," . $val->cantidad . ")");
+                    $sql =  $this->conn->query("INSERT INTO patron_articulo (id_patron, id_articulo, cantidad) VALUES (" . $id_patron . "," . $id_articulo . "," . $data->cantidad . ")");
                 }
-            }
+            
             return true;
         }
     }
@@ -198,10 +195,10 @@ class Patron
         $id_patron = $data->id_patron;
         $id_articulo = $data->id_articulo;
         foreach ($data->variantes as $key => $val) {
-            $exist = $this->conn->query("SELECT * FROM patron_articulo WHERE id_patron =" . $id_patron . " AND id_articulo =" . $id_articulo . " AND id_talla =" . $val->id_talla . " AND id_color =" . $val->id_color);
+            $exist = $this->conn->query("SELECT * FROM patron_articulo WHERE id_patron =" . $id_patron . " AND id_articulo =" . $id_articulo);
             $exist = $exist->fetch();
             if ($exist) {
-                $sql =  $this->conn->query("DELETE FROM patron_articulo WHERE id_patron = " . $id_patron . " AND id_articulo =" . $id_articulo . " AND id_talla =" . $val->id_talla . " AND id_color =" . $val->id_color);
+                $sql =  $this->conn->query("DELETE FROM patron_articulo WHERE id_patron = " . $id_patron . " AND id_articulo =" . $id_articulo);
             }
         }
         return true;

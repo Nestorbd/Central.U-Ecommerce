@@ -19,6 +19,9 @@ La aplicación es para el uso interino de la empresa, que consiste en una pagina
     - [Controlador](#controlador)
     - [Modelos](#modelos)
   - [Frontend](#frontend-1)
+- [Arquitectura de datos](#arquitectura-de-datos)
+  - [Entidad / Relación](#entidad--relación)
+  - [Modelo de datos](#modelo-de-datos)
 
 # Manual de instalación
 
@@ -328,7 +331,15 @@ También nos podemos encontrar otros métodos distintos a los anteriores pero su
 
 
 
+# Arquitectura de datos
 
+## Entidad / Relación
+
+![E/R](documentacion/modelo%20de%20datos/Modelo%20relacional.png)
+
+## Modelo de datos
+
+![Modelo de datos](documentacion/modelo%20de%20datos/Modelo%20de%20datos.png)
 
 
 

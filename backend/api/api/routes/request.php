@@ -44,20 +44,8 @@ class Request
                         $this->metodo = "getColumns";
                         $isCorrectMetod = true;
                     }
-                    if ($this->controlador == "articulo" && $this->metodo == "talla") {
-                        $this->metodo = "getArticulosByTalla";
-                        $isCorrectMetod = true;
-                    }
-                    if ($this->controlador == "articulo" && $this->metodo == "color") {
-                        $this->metodo = "getArticulosByColor";
-                        $isCorrectMetod = true;
-                    }
-                    if ($this->controlador == "color" && $this->metodo == "articulo") {
-                        $this->metodo = "getColoresByArticulo";
-                        $isCorrectMetod = true;
-                    }
-                    if ($this->controlador == "talla" && $this->metodo == "articulo") {
-                        $this->metodo = "getTallasByArticulo";
+                    if ($this->controlador == "articulo" && $this->metodo == "patron") {
+                        $this->metodo = "getArticulosByPatron";
                         $isCorrectMetod = true;
                     }
                     if($this->controlador == "categoriaTarifa" && $this->metodo == "tipo"){
@@ -96,25 +84,21 @@ class Request
                         $this->metodo = "getPatronesByPedido";
                         $isCorrectMetod = true;
                     }
+                    if ($this->controlador == "usuario" && $this->metodo == "actual") {
+                        $this->metodo = "getCurrentUser";
+                        $isCorrectMetod = true;
+                    }
                 }
             }
 
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if ($this->metodo == "insertar") {
+                if ($this->metodo == "insertar" && $this->controlador != "articulo") {
                     $this->metodo = "insert";
                     $isCorrectMetod = true;
                 }
                 if ($this->controlador == "formulario" && $this->metodo == "insertarColumna") {
                     $this->metodo = "createColumn";
-                    $isCorrectMetod = true;
-                }
-                if ($this->controlador == "articulo" && $this->metodo == "agregarTallas") {
-                    $this->metodo = "añadirTallas";
-                    $isCorrectMetod = true;
-                }
-                if ($this->controlador == "articulo" && $this->metodo == "agregarColores") {
-                    $this->metodo = "añadirColores";
                     $isCorrectMetod = true;
                 }
                 if ($this->controlador == "categoriaTarifa" && $this->metodo == "agregarTipos") {
@@ -140,23 +124,12 @@ class Request
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-                if ($this->metodo == "actualizar") {
+                if ($this->metodo == "actualizar" && $this->controlador != "articulo") {
                     
                     $this->metodo = "update";
                     $isCorrectMetod = true;
                 }
-                if ($this->controlador == "articulo" && $this->metodo == "desactivarTalla") {
-                    $isCorrectMetod = true;
-                }
-                if ($this->controlador == "articulo" && $this->metodo == "desactivarColor") {
-                    $isCorrectMetod = true;
-                }
-                if ($this->controlador == "articulo" && $this->metodo == "activarTalla") {
-                    $isCorrectMetod = true;
-                }
-                if ($this->controlador == "articulo" && $this->metodo == "activarColor") {
-                    $isCorrectMetod = true;
-                }
+
                 if ($this->controlador == "categoriaTarifa" && $this->metodo == "desactivarTipo") {
                     $isCorrectMetod = true;
                 }
@@ -170,7 +143,7 @@ class Request
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-                if ($this->metodo == "eliminar") {
+                if ($this->metodo == "eliminar" && $this->controlador != "articulo") {
                     $this->metodo = "delete";
                     $isCorrectMetod = true;
                 }

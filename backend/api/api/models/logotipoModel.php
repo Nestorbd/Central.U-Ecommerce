@@ -76,7 +76,7 @@ class Logotipos
             }
         }
         if ($img){
-            $img = str_replace("C:".DS."xampp".DS."htdocs".DS,"http://localhost/", $img);
+            $img = str_replace("/var/www/html/", "http://192.168.0.90/", $img);
             $img = str_replace(DS,'/',$img);
             $return["imagen_png"] = $img;
             $returnColum["imagen_png"] = "imagen_png";

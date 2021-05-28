@@ -1,20 +1,20 @@
 <?php
-require_once 'models/bocetoModel.php';
+require_once 'models/porDefectoModel.php';
 
 
-class BocetoController
+class PorDefectoController
 {
 
-    private $boceto;
+    private $porDefecto;
 
     public function __construct()
     {
-        $this->boceto = new Boceto();
+        $this->porDefecto = new PorDefecto();
     }
 
     public function getAll()
     {
-        $data = $this->boceto->getBocetos();
+        $data = $this->porDefecto->getporDefectos();
 
         exit(json_encode($data));
     }
@@ -24,9 +24,9 @@ class BocetoController
         if (is_array($id)) {
             $id = implode('', $id);
         }
-        $data = $this->boceto->getBocetoById($id);
+        $data = $this->porDefecto->getPorDefectoById($id);
         if ($data == null) {
-            $data = "No hay ningun boceto con id=" . $id;
+            $data = "No hay ningun porDefecto con id=" . $id;
             exit(json_encode($data));
         }else{
             $data_r[0] = $data;
@@ -41,7 +41,7 @@ class BocetoController
             $img = uploadImage('imagen');
             $jsonString = json_encode($_POST);
             $decodedArray = json_decode($jsonString);
-            $dataCreate = $this->boceto->createBoceto($decodedArray, $img);
+            $dataCreate = $this->porDefecto->createPorDefecto($decodedArray, $img);
 
             if ($dataCreate) {
                 $this->getOne($dataCreate);
@@ -57,33 +57,22 @@ class BocetoController
         if (is_array($id)) {
             $id = implode('', $id);
         }
-        $data = $this->boceto->deleteBoceto($id);
+        $data = $this->porDefecto->deletePorDefecto($id);
 
         if (!$data) {
-            exit(json_encode("No hay ninguna boceto"));
+            exit(json_encode("No hay ninguna porDefecto"));
         } else {
             exit(json_encode(array('status' => 'success')));
         }
     }
-
-    public function getBocetosByPedido($id){
-        if (is_array($id)) {
-            $id = implode('', $id);
-        }
-        $data = $this->boceto->getBocetosByPedido($id);
-        if (!$data) {
-            exit(json_encode("este pedido no tiene ningun boceto asignado"));
-        } else {
-            exit(json_encode($data));
-        }
-    }
 }
+
 function uploadImage($imgName)
 {
 
     if (isset($_FILES[$imgName])) {
         $img_tmp = $_FILES[$imgName]['tmp_name'];
-        $imgFolder = ROOT . 'imagenes' . DS . 'bocetos' . DS;
+        $imgFolder = ROOT . 'imagenes' . DS . 'defaults' . DS;
 
         if (!file_exists($imgFolder)) {
             mkdir($imgFolder, 0777, true);

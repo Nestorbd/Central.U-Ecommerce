@@ -137,6 +137,7 @@ class Tarifa
     }
 
     public function getTarifasByPatron($id_patron){
+        
         $id_patron = $this->conn->quote($id_patron);
         $sql = $this->conn->query("SELECT t.* FROM tarifas t JOIN patron_tarifa p_t ON t.id = p_t.id_tarifa WHERE p_t.id_patron = ".$id_patron);
         $data = $sql->fetchAll(PDO::FETCH_OBJ);

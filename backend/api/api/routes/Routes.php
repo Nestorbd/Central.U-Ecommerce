@@ -6,8 +6,10 @@ class Router{
         $ruta = ROOT . "controllers" . DS . $controlador . ".php";
         $metodo = $request->getMetodo();
         $argumento = $request->getArgumento();
+        
         if(is_readable($ruta)){
             require_once $ruta ;
+            
             $controlador = new $controlador;
             if(!isset($argumento)){
                 call_user_func(array($controlador,$metodo));

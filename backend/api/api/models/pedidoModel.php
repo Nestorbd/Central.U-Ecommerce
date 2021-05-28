@@ -172,12 +172,6 @@ class Pedido
 
             unset($dataNew->id_usuario);
 
-            if (empty($return["esta_firmado"]) || $return["esta_firmado"] === "false") {
-                $return["esta_firmado"] = 0;
-            } else {
-                $return["esta_firmado"] = 1;
-            }
-
             $return = array();
 
             foreach ($dataNew as $key => $val) {

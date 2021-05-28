@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0898a078-b8e3-4916-af87-413718f82dc6",
+		"_postman_id": "27e0b6c5-c0ed-4e8a-991d-e6064c6228e6",
 		"name": "SERIGRAFIA APP",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -17,12 +17,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/direccion",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/direccion",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"direccion"
 									]
@@ -36,12 +41,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/direccion/ver/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/direccion/ver/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"direccion",
 										"ver",
@@ -66,12 +76,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/direccion/insertar",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/direccion/insertar",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"direccion",
 										"insertar"
@@ -95,12 +110,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/direccion/actualizar/3",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/direccion/actualizar/3",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"direccion",
 										"actualizar",
@@ -116,12 +136,17 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/direccion/eliminar/3",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/direccion/eliminar/3",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"direccion",
 										"eliminar",
@@ -137,12 +162,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/direccion/cliente/1?es_empresa=true",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/direccion/cliente/1?es_empresa=true",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"direccion",
 										"cliente",
@@ -176,12 +206,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/direccion/cliente/1?es_empresa=false",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/direccion/cliente/1?es_empresa=false",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"direccion",
 										"cliente",
@@ -205,12 +240,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/cliente",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/cliente",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"cliente"
 							]
@@ -242,12 +282,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/cliente/ver/1?es_empresa=false",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/cliente/ver/1?es_empresa=false",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"cliente",
 								"ver",
@@ -274,12 +319,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/cliente/ver/1?es_empresa=true",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/cliente/ver/1?es_empresa=true",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"cliente",
 								"ver",
@@ -310,12 +360,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/cliente/insertar",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/cliente/insertar",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"cliente",
 								"insertar"
@@ -339,12 +394,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/cliente/insertar",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/cliente/insertar",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"cliente",
 								"insertar"
@@ -368,12 +428,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/cliente/actualizar/3",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/cliente/actualizar/3",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"cliente",
 								"actualizar",
@@ -398,12 +463,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/cliente/actualizar/3",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/cliente/actualizar/3",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"cliente",
 								"actualizar",
@@ -424,12 +494,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/formulario",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/formulario",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"formulario"
 							]
@@ -443,12 +518,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/formulario/ver/2",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/formulario/ver/2",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"formulario",
 								"ver",
@@ -473,12 +553,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/formulario/insertar",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/formulario/insertar",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"formulario",
 								"insertar"
@@ -502,12 +587,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/formulario/actualizar/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/formulario/actualizar/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"formulario",
 								"actualizar",
@@ -523,12 +613,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/formulario/eliminar/5",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/formulario/eliminar/5",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"formulario",
 								"eliminar",
@@ -553,12 +648,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/formulario/insertarColumna",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/formulario/insertarColumna",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"formulario",
 								"insertarColumna"
@@ -573,12 +673,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/formulario/verColumnas",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/formulario/verColumnas",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"formulario",
 								"verColumnas"
@@ -598,12 +703,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/logotipo",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/logotipo",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"logotipo"
 							]
@@ -617,12 +727,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/logotipo/ver/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/logotipo/ver/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"logotipo",
 								"ver",
@@ -648,7 +763,7 @@
 								{
 									"key": "imagen",
 									"type": "file",
-									"src": "/C:/Users/maqui/Pictures/Product/1.png"
+									"src": "/C:/Users/Operador1/Desktop/Product/1.png"
 								},
 								{
 									"key": "id_individual",
@@ -658,12 +773,17 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost/api/logotipo/insertar",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/logotipo/insertar",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"logotipo",
 								"insertar"
@@ -679,7 +799,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"logotipoActualizado\"\r\n}",
+							"raw": "{\r\n    \"nombre\":\"logotipo1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -687,16 +807,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/logotipo/actualizar/3",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/logotipo/actualizar/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"logotipo",
 								"actualizar",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -708,12 +833,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/logotipo/eliminar/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/logotipo/eliminar/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"logotipo",
 								"eliminar",
@@ -729,12 +859,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/logotipo/cliente/1?es_empresa=true",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/logotipo/cliente/1?es_empresa=true",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"logotipo",
 								"cliente",
@@ -756,434 +891,22 @@
 			"name": "Articulo",
 			"item": [
 				{
-					"name": "Categoria",
-					"item": [
-						{
-							"name": "GET ALL",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/categoriaArticulo",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"categoriaArticulo"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET ONE",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/categoriaArticulo/ver/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"categoriaArticulo",
-										"ver",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "INSERT",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"pantalon\",\r\n    \"activo\":true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost/api/categoriaArticulo/insertar",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"categoriaArticulo",
-										"insertar"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UPDATE",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"activo\":false\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost/api/categoriaArticulo/actualizar/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"categoriaArticulo",
-										"actualizar",
-										"2"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DELETE",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/categoriaArticulo/eliminar/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"categoriaArticulo",
-										"eliminar",
-										"2"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Talla",
-					"item": [
-						{
-							"name": "GET ALL",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/talla",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"talla"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET ONE",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/talla/ver/6",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"talla",
-										"ver",
-										"6"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "INSERT",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"L\",\r\n    \"activo\":true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost/api/talla/insertar",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"talla",
-										"insertar"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UPDATE",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"xxl\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost/api/talla/actualizar/6",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"talla",
-										"actualizar",
-										"6"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DELETE",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/talla/eliminar/6",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"talla",
-										"eliminar",
-										"6"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET TALLA BY ARTICULO",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/talla/articulo/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"talla",
-										"articulo",
-										"1"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Color",
-					"item": [
-						{
-							"name": "GET ALL",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/color",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"color"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET ONE",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/color/ver/3",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"color",
-										"ver",
-										"3"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "INSERT",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"azul\",\r\n    \"activo\":false\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost/api/color/insertar",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"color",
-										"insertar"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UPDATE",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"malva\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost/api/color/actualizar/5",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"color",
-										"actualizar",
-										"5"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DELETE",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/color/eliminar/5",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"color",
-										"eliminar",
-										"5"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET COLOR BY ARTICULO",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/color/articulo/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"color",
-										"articulo",
-										"1"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "GET ALL",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/articulo",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/articulo",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"articulo"
 							]
@@ -1197,12 +920,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/articulo/ver/3",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/articulo/ver/3",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"articulo",
 								"ver",
@@ -1213,348 +941,26 @@
 					"response": []
 				},
 				{
-					"name": "INSERT",
+					"name": "GET ARTICULOS BY PATRON",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "imagen",
-									"type": "file",
-									"src": "/C:/Users/maqui/Pictures/Product/1.png"
-								},
-								{
-									"key": "nombre",
-									"value": "art3",
-									"type": "text"
-								},
-								{
-									"key": "codigo_barra",
-									"value": "456",
-									"type": "text"
-								},
-								{
-									"key": "stock",
-									"value": "12",
-									"type": "text"
-								},
-								{
-									"key": "id_categoria",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "tallas[0]",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "tallas[1]",
-									"value": "2",
-									"type": "text"
-								},
-								{
-									"key": "tallas[2]",
-									"value": "3",
-									"type": "text"
-								},
-								{
-									"key": "colores[0]",
-									"value": "1",
-									"contentType": "",
-									"type": "text"
-								},
-								{
-									"key": "colores[1]",
-									"value": "2",
-									"type": "text"
-								},
-								{
-									"key": "colores[2]",
-									"value": "3",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost/api/articulo/insertar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"insertar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UPDATE",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"articuloPrueba actualizado\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/articulo/actualizar/13",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"actualizar",
-								"13"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE",
-					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/articulo/eliminar/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/articulo/patron/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"articulo",
-								"eliminar",
+								"patron",
 								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ARTICULO BY TALLA",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost/api/articulo/talla/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"talla",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ARTICULO BY COLOR",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost/api/articulo/color/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"color",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ADD TALLA",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 3,\r\n    \"tallas\":[2,5]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/articulo/agregarTallas",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"agregarTallas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ADD COLOR",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":3,\r\n    \"colores\": [2,3]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/articulo/agregarColores",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"agregarColores"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DISABLE COLOR FOR ARTICULO",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":3,\r\n    \"id_color\":2\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/articulo/desactivarColor",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"desactivarColor"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DISABLE TALLA FOR ARTICULO",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":3,\r\n    \"id_talla\":2\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/articulo/desactivarTalla",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"desactivarTalla"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ENABLE COLOR FOR ARTICULO",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":3,\r\n    \"id_color\":2\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/articulo/activarColor",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"activarColor"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ENABLE TALLA FOR ARTICULO",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":3,\r\n    \"id_talla\":2\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/articulo/activarTalla",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"articulo",
-								"activarTalla"
 							]
 						}
 					},
@@ -1574,12 +980,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa"
 									]
@@ -1593,12 +1004,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa/ver/4",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa/ver/4",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa",
 										"ver",
@@ -1615,7 +1031,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Serigrafia\",\r\n    \"tipos\":[1]\r\n}",
+									"raw": "{\r\n    \"nombre\":\"Transfer\",\r\n    \"tipos\":[1,2]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1623,12 +1039,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa/insertar",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa/insertar",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa",
 										"insertar"
@@ -1652,12 +1073,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa/actualizar/2",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa/actualizar/2",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa",
 										"actualizar",
@@ -1673,12 +1099,17 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa/eliminar/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa/eliminar/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa",
 										"eliminar",
@@ -1694,12 +1125,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa/tipo/4",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa/tipo/4",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa",
 										"tipo",
@@ -1724,12 +1160,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa/agregarTipos",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa/agregarTipos",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa",
 										"agregarTipos"
@@ -1753,12 +1194,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa/desactivarTipo",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa/desactivarTipo",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa",
 										"desactivarTipo"
@@ -1782,12 +1228,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/categoriaTarifa/activarTipo",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/categoriaTarifa/activarTipo",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"categoriaTarifa",
 										"activarTipo"
@@ -1807,12 +1258,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/tipo",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/tipo",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"tipo"
 									]
@@ -1826,12 +1282,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/tipo/ver/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/tipo/ver/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"tipo",
 										"ver",
@@ -1848,7 +1309,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"Creación\"\r\n}",
+									"raw": "{\r\n    \"nombre\":\"Repetición\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1856,12 +1317,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/tipo/insertar",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/tipo/insertar",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"tipo",
 										"insertar"
@@ -1885,12 +1351,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/tipo/actualizar/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/tipo/actualizar/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"tipo",
 										"actualizar",
@@ -1906,12 +1377,17 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/tipo/eliminar/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/tipo/eliminar/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"tipo",
 										"eliminar",
@@ -1927,12 +1403,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/tipo/categoria/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/tipo/categoria/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"tipo",
 										"categoria",
@@ -1950,12 +1431,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/tarifa",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/tarifa",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"tarifa"
 							]
@@ -1969,12 +1455,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/tarifa/ver/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/tarifa/ver/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"tarifa",
 								"ver",
@@ -1991,7 +1482,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"tarifa1\",\r\n    \"precio\":4,\r\n    \"id_categoria\":1,\r\n    \"id_tipo\":1\r\n}",
+							"raw": "{\r\n    \"nombre\":\"tarifa2\",\r\n    \"precio\":15,\r\n    \"id_categoria\":1,\r\n    \"id_tipo\":2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1999,12 +1490,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/tarifa/insertar",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/tarifa/insertar",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"tarifa",
 								"insertar"
@@ -2028,12 +1524,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/tarifa/actualizar/3",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/tarifa/actualizar/3",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"tarifa",
 								"actualizar",
@@ -2049,12 +1550,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/tarifa/verPrecioAnterior/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/tarifa/verPrecioAnterior/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"tarifa",
 								"verPrecioAnterior",
@@ -2070,12 +1576,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/tarifa/verPreciosAnteriores/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/tarifa/verPreciosAnteriores/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"tarifa",
 								"verPreciosAnteriores",
@@ -2103,12 +1614,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/tarifa/categoriaYTipo",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/tarifa/categoriaYTipo",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"tarifa",
 								"categoriaYTipo"
@@ -2123,142 +1639,22 @@
 			"name": "Usuario",
 			"item": [
 				{
-					"name": "Rol",
-					"item": [
-						{
-							"name": "GET ALL",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/rol",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"rol"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET ONE",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/rol/ver/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"rol",
-										"ver",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "INSERT",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"admin\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost/api/rol/insertar",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"rol",
-										"insertar"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UPDATE",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nombre\":\"admin act\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost/api/rol/actualizar/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"rol",
-										"actualizar",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DELETE",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost/api/rol/eliminar/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"path": [
-										"api",
-										"rol",
-										"eliminar",
-										"1"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "GET ALL",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/usuario",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/usuario",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"usuario"
 							]
@@ -2272,12 +1668,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/usuario/ver/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/usuario/ver/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"usuario",
 								"ver",
@@ -2288,80 +1689,25 @@
 					"response": []
 				},
 				{
-					"name": "INSERT",
+					"name": "GET CURRENT USER",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"usu1\",\r\n    \"id_rol\":1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/usuario/insertar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"usuario",
-								"insertar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UPDATE",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"usu1 act\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost/api/usuario/actualizar/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"api",
-								"usuario",
-								"actualizar",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE",
-					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/usuario/eliminar/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/usuario/actual",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"usuario",
-								"eliminar",
-								"1"
+								"actual"
 							]
 						}
 					},
@@ -2381,12 +1727,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/estado",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/estado",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"estado"
 									]
@@ -2400,12 +1751,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/estado/ver/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/estado/ver/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"estado",
 										"ver",
@@ -2430,12 +1786,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/estado/insertar",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/estado/insertar",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"estado",
 										"insertar"
@@ -2459,12 +1820,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/estado/actualizar/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/estado/actualizar/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"estado",
 										"actualizar",
@@ -2480,12 +1846,17 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/estado/eliminar/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/estado/eliminar/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"estado",
 										"eliminar",
@@ -2506,12 +1877,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/patron",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron"
 									]
@@ -2525,12 +1901,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/patron/ver/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/ver/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"ver",
@@ -2551,7 +1932,7 @@
 										{
 											"key": "imagen",
 											"type": "file",
-											"src": "/C:/Users/maqui/Pictures/Product/1.png"
+											"src": "/C:/Users/Operador1/Desktop/Product/1.png"
 										},
 										{
 											"key": "id_pedidos",
@@ -2561,7 +1942,7 @@
 										},
 										{
 											"key": "observaciones",
-											"value": "logo nuevo",
+											"value": "",
 											"type": "text"
 										},
 										{
@@ -2571,7 +1952,7 @@
 										},
 										{
 											"key": "variantes[0][id_color]",
-											"value": "1",
+											"value": "2",
 											"type": "text"
 										},
 										{
@@ -2581,7 +1962,7 @@
 										},
 										{
 											"key": "variantes[0][cantidad]",
-											"value": "75",
+											"value": "5",
 											"type": "text"
 										},
 										{
@@ -2596,7 +1977,7 @@
 										},
 										{
 											"key": "variantes[1][id_color]",
-											"value": "2",
+											"value": "1",
 											"type": "text"
 										},
 										{
@@ -2606,18 +1987,23 @@
 										},
 										{
 											"key": "variantes[1][cantidad]",
-											"value": "58",
+											"value": "6",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://localhost/api/patron/insertar",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/insertar",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"insertar"
@@ -2632,16 +2018,21 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/patron/eliminar/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/eliminar/4",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"eliminar",
-										"1"
+										"4"
 									]
 								}
 							},
@@ -2662,12 +2053,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/patron/actualizar/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/actualizar/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"actualizar",
@@ -2683,12 +2079,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/patron/pedido/1",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/pedido/1",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"pedido",
@@ -2713,12 +2114,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/patron/agregarArticulos",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/agregarArticulos",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"agregarArticulos"
@@ -2742,12 +2148,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/patron/agregarTarifas",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/agregarTarifas",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"agregarTarifas"
@@ -2771,12 +2182,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/patron/removerArticulos",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/removerArticulos",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"removerArticulos"
@@ -2800,12 +2216,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/patron/removerTarifas",
+									"raw": "http://192.168.0.90/serigrafia/backend/api/patron/removerTarifas",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"192",
+										"168",
+										"0",
+										"90"
 									],
 									"path": [
+										"serigrafia",
+										"backend",
 										"api",
 										"patron",
 										"removerTarifas"
@@ -2822,12 +2243,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/pedido",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/pedido",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"pedido"
 							]
@@ -2841,12 +2267,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/pedido/ver/15",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/pedido/ver/15",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"pedido",
 								"ver",
@@ -2863,7 +2294,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"esta_firmado\":\"false\",\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-16\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_individual\":1,\r\n    \"id_empresa\":null,\r\n    \"id_usuario\": 1,\r\n    \"logotipos\":[1,2,3],\r\n    \"patrones\":[\r\n        {\r\n            \"id_patron\": 6\r\n            },\r\n            {\r\n            \"id_patron\":7\r\n            }\r\n            ]\r\n\r\n}",
+							"raw": "{\r\n    \"esta_firmado\":\"false\",\r\n    \"parte_trabajo\":\"parte\",\r\n    \"fecha_terminacion_trabajo\": \"2021-05-28\",\r\n    \"validado\": \"false\",\r\n    \"id_estado\":1,\r\n    \"id_individual\":1,\r\n    \"id_empresa\":null,\r\n    \"id_usuario\": 1,\r\n    \"logotipos\":[1,2,3],\r\n    \"patrones\":[\r\n        {\r\n            \"id_patron\": 6\r\n            },\r\n            {\r\n            \"id_patron\":5\r\n            }\r\n            ]\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2871,12 +2302,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/pedido/insertar",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/pedido/insertar",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"pedido",
 								"insertar"
@@ -2900,12 +2336,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/pedido/actualizar/17",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/pedido/actualizar/17",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"pedido",
 								"actualizar",
@@ -2921,16 +2362,21 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/pedido/eliminar/14",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/pedido/eliminar/5",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"pedido",
 								"eliminar",
-								"14"
+								"5"
 							]
 						}
 					},
@@ -2951,12 +2397,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/pedido/agregarLogotipos",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/pedido/agregarLogotipos",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"pedido",
 								"agregarLogotipos"
@@ -2984,12 +2435,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/pedido/agregarUsuario",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/pedido/agregarUsuario",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"pedido",
 								"agregarUsuario"
@@ -3004,15 +2460,118 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/pedido/usuario/1",
+							"raw": "http://192.168.0.90/serigrafia/backend/api/pedido/usuario/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"0",
+								"90"
 							],
 							"path": [
+								"serigrafia",
+								"backend",
 								"api",
 								"pedido",
 								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Por Defecto",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/Operador1/Desktop/Product/2.png"
+								},
+								{
+									"key": "nombre",
+									"value": "Delantal",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.0.90/serigrafia/backend/api/porDefecto/insertar",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"90"
+							],
+							"path": [
+								"serigrafia",
+								"backend",
+								"api",
+								"porDefecto",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"delantal cocina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.90/serigrafia/backend/api/porDefecto/eliminar/1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"90"
+							],
+							"path": [
+								"serigrafia",
+								"backend",
+								"api",
+								"porDefecto",
+								"eliminar",
 								"1"
 							]
 						}
