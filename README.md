@@ -335,11 +335,11 @@ También nos podemos encontrar otros métodos distintos a los anteriores pero su
 
 ## Entidad / Relación
 
-![E/R](documentacion/modelo%20de%20datos/Modelo%20relacional.png)
+![E/R](https://github.com/Nestorbd/Central.U-Ecommerce/blob/master/Documentacion/modelo%20de%20datos/Modelo%20relacional.png)
 
 ## Modelo de datos
 
-![Modelo de datos](documentacion/modelo%20de%20datos/Modelo%20de%20datos.png)
+![Modelo de datos](https://github.com/Nestorbd/Central.U-Ecommerce/blob/master/Documentacion/modelo%20de%20datos/Modelo%20de%20datos.png)
 
 
 
